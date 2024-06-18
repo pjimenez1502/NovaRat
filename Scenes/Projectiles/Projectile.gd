@@ -4,6 +4,23 @@ class_name projectile
 @export var speed : float
 @export var damage : float
 
+var lifetime : float = 8
+
+func _ready() -> void:
+	set_inactive()
+
 func _physics_process(delta: float) -> void:
 	move_and_collide(-transform.basis.z * speed * delta)
+
+func start() -> void:
+	set_active()
+	await get_tree().create_timer(3).timeout
+	set_inactive()
+
+func set_active() -> void:
+	set_physics_process(true)
 	
+func set_inactive() -> void:
+	global_position = Vector3(0,0,10)
+	set_physics_process(false)
+	get_parent().available_bullet_pool.append(self)

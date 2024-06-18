@@ -10,8 +10,8 @@ class_name ship_weapon
 var timer_ready : bool = true
 
 func _ready() -> void:
+	init_available_bullet_pool()
 	timer.wait_time = 60/rpm
-	pass
 
 func shoot() -> void:
 	if !timer_ready:
@@ -27,16 +27,28 @@ func fdsgfdsgf() -> void:
 			instantiate_projectile(_hardpoint)
 
 func instantiate_projectile(_hardpoint : hardpoint) -> void:
-	var projectile_instance =  _projectile.instantiate() as projectile
-	#print(projectile_instance.transform)
-	add_child(projectile_instance)
-	projectile_instance.global_transform = _hardpoint.global_transform
+	var projectile_instance = get_bullet()
+	if projectile_instance:
+		projectile_instance.global_transform = _hardpoint.global_transform
 
 
-var available_bullet_count : int = 40
-func create_init_bullets():
-	pass
+var available_bullet_pool_size : int = 200
+var available_bullet_pool : Array[projectile]
+var used_bullet_pool : Array[projectile]
+func init_available_bullet_pool():
+	for i in available_bullet_pool_size:
+		var bullet: projectile = _projectile.instantiate() as projectile
+		add_child(bullet)
 
+func get_bullet() -> projectile:
+	if available_bullet_pool.size() > 0:
+		var bullet : projectile = available_bullet_pool.pop_front()
+		used_bullet_pool.append(bullet)
+		bullet.start()
+		return bullet
+	else:
+		print("no bullets")
+		return null
 
 func _on_timer_timeout() -> void:
 	timer_ready = true
