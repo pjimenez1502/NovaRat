@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://bogc8w4gkun8x"]
+
+[ext_resource type="PackedScene" uid="uid://w5amtol0blid" path="res://Assets/Model/PlayerShip.glb" id="1_h0486"]
+[ext_resource type="Script" path="res://Src/Player/player_ship.gd" id="1_iatc7"]
+[ext_resource type="Script" path="res://Src/Player/PlayerControl.gd" id="3_qxxd3"]
+[ext_resource type="Texture2D" uid="uid://x2di4vfsrpet" path="res://Assets/Sprite/Sight.png" id="4_26r7y"]
+[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="5_33llm"]
+[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="5_41wfr"]
+[ext_resource type="PackedScene" uid="uid://c2djybousjxdy" path="res://Scenes/Projectiles/Laser_1/laser_1.tscn" id="6_kphue"]
+
+[node name="PlayerShip" type="Node3D" node_paths=PackedStringArray("_player_control", "weapon")]
+script = ExtResource("1_iatc7")
+_player_control = NodePath("PlayerControl")
+weapon = NodePath("Weapon")
+
+[node name="PlayerShip" parent="." instance=ExtResource("1_h0486")]
+
+[node name="Sight" type="Node3D" parent="."]
+
+[node name="Sight_Near" type="Sprite3D" parent="Sight"]
+transform = Transform3D(0.999999, 0, -0.00122173, 0, 1, 0, 0.00122173, 0, 0.999999, -0.0018326, 0, -8)
+pixel_size = 0.1
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_26r7y")
+
+[node name="Sight_Far" type="Sprite3D" parent="Sight"]
+transform = Transform3D(0.999999, 0, -0.00122173, 0, 1, 0, 0.00122173, 0, 0.999999, 0.0018326, 0, -11)
+pixel_size = 0.08
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_26r7y")
+
+[node name="PlayerControl" type="Node" parent="."]
+script = ExtResource("3_qxxd3")
+
+[node name="Weapon" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
+script = ExtResource("5_33llm")
+_projectile = ExtResource("6_kphue")
+hardpoint_list = [NodePath("../Hardpoints/Hardpoint_1"), NodePath("../Hardpoints/Hardpoint_2"), NodePath("../Hardpoints/Hardpoint_3")]
+
+[node name="Timer" type="Timer" parent="Weapon"]
+
+[node name="Hardpoints" type="Node3D" parent="."]
+
+[node name="Hardpoint_1" type="Node3D" parent="Hardpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.86452)
+script = ExtResource("5_41wfr")
+enabled = true
+
+[node name="Hardpoint_2" type="Node3D" parent="Hardpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01924, 0, 0.0665366)
+script = ExtResource("5_41wfr")
+enabled = true
+
+[node name="Hardpoint_3" type="Node3D" parent="Hardpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.019, 0, 0.067)
+script = ExtResource("5_41wfr")
+enabled = true
+
+[connection signal="timeout" from="Weapon/Timer" to="Weapon" method="_on_timer_timeout"]
