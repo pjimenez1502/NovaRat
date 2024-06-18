@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2djybousjxdy"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/Projectile.gd" id="1_bumg4"]
+[ext_resource type="PackedScene" uid="uid://crx6gwi111uvd" path="res://Scenes/Projectiles/Laser_1/Laser_1.glb" id="1_rqey0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q7ybl"]
+radius = 0.108316
+height = 0.957679
+
+[node name="Laser_1" type="CharacterBody3D"]
+script = ExtResource("1_bumg4")
+speed = 100.0
+damage = 10.0
+
+[node name="Laser_1" parent="." instance=ExtResource("1_rqey0")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.307481)
+shape = SubResource("CapsuleShape3D_q7ybl")
