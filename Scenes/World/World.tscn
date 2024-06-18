@@ -10,3 +10,9 @@ script = ExtResource("1_fbcyp")
 [node name="SpawnDirector" type="Node" parent="."]
 script = ExtResource("2_il8o0")
 obstacle_list = Array[PackedScene]([ExtResource("3_2f2dg")])
+spawn_area = Vector3(20, 8, 1)
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="SpawnDirector"]
+wait_time = 0.5
+
+[connection signal="timeout" from="SpawnDirector/ObstacleSpawnTimer" to="SpawnDirector" method="_on_obstacle_spawn_timer_timeout"]

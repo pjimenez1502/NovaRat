@@ -5,8 +5,7 @@
 
 [node name="Main" type="Node3D"]
 
-[node name="World" parent="." node_paths=PackedStringArray("_player_ship") instance=ExtResource("1_xsorj")]
-_player_ship = NodePath("../PlayerShip")
+[node name="World" parent="." instance=ExtResource("1_xsorj")]
 
 [node name="PlayerShip" parent="." instance=ExtResource("2_7swg3")]
 

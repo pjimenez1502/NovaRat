@@ -23,6 +23,6 @@ func set_active() -> void:
 	set_physics_process(true)
 	
 func set_inactive() -> void:
-	global_position = Vector3(0,0,10)
 	set_physics_process(false)
+	global_position = Vector3(0,0,10)
 	get_parent().available_bullet_pool.append(self)

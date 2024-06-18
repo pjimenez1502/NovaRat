@@ -19,9 +19,9 @@ func shoot() -> void:
 	
 	timer_ready = false
 	timer.start()
-	fdsgfdsgf()
+	iterate_hardpoints()
 
-func fdsgfdsgf() -> void:
+func iterate_hardpoints() -> void:
 	for _hardpoint : hardpoint in hardpoint_list:
 		if _hardpoint.enabled:
 			instantiate_projectile(_hardpoint)
@@ -30,6 +30,10 @@ func instantiate_projectile(_hardpoint : hardpoint) -> void:
 	var projectile_instance = get_bullet()
 	if projectile_instance:
 		projectile_instance.global_transform = _hardpoint.global_transform
+
+func _on_timer_timeout() -> void:
+	timer_ready = true
+
 
 
 var available_bullet_pool_size : int = 200
@@ -49,6 +53,3 @@ func get_bullet() -> projectile:
 	else:
 		print("no bullets")
 		return null
-
-func _on_timer_timeout() -> void:
-	timer_ready = true
