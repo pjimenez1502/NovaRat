@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://f6rkutfavjyl"]
+
+[ext_resource type="Script" path="res://Scenes/Obstacles/Obstacle.gd" id="1_dgv8h"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xdouh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j806r"]
+
+[node name="Asteroid" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_dgv8h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xdouh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_j806r")

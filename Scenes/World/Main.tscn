@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=4 format=3 uid="uid://do3qg8xv2qeju"]
 
 [ext_resource type="PackedScene" uid="uid://c6l7po0jlw5nx" path="res://Scenes/World/World.tscn" id="1_xsorj"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Player Ship.tscn" id="2_7swg3"]
+[ext_resource type="Script" path="res://Src/World/SpawnDirector.gd" id="3_0d243"]
 
 [node name="Main" type="Node3D"]
 
@@ -11,3 +12,7 @@
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)
+
+[node name="SpawnDirector" type="Node" parent="."]
+script = ExtResource("3_0d243")
+obstacle_list = null
