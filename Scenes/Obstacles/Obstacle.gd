@@ -3,7 +3,7 @@ class_name obstacle
 
 @export var hp : float = 50
 
-func _on_hit(damage : float) -> void:
+func damage(damage : float) -> void:
 	hp -= damage
 	if hp <= 0:
 		death()

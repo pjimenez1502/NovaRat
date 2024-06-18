@@ -3,18 +3,20 @@ class_name projectile
 
 @export var speed : float
 @export var damage : float
-
-var lifetime : float = 8
+@export var lifetime : float = 2
 
 func _ready() -> void:
 	set_inactive()
 
 func _physics_process(delta: float) -> void:
-	move_and_collide(-transform.basis.z * speed * delta)
+	var collision := move_and_collide(-transform.basis.z * speed * delta)
+	if collision:
+		collision.get_collider().damage(damage)
+		set_inactive()
 
 func start() -> void:
 	set_active()
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(lifetime).timeout
 	set_inactive()
 
 func set_active() -> void:
