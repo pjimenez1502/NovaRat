@@ -32,7 +32,6 @@ func init_obstacle_pool() -> void:
 	
 
 func get_obstacle() -> obstacle:
-	print(available_obstacle_pool.size())
 	if available_obstacle_pool.size() > 0:
 		var _obstacle : obstacle = available_obstacle_pool.pop_front()
 		used_obstacle_pool.append(_obstacle)

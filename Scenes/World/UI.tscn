@@ -1,7 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://uce22k0lid50"]
+[gd_scene load_steps=3 format=3 uid="uid://uce22k0lid50"]
 
 [ext_resource type="PackedScene" uid="uid://do3qg8xv2qeju" path="res://Scenes/World/Main.tscn" id="1_beg2u"]
+[ext_resource type="Script" path="res://Src/UI/flight_overlay.gd" id="2_n832s"]
 
 [node name="UI" type="CanvasLayer"]
 
 [node name="Main" parent="." instance=ExtResource("1_beg2u")]
+
+[node name="Flight Overlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -175.0
+offset_bottom = 52.0
+grow_horizontal = 0
+script = ExtResource("2_n832s")
+
+[node name="Score Label" type="Label" parent="Flight Overlay"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "69420"
+horizontal_alignment = 1
+vertical_alignment = 1
