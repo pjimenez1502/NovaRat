@@ -3,6 +3,7 @@ class_name world
 
 @onready var _spawn_director: spawn_director = $SpawnDirector
 
+@export var play_area : Node3D
 @export var world_point : Vector3
 @export var scroll_speed : float = 5
 

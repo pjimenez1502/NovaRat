@@ -1,6 +1,7 @@
 extends Node
 class_name spawn_director
 
+@onready var _world: world = $".."
 @onready var obstacle_spawn_timer: Timer = $ObstacleSpawnTimer
 
 @export var obstacle_list : Array[PackedScene]
@@ -17,8 +18,9 @@ func start_obstacle_spawn() -> void:
 func spawn_obstacle() -> void:
 	var _obstacle = get_obstacle()
 	if _obstacle:
-		var position = Vector3(randf_range(-spawn_area.x, spawn_area.x), randf_range(-spawn_area.y, spawn_area.y), randf_range(-spawn_area.z, spawn_area.z)-20)
+		var position = _world.play_area.position + _world.play_area.transform.basis.z * -60 + Vector3(randf_range(-spawn_area.x, spawn_area.x), randf_range(-spawn_area.y, spawn_area.y), randf_range(-spawn_area.z, spawn_area.z))
 		_obstacle.position = position
+
 func _on_obstacle_spawn_timer_timeout() -> void:
 	spawn_obstacle()
 

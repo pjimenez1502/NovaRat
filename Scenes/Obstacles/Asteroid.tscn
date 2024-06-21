@@ -37,6 +37,7 @@ _data = {
 collision_layer = 34
 collision_mask = 2
 script = ExtResource("1_dgv8h")
+BASE_SPEED = 0.0
 
 [node name="Asteroid" parent="." instance=ExtResource("2_d1107")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0981742, 0, 0)

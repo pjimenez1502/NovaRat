@@ -1,13 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=5 format=3 uid="uid://do3qg8xv2qeju"]
 
 [ext_resource type="PackedScene" uid="uid://c6l7po0jlw5nx" path="res://Scenes/World/World.tscn" id="1_xsorj"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Player Ship.tscn" id="2_7swg3"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ti2iq"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_egrti"]
+material = SubResource("StandardMaterial3D_ti2iq")
+
 [node name="Main" type="Node3D"]
 
-[node name="World" parent="." instance=ExtResource("1_xsorj")]
+[node name="World" parent="." node_paths=PackedStringArray("play_area") instance=ExtResource("1_xsorj")]
+play_area = NodePath("../PlayArea")
 
-[node name="PlayerShip" parent="." instance=ExtResource("2_7swg3")]
+[node name="PlayArea" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="AimCenter" type="Node3D" parent="PlayArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayArea/AimCenter"]
+mesh = SubResource("SphereMesh_egrti")
+skeleton = NodePath("../..")
+
+[node name="PlayerShip" parent="PlayArea" node_paths=PackedStringArray("play_area") instance=ExtResource("2_7swg3")]
+play_area = NodePath("..")
+
+[node name="Camera3D" type="Camera3D" parent="PlayArea"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)
