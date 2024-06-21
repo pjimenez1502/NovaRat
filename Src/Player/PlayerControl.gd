@@ -5,6 +5,8 @@ class_name player_control
 
 
 var direction : Vector2
+var braking : bool
+var boosting : bool
 
 const DOUBLETAP_DELAY : float = .25
 var doubletap_time : float = DOUBLETAP_DELAY
@@ -28,6 +30,9 @@ func _input(_event: InputEvent) -> void:
 		_player_ship.dodge(-1)
 	if check_right_dodge():
 		_player_ship.dodge(1)
+	
+	braking = Input.is_action_pressed("SPEED_DOWN")
+	boosting = Input.is_action_pressed("SPEED_UP")
 
 var left_pressed : bool
 var left_released : bool

@@ -11,8 +11,13 @@ class_name player_ship
 @export var weapon : ship_weapon
 @export var stats : ship_stats
 
+@export var speed : float = 6
+@export var boost_power : float = 1.4
+@export var brake_power : float = 0.8
+
 @export var dodge_distance : float = 1.5
 @export var dodge_cooldown : float = 2
+
 var curr_dodge_cooldown : float
 
 var target_position : Vector3
@@ -35,9 +40,13 @@ func _physics_process(delta: float) -> void:
 		check_turning(delta)
 	curr_dodge_cooldown -= delta
 
+func calculate_speed() -> float:
+	return speed * (brake_power if _player_control.braking else 1) * (boost_power if _player_control.boosting else 1)
+
 func forward(delta : float) -> void:
-	play_area.global_translate(-play_area.transform.basis.z * delta * 4)
-	pass
+	var calculated_speed = calculate_speed()
+	print(calculated_speed)
+	play_area.global_translate(-play_area.transform.basis.z * delta * calculated_speed)
 
 func steer(delta : float) -> void:
 	target_position = position + Vector3(_player_control.direction.x, _player_control.direction.y, 0) + (Vector3(_bank, 0, 0) * 0.5)
