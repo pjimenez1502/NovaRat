@@ -1,0 +1,74 @@
+{
+	"categories": [
+		{
+			"uuid": "71ec3932-324d-45b3-9a0c-8ae93109dd83",
+			"title": "Task",
+			"color": "3d85f2"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "3056daed-6c6b-4be8-bda1-55288df91f12",
+			"title": "Todo",
+			"tasks": [
+				"a1b3d0e0-43ce-4165-914c-28641c6bb3a6",
+				"71f6d6d1-db42-4f42-8250-0c92c63920c9",
+				"a1f38326-1dcf-4130-993a-d092f9abc9c9",
+				"b2ad906a-6dec-41ab-8be6-4167efb55cbc"
+			]
+		},
+		{
+			"uuid": "7331ae9b-2459-49d2-826c-7e8426316020",
+			"title": "Doing",
+			"tasks": []
+		},
+		{
+			"uuid": "3c7591ff-8a06-43f3-8a4e-30fd69834c1d",
+			"title": "Done",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "a1b3d0e0-43ce-4165-914c-28641c6bb3a6",
+			"title": "Push Player away from hit on damage",
+			"description": "",
+			"category": "71ec3932-324d-45b3-9a0c-8ae93109dd83",
+			"steps": []
+		},
+		{
+			"uuid": "71f6d6d1-db42-4f42-8250-0c92c63920c9",
+			"title": "All Range Mode",
+			"description": "",
+			"category": "71ec3932-324d-45b3-9a0c-8ae93109dd83",
+			"steps": []
+		},
+		{
+			"uuid": "a1f38326-1dcf-4130-993a-d092f9abc9c9",
+			"title": "Different Stage Types",
+			"description": "",
+			"category": "71ec3932-324d-45b3-9a0c-8ae93109dd83",
+			"steps": []
+		},
+		{
+			"uuid": "b2ad906a-6dec-41ab-8be6-4167efb55cbc",
+			"title": " Progression map (slay the spire like)",
+			"description": "Stage ideas:\n\tMissile Interception (All range, target far off in the distance moving towards thing to defend. Progress through waves of enemies until you reach the missile)\n\t\n\tNaval Assault (Railed, destroy turrets and critical points of big ships to destroy them.)\n\tBig Ship Boss\n\tShoot them all (Railed, standard starfox)\n\tPlanetary Assault (All range, destroy ground targets, other ships in the air)\n\tPlanetary Defense (All range, protect ground targets)\n\t\n\nExtras\n\tJunkyard (repair, upgrades, ) (limited but cheaper)\n\tWorkshop (repair, upgrades)\n\t\n\t",
+			"category": "71ec3932-324d-45b3-9a0c-8ae93109dd83",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"3056daed-6c6b-4be8-bda1-55288df91f12"
+			],
+			[
+				"7331ae9b-2459-49d2-826c-7e8426316020"
+			],
+			[
+				"3c7591ff-8a06-43f3-8a4e-30fd69834c1d"
+			]
+		]
+	}
+}
