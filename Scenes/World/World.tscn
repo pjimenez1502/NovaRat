@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6l7po0jlw5nx"]
+[gd_scene load_steps=8 format=3 uid="uid://c6l7po0jlw5nx"]
 
 [ext_resource type="Script" path="res://Src/World/world.gd" id="1_fbcyp"]
 [ext_resource type="Script" path="res://Src/World/SpawnDirector.gd" id="2_il8o0"]
 [ext_resource type="PackedScene" uid="uid://f6rkutfavjyl" path="res://Scenes/Obstacles/Asteroid.tscn" id="3_2f2dg"]
+[ext_resource type="Texture2D" uid="uid://bf08bsypo7aat" path="res://Assets/Skybox/Skybox black.png" id="4_77j5n"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jb4an"]
+panorama = ExtResource("4_77j5n")
+
+[sub_resource type="Sky" id="Sky_6c5km"]
+sky_material = SubResource("PanoramaSkyMaterial_jb4an")
+
+[sub_resource type="Environment" id="Environment_rgewm"]
+background_mode = 2
+sky = SubResource("Sky_6c5km")
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_fbcyp")
@@ -14,5 +25,8 @@ spawn_area = Vector3(20, 8, 1)
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="SpawnDirector"]
 wait_time = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rgewm")
 
 [connection signal="timeout" from="SpawnDirector/ObstacleSpawnTimer" to="SpawnDirector" method="_on_obstacle_spawn_timer_timeout"]
