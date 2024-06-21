@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 ScoreDirector="*res://Src/Global/ScoreDirector.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
+
 [input]
 
 UP={
