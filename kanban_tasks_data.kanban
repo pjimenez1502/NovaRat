@@ -14,7 +14,8 @@
 				"a1b3d0e0-43ce-4165-914c-28641c6bb3a6",
 				"71f6d6d1-db42-4f42-8250-0c92c63920c9",
 				"a1f38326-1dcf-4130-993a-d092f9abc9c9",
-				"b2ad906a-6dec-41ab-8be6-4167efb55cbc"
+				"b2ad906a-6dec-41ab-8be6-4167efb55cbc",
+				"5d1140dd-4788-4138-84fa-6659cdba1a4d"
 			]
 		},
 		{
@@ -54,6 +55,13 @@
 			"uuid": "b2ad906a-6dec-41ab-8be6-4167efb55cbc",
 			"title": " Progression map (slay the spire like)",
 			"description": "Stage ideas:\n\tMissile Interception (All range, target far off in the distance moving towards thing to defend. Progress through waves of enemies until you reach the missile)\n\t\n\tNaval Assault (Railed, destroy turrets and critical points of big ships to destroy them.)\n\tBig Ship Boss\n\tShoot them all (Railed, standard starfox)\n\tPlanetary Assault (All range, destroy ground targets, other ships in the air)\n\tPlanetary Defense (All range, protect ground targets)\n\t\n\nExtras\n\tJunkyard (repair, upgrades, ) (limited but cheaper)\n\tWorkshop (repair, upgrades)\n\t\n\t",
+			"category": "71ec3932-324d-45b3-9a0c-8ae93109dd83",
+			"steps": []
+		},
+		{
+			"uuid": "5d1140dd-4788-4138-84fa-6659cdba1a4d",
+			"title": "Combo and score animation",
+			"description": "",
 			"category": "71ec3932-324d-45b3-9a0c-8ae93109dd83",
 			"steps": []
 		}
