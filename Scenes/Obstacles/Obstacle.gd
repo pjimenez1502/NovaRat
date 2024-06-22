@@ -7,7 +7,8 @@ class_name obstacle
 
 @export var BASE_SPEED : float = 4
 var speed : float
-@export var hp : float = 50
+@export var BASE_HP : float = 4
+var hp
 @export var lifetime : float = 30
 @export var value : int = 10
 
@@ -43,6 +44,7 @@ func start() -> void:
 
 func set_active() -> void:
 	set_physics_process(true)
+	hp = BASE_HP
 	
 func set_inactive() -> void:
 	set_physics_process(false)
