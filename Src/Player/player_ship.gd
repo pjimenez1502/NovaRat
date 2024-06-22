@@ -23,6 +23,7 @@ var curr_dodge_cooldown : float
 var target_position : Vector3
 var target_bank : float
 var _bank : float
+var bank_boost : float
 
 var velocity : Vector3
 var look_target: Vector3
@@ -48,14 +49,16 @@ func forward(delta : float) -> void:
 	play_area.global_translate(-play_area.transform.basis.z * delta * calculated_speed)
 
 func steer(delta : float) -> void:
-	target_position = position + Vector3(_player_control.direction.x, _player_control.direction.y, 0) + (Vector3(_bank, 0, 0) * 0.5)
-	target_position.x = clampf(target_position.x, -6, 6)
+	target_position = position + Vector3(_player_control.direction.x + bank_boost, _player_control.direction.y, 0)
+	
+	target_position.x = clampf(target_position.x, -6.5, 6.5)
 	target_position.y = clampf(target_position.y, -2, 4)
+	
+	target_position.z = 0 + -2 if _player_control.boosting else 0 + 2 if _player_control.braking else 0
 	
 	position = lerp(position, target_position , delta * 6)
 	
-	play_area.transform.basis.z
-	aim_center.position = Vector3(_player_control.direction.x * 30, _player_control.direction.y * 12, -20)
+	aim_center.position = Vector3(_player_control.direction.x * 30, _player_control.direction.y * 12, -30)
 	look_target = lerp(look_target, aim_center.global_position , delta * 8)
 	look_at(look_target)
 
@@ -85,7 +88,8 @@ func bank(delta : float) -> void:
 	rotate_object_local(Vector3.FORWARD, _bank)
 
 func set_bank(angle : float) -> void:
-	target_bank = deg_to_rad(angle)
+	bank_boost = angle * 0.5
+	target_bank = deg_to_rad(clampf( angle * 90 + _player_control.direction.x * 40, -90, 90))
 
 func roll(direction : float) -> void:
 	pass

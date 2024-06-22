@@ -24,7 +24,7 @@ func _input(_event: InputEvent) -> void:
 		_player_ship.weapon.shoot()
 	
 	var bank_axis = Input.get_axis("DODGE_LEFT", "DODGE_RIGHT")
-	_player_ship.set_bank(bank_axis * 90)
+	_player_ship.set_bank(bank_axis)
 	
 	if check_left_dodge():
 		_player_ship.dodge(-1)
