@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ScoreDirector="*res://Src/Global/ScoreDirector.gd"
+UIDirector="*res://Src/Global/UIDirector.gd"
 
 [editor_plugins]
 

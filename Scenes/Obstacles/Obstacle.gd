@@ -31,7 +31,7 @@ func damage(damage : float) -> void:
 
 func death() -> void:
 	# animation / particles
-	ScoreDirector.add_score(value)
+	UIDirector.add_score(value)
 	set_inactive()
 
 func start() -> void:
@@ -50,4 +50,5 @@ func set_inactive() -> void:
 	get_parent().available_obstacle_pool.append(self)
 
 func set_random_rotation() -> void:
+	rotation = Vector3(randf_range(0, TAU),randf_range(0, TAU),randf_range(0, TAU))
 	rotation_value = Vector3(randf(),randf(),randf()).normalized()

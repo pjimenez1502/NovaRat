@@ -45,7 +45,6 @@ func calculate_speed() -> float:
 
 func forward(delta : float) -> void:
 	var calculated_speed = calculate_speed()
-	print(calculated_speed)
 	play_area.global_translate(-play_area.transform.basis.z * delta * calculated_speed)
 
 func steer(delta : float) -> void:
