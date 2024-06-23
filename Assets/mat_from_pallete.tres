@@ -1,8 +1,10 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://y14jtodpovl0"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://y14jtodpovl0"]
 
 [ext_resource type="Texture2D" uid="uid://bnl6jrfykouyi" path="res://Assets/pallete.png" id="1_enjlx"]
+[ext_resource type="Material" uid="uid://ba7hnouefnl1p" path="res://Assets/Dither Mat.tres" id="2_kdrya"]
 
 [resource]
+next_pass = ExtResource("2_kdrya")
 shading_mode = 0
 albedo_texture = ExtResource("1_enjlx")
 texture_filter = 0
