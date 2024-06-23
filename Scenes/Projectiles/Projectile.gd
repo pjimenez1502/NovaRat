@@ -13,8 +13,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(-transform.basis.z * speed * delta)
 	if collision:
-		collision.get_collider().damage(damage)
+		print(collision.get_collider())
+		if collision.get_collider().has_method("damage"):
+			collision.get_collider().damage(damage)
 		set_inactive()
+		print("hit")
 
 func start() -> void:
 	set_active()
@@ -22,11 +25,14 @@ func start() -> void:
 	set_inactive()
 
 func set_active() -> void:
-	collision.disabled = false
+	set_collision_disabled(false)
 	set_physics_process(true)
 	
 func set_inactive() -> void:
-	collision.disabled = true
+	set_collision_disabled(true)
 	set_physics_process(false)
 	global_position = Vector3(0,0,100)
 	get_parent().available_bullet_pool.append(self)
+
+func set_collision_disabled(value: bool) -> void:
+	collision.set_deferred("disabled", value)

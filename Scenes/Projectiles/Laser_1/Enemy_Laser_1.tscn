@@ -14,9 +14,9 @@ height = 0.957679
 
 [node name="Laser_1" type="CharacterBody3D"]
 collision_layer = 512
-collision_mask = 32
+collision_mask = 96
 script = ExtResource("1_r645p")
-speed = 60.0
+speed = 40.0
 
 [node name="Laser_1" parent="." instance=ExtResource("2_mjuds")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)

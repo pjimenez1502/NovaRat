@@ -14,7 +14,7 @@ height = 0.957679
 
 [node name="Laser_1" type="CharacterBody3D"]
 collision_layer = 256
-collision_mask = 32
+collision_mask = 96
 script = ExtResource("1_pqpys")
 speed = 100.0
 

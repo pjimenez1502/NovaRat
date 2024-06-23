@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bogc8w4gkun8x"]
+[gd_scene load_steps=17 format=3 uid="uid://bogc8w4gkun8x"]
 
 [ext_resource type="PackedScene" uid="uid://w5amtol0blid" path="res://Assets/Model/PlayerShip.glb" id="1_h0486"]
 [ext_resource type="Script" path="res://Src/Player/player_ship.gd" id="1_iatc7"]
@@ -8,10 +8,7 @@
 [ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="5_41wfr"]
 [ext_resource type="PackedScene" uid="uid://c2djybousjxdy" path="res://Scenes/Projectiles/Laser_1/Player_Laser_1.tscn" id="6_fkmw5"]
 [ext_resource type="Script" path="res://Src/Ship/Ship_Stats.gd" id="7_xhxuk"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr61g"]
-radius = 0.892566
-height = 3.00376
+[ext_resource type="Script" path="res://Scenes/SpinShield.gd" id="9_7xd1x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_647xx"]
 shading_mode = 0
@@ -35,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qf7mn"]
 resource_name = "Dash L"
-length = 0.3
+length = 0.5
 step = 0.025
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
@@ -44,6 +41,23 @@ tracks/0/path = NodePath("PlayerShip")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.025, 1, 0, 0, 0.707, 0.707, 0.05, 1, 0, 0, 1, 0, 0.075, 1, 0, 0, 0.707, -0.707, 0.1, 1, 0, 0, 0, 1, 0.125, 1, 0, 0, 0.707, 0.707, 0.15, 1, 0, 0, 1, 0, 0.175, 1, 0, 0, 0.707, -0.707, 0.2, 1, 0, 0, 0, 1, 0.225, 1, 0, 0, 0.707, 0.707, 0.25, 1, 0, 0, 1, 0, 0.275, 1, 0, 0, 0.707, -0.707, 0.3, 1, 0, 0, 0, 1)
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpinShield")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"shield_up"
+}, {
+"args": [],
+"method": &"shield_down"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_opn0c"]
 resource_name = "Dash R"
@@ -55,6 +69,23 @@ tracks/0/path = NodePath("PlayerShip")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.025, 1, 0, 0, 0.707, -0.707, 0.05, 1, 0, 0, -1, 0, 0.075, 1, 0, 0, 0.707, 0.707, 0.1, 1, 0, 0, 0, 1, 0.125, 1, 0, 0, 0.707, -0.707, 0.15, 1, 0, 0, -1, 0, 0.175, 1, 0, 0, 0.707, 0.707, 0.2, 1, 0, 0, 0, 1, 0.225, 1, 0, 0, 0.707, -0.707, 0.25, 1, 0, 0, -1, 0, 0.275, 1, 0, 0, 0.707, 0.707, 0.3, 1, 0, 0, 0, 1)
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpinShield")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"shield_up"
+}, {
+"args": [],
+"method": &"shield_down"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gynr7"]
 _data = {
@@ -63,6 +94,13 @@ _data = {
 "Dash R": SubResource("Animation_opn0c")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr61g"]
+radius = 0.923486
+height = 3.00376
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y2ky3"]
+radius = 2.04228
+
 [node name="PlayerShip" type="CharacterBody3D" node_paths=PackedStringArray("_player_control", "weapon", "stats") groups=["PLAYER"]]
 collision_layer = 2
 collision_mask = 0
@@ -70,36 +108,28 @@ script = ExtResource("1_iatc7")
 _player_control = NodePath("PlayerControl")
 weapon = NodePath("Weapon")
 stats = NodePath("Stats")
-speed = 8.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_jr61g")
+speed = 10.0
+dodge_cooldown = 0.1
 
 [node name="PlayerShip" parent="." instance=ExtResource("1_h0486")]
 
 [node name="Sight" type="Node3D" parent="."]
 
 [node name="Sight_Near" type="Sprite3D" parent="Sight"]
-transform = Transform3D(0.999999, 0, -0.00122173, 0, 1, 0, 0.00122173, 0, 0.999999, -0.0018326, 0, -8)
-pixel_size = 0.1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+pixel_size = 0.008
 billboard = 1
+fixed_size = true
 texture_filter = 0
 texture = ExtResource("4_26r7y")
 
 [node name="Sight_Far" type="Sprite3D" parent="Sight"]
-transform = Transform3D(0.999999, 0, -0.00122173, 0, 1, 0, 0.00122173, 0, 0.999999, 0.0018326, 0, -11)
-pixel_size = 0.08
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+pixel_size = 0.005
 billboard = 1
+fixed_size = true
 texture_filter = 0
 texture = ExtResource("4_26r7y")
-
-[node name="Hit Area" type="Area3D" parent="." groups=["TERRAIN"]]
-collision_layer = 0
-collision_mask = 576
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hit Area"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.299968)
-shape = SubResource("CapsuleShape3D_jr61g")
 
 [node name="PlayerControl" type="Node" parent="."]
 script = ExtResource("3_qxxd3")
@@ -119,22 +149,46 @@ script = ExtResource("7_xhxuk")
 [node name="Hardpoint_1" type="Node3D" parent="Hardpoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000335492, -1.84036)
 script = ExtResource("5_41wfr")
-enabled = true
 
 [node name="Hardpoint_2" type="Node3D" parent="Hardpoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.2, -1.2)
 script = ExtResource("5_41wfr")
+enabled = true
 
 [node name="Hardpoint_3" type="Node3D" parent="Hardpoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.2, -1.2)
 script = ExtResource("5_41wfr")
+enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gynr7")
 }
 
-[connection signal="body_entered" from="Hit Area" to="Stats" method="_on_hit_area_body_entered"]
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.3)
+shape = SubResource("CapsuleShape3D_jr61g")
+
+[node name="SpinShield" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("9_7xd1x")
+
+[node name="Collision" type="CollisionShape3D" parent="SpinShield"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0214635, -0.268869)
+shape = SubResource("SphereShape3D_y2ky3")
+disabled = true
+
+[node name="Hit Area" type="Area3D" parent="." groups=["TERRAIN"]]
+collision_layer = 0
+collision_mask = 576
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hit Area"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.299968)
+shape = SubResource("CapsuleShape3D_jr61g")
+
 [connection signal="timeout" from="Weapon/Timer" to="Weapon" method="_on_timer_timeout"]
+[connection signal="body_entered" from="SpinShield" to="SpinShield" method="_on_body_entered"]
+[connection signal="body_entered" from="Hit Area" to="Stats" method="_on_hit_area_body_entered"]
 
 [editable path="PlayerShip"]
