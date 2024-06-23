@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b42b1t1l3wbea"]
+
+[ext_resource type="PackedScene" uid="uid://c8f7yrba8nyav" path="res://Scenes/Entities/Enemies/Cruiser_1.glb" id="1_i5rn0"]
+[ext_resource type="PackedScene" uid="uid://cgodsf4yrgju4" path="res://Scenes/Entities/Enemies/turret_1.tscn" id="2_q6gim"]
+
+[node name="Cruiser_1" type="Node3D"]
+
+[node name="Cruiser_12" parent="." instance=ExtResource("1_i5rn0")]
+
+[node name="Turrets" type="Node3D" parent="."]
+
+[node name="Turret_1" parent="Turrets" instance=ExtResource("2_q6gim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.4017, 0)
+
+[node name="Turret_2" parent="Turrets" instance=ExtResource("2_q6gim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.6762, -17.8354)
+
+[node name="Turret_3" parent="Turrets" instance=ExtResource("2_q6gim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.8091, -32.8773)
+
+[node name="Turret_4" parent="Turrets" instance=ExtResource("2_q6gim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.2256, -48.2436)

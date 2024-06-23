@@ -3,36 +3,23 @@ class_name obstacle
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var asteroid: Node3D = $Asteroid
-
+@onready var health: entity_health = $Health
 
 @export var BASE_SPEED : float = 4
 var speed : float
-@export var BASE_HP : float = 4
-var hp
 @export var lifetime : float = 30
-@export var value : int = 10
-
 var rotation_value : Vector3
+
 func _ready() -> void:
 	set_inactive()
-	
 
 func _physics_process(delta: float) -> void:
 	asteroid.rotate(rotation_value, 0.005)
 	var collision := move_and_collide(transform.basis.z * speed * delta)
-	#if collision:
-		#collision.get_collider().damage(damage)
-		#set_inactive()
-		
-func damage(damage : float) -> void:
-	animation_player.play("Damage")
-	hp -= damage
-	if hp <= 0:
-		death()
-
+	
+func damage(_damage:int) -> void:
+	health.damage(_damage)
 func death() -> void:
-	# animation / particles
-	UIDirector.add_score(value)
 	set_inactive()
 
 func start() -> void:
@@ -44,11 +31,11 @@ func start() -> void:
 
 func set_active() -> void:
 	set_physics_process(true)
-	hp = BASE_HP
+	health.init_hp()
 	
 func set_inactive() -> void:
 	set_physics_process(false)
-	global_position = Vector3(0,0,10)
+	global_position = Vector3(0,0,100)
 	get_parent().available_obstacle_pool.append(self)
 
 func set_random_rotation() -> void:

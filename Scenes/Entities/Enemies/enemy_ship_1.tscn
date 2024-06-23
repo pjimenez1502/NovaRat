@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7fivsx1kd1lk"]
+
+[ext_resource type="PackedScene" uid="uid://cu8738c1wr1fq" path="res://Scenes/Entities/Enemies/Ship_1.glb" id="1_u76sk"]
+[ext_resource type="Script" path="res://Scenes/Entities/Enemies/enemy_ship_1.gd" id="1_wflbu"]
+
+[node name="Enemy_Ship_1" type="CharacterBody3D"]
+script = ExtResource("1_wflbu")
+
+[node name="Ship_1" parent="." instance=ExtResource("1_u76sk")]

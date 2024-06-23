@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bmoe0mwiep5u0"
-path="res://.godot/imported/Asteroid1.glb-c7fbbf0192f0e73c35a666cae76e044f.scn"
+uid="uid://c8f7yrba8nyav"
+path="res://.godot/imported/Cruiser_1.glb-d1140a2619d6c90c4f1690300e0f2e93.scn"
 
 [deps]
 
-source_file="res://Scenes/Obstacles/Asteroid1.glb"
-dest_files=["res://.godot/imported/Asteroid1.glb-c7fbbf0192f0e73c35a666cae76e044f.scn"]
+source_file="res://Scenes/Entities/Enemies/Cruiser_1.glb"
+dest_files=["res://.godot/imported/Cruiser_1.glb-d1140a2619d6c90c4f1690300e0f2e93.scn"]
 
 [params]
 
