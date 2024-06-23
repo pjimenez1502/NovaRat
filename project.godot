@@ -97,6 +97,8 @@ SPEED_DOWN={
 3d_physics/layer_2="Player"
 3d_physics/layer_6="Shootable"
 3d_physics/layer_7="Hard Terrain"
+3d_physics/layer_9="PlayerLaser"
+3d_physics/layer_10="EnemyLaser"
 
 [rendering]
 

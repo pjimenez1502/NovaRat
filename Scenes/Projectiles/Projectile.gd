@@ -2,8 +2,10 @@ extends CharacterBody3D
 class_name projectile
 
 @export var speed : float
-@export var damage : float
+@export var damage : float = 1
 @export var lifetime : float = 2
+@onready var collision: CollisionShape3D = $CollisionShape3D
+
 
 func _ready() -> void:
 	set_inactive()
@@ -20,9 +22,11 @@ func start() -> void:
 	set_inactive()
 
 func set_active() -> void:
+	collision.disabled = false
 	set_physics_process(true)
 	
 func set_inactive() -> void:
+	collision.disabled = true
 	set_physics_process(false)
-	global_position = Vector3(0,0,10)
+	global_position = Vector3(0,0,100)
 	get_parent().available_bullet_pool.append(self)

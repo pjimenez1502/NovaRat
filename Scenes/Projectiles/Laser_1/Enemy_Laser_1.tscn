@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjvrvo30jemo2"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/Projectile.gd" id="1_r645p"]
+[ext_resource type="PackedScene" uid="uid://crx6gwi111uvd" path="res://Scenes/Projectiles/Laser_1/Laser_1.glb" id="2_mjuds"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkej3"]
+shading_mode = 0
+albedo_color = Color(1, 0.733333, 0, 1)
+grow_amount = 0.288
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q7ybl"]
+radius = 0.108316
+height = 0.957679
+
+[node name="Laser_1" type="CharacterBody3D"]
+collision_layer = 512
+collision_mask = 32
+script = ExtResource("1_r645p")
+speed = 60.0
+
+[node name="Laser_1" parent="." instance=ExtResource("2_mjuds")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+
+[node name="Laser_1" parent="Laser_1" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60566e-08, 0.183666)
+surface_material_override/0 = SubResource("StandardMaterial3D_rkej3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.184316)
+shape = SubResource("CapsuleShape3D_q7ybl")
+
+[editable path="Laser_1"]

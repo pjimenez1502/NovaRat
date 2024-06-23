@@ -43,6 +43,7 @@ func init_available_bullet_pool():
 	for i in available_bullet_pool_size:
 		var bullet: projectile = _projectile.instantiate() as projectile
 		add_child(bullet)
+		bullet.global_position = Vector3(0,0,100)
 
 func get_bullet() -> projectile:
 	if available_bullet_pool.size() > 0:
