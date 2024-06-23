@@ -109,7 +109,6 @@ _player_control = NodePath("PlayerControl")
 weapon = NodePath("Weapon")
 stats = NodePath("Stats")
 speed = 10.0
-dodge_cooldown = 0.1
 
 [node name="PlayerShip" parent="." instance=ExtResource("1_h0486")]
 

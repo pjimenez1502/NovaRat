@@ -3,20 +3,25 @@ class_name player_ship
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var aim_center: Node3D = $"../AimCenter"
+@onready var collision: CollisionShape3D = $Collision
 
+@export_group("Movement type")
+@export var invert_y : bool
 @export var all_range : bool
 
+@export_group("Components")
 @export var play_area : Node3D
 @export var _player_control : player_control
 @export var weapon : ship_weapon
 @export var stats : ship_stats
 
+@export_group("Stats")
 @export var speed : float = 6
 @export var boost_power : float = 1.4
 @export var brake_power : float = 0.8
 
 @export var dodge_distance : float = 1.5
-@export var dodge_cooldown : float = 2
+@export var dodge_cooldown : float = 1
 
 var curr_dodge_cooldown : float
 
@@ -50,6 +55,8 @@ func forward(delta : float) -> void:
 
 func steer(delta : float) -> void:
 	target_position = position + Vector3(_player_control.direction.x + bank_boost, _player_control.direction.y, 0)
+	if invert_y:
+		target_position = position + Vector3(_player_control.direction.x + bank_boost, -_player_control.direction.y, 0)
 	
 	target_position.x = clampf(target_position.x, -6.5, 6.5)
 	target_position.y = clampf(target_position.y, -2, 4)
@@ -58,7 +65,7 @@ func steer(delta : float) -> void:
 	
 	position = lerp(position, target_position , delta * 6)
 	
-	aim_center.position = Vector3(_player_control.direction.x * 30, _player_control.direction.y * 12, -30)
+	aim_center.position = Vector3(_player_control.direction.x * 30, _player_control.direction.y * 12, -20)
 	look_target = lerp(look_target, aim_center.global_position , delta * 8)
 	look_at(look_target)
 
@@ -70,20 +77,16 @@ func check_turning(delta: float) -> void:
 	if turning_offset < -5 and _player_control.direction.x < 0:
 		play_area.rotate_y(-_player_control.direction.x * delta * .8)
 	
-	play_area.rotate_y(-bank_boost * delta * 1)
+	#play_area.rotate_y(-bank_boost * delta * 1)
 
 func dodge(direction : int) -> void:
 	if curr_dodge_cooldown > 0:
 		return
-	#dash.x += direction * dodge_distance
 	curr_dodge_cooldown = dodge_cooldown
 	if direction == 1:
 		animation_player.play("Dash R")
 	elif direction == -1:
 		animation_player.play("Dash L")
-
-func clear_dash() -> void:
-	dash = Vector3.ZERO
 
 func bank(delta : float) -> void:
 	_bank = lerp(_bank, target_bank, delta * 6)
