@@ -69,6 +69,8 @@ func check_turning(delta: float) -> void:
 		
 	if turning_offset < -5 and _player_control.direction.x < 0:
 		play_area.rotate_y(-_player_control.direction.x * delta * .8)
+	
+	play_area.rotate_y(-bank_boost * delta * 1)
 
 func dodge(direction : int) -> void:
 	if curr_dodge_cooldown > 0:
