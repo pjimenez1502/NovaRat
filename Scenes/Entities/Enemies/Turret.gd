@@ -7,8 +7,10 @@ var target_look : Vector3
 @onready var turret_head: MeshInstance3D = $Turret_1/TurretBase/TurretHead
 @onready var weapon: ship_weapon = $Weapon
 @onready var health: entity_health = $Health
+@onready var collision: CollisionShape3D = $Collision
 
 @export var aim_variance : float
+@export var score_value : float = 100
 var innacuracy_vector : Vector3
 
 func _ready() -> void:
@@ -23,7 +25,10 @@ func _physics_process(delta: float) -> void:
 func damage(_damage:int) -> void:
 	health.damage(_damage)
 func death() -> void:
-	queue_free()
+	turret_head.visible = false
+	collision.disabled = true
+	set_physics_process(false)
+	UIDirector.add_score(score_value)
 	
 ## ACCURACY
 func _on_innacuracy_timer_timeout() -> void:

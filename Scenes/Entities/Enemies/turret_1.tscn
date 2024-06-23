@@ -11,7 +11,7 @@
 radius = 100.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b4ldh"]
-size = Vector3(2.5, 2.5, 2.5)
+size = Vector3(3, 3, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_541ft"]
 shading_mode = 0
@@ -42,15 +42,17 @@ _data = {
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_lgdml")
-aim_variance = 8.0
+aim_variance = 10.0
 
 [node name="Turret_1" parent="." instance=ExtResource("2_so4ek")]
 
 [node name="Hardpoint_1" parent="Turret_1/TurretBase/TurretHead" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.449999, 0.5, -3.39959)
 script = ExtResource("3_ngt5r")
 enabled = true
 
 [node name="Hardpoint_2" parent="Turret_1/TurretBase/TurretHead" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.450001, 0.5, -3.39959)
 script = ExtResource("3_ngt5r")
 enabled = true
 
@@ -61,14 +63,14 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TargetingRange"]
 shape = SubResource("SphereShape3D_cv8xm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720886, 0)
 shape = SubResource("BoxShape3D_b4ldh")
 
 [node name="Weapon" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
 script = ExtResource("4_6sod8")
 _projectile = ExtResource("5_e28in")
-rpm = 60.0
+rpm = 40.0
 hardpoint_list = [NodePath("../Turret_1/TurretBase/TurretHead/Hardpoint_1"), NodePath("../Turret_1/TurretBase/TurretHead/Hardpoint_2")]
 
 [node name="Timer" type="Timer" parent="Weapon"]
@@ -83,10 +85,6 @@ libraries = {
 }
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
-script = ExtResource("6_ehk1u")
-entity = NodePath("..")
-
-[node name="Health2" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("6_ehk1u")
 entity = NodePath("..")
 

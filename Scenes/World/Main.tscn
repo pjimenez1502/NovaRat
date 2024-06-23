@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=7 format=3 uid="uid://do3qg8xv2qeju"]
 
 [ext_resource type="PackedScene" uid="uid://c6l7po0jlw5nx" path="res://Scenes/World/World.tscn" id="1_xsorj"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Player Ship.tscn" id="2_7swg3"]
+[ext_resource type="Script" path="res://Src/Player/Player_Camera.gd" id="3_l4tny"]
+[ext_resource type="PackedScene" uid="uid://b42b1t1l3wbea" path="res://Scenes/Entities/Enemies/cruiser_1.tscn" id="3_ur2k2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ti2iq"]
 shading_mode = 0
@@ -12,6 +14,13 @@ material = SubResource("StandardMaterial3D_ti2iq")
 
 [node name="Main" type="Node3D"]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.901803, 0.278293, 0.330612, -0.354611, 0.0392958, 0.934188, 0.246986, -0.959692, 0.134123, 0.223911, 2.87974, 0.191294)
+light_energy = 6.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.926544, 0.278293, -0.253118, 0.274291, 0.0392958, -0.960844, -0.25745, -0.959692, -0.112742, 0.223911, 2.87974, 0.191294)
+
 [node name="World" parent="." node_paths=PackedStringArray("play_area") instance=ExtResource("1_xsorj")]
 play_area = NodePath("../PlayArea")
 
@@ -21,11 +30,19 @@ play_area = NodePath("../PlayArea")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayArea/AimCenter"]
+visible = false
 mesh = SubResource("SphereMesh_egrti")
 skeleton = NodePath("../..")
 
 [node name="PlayerShip" parent="PlayArea" node_paths=PackedStringArray("play_area") instance=ExtResource("2_7swg3")]
+all_range = true
 play_area = NodePath("..")
+speed = 12.0
 
-[node name="Camera3D" type="Camera3D" parent="PlayArea"]
+[node name="Camera3D" type="Camera3D" parent="PlayArea" node_paths=PackedStringArray("_player_ship")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)
+script = ExtResource("3_l4tny")
+_player_ship = NodePath("../PlayerShip")
+
+[node name="Cruiser_1" parent="." instance=ExtResource("3_ur2k2")]
+transform = Transform3D(-0.674431, 0, -0.738338, 0, 1, 0, 0.738338, 0, -0.674431, 27.4165, -6.71529, -220.957)
