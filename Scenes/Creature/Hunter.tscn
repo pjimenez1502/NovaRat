@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk471ywuursg"]
+
+[ext_resource type="PackedScene" uid="uid://qjh53vle7a8a" path="res://Scenes/Creature/Hunter.glb" id="1_m7wh7"]
+
+[node name="Hunter" type="Node3D"]
+
+[node name="Hunter" parent="." instance=ExtResource("1_m7wh7")]
