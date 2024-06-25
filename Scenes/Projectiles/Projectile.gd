@@ -13,7 +13,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(-transform.basis.z * speed * delta)
 	if collision:
-		print(collision.get_collider())
+		#print(collision.get_collider())
 		if collision.get_collider().has_method("damage"):
 			collision.get_collider().damage(damage)
 		set_inactive()

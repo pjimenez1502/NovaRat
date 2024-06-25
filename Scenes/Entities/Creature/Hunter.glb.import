@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://qjh53vle7a8a"
-path="res://.godot/imported/Hunter.glb-681065411c90e446130d2e554e787f18.scn"
+path="res://.godot/imported/Hunter.glb-7c89f9c4fea1e87200668fe886d07e4e.scn"
 
 [deps]
 
-source_file="res://Scenes/Creature/Hunter.glb"
-dest_files=["res://.godot/imported/Hunter.glb-681065411c90e446130d2e554e787f18.scn"]
+source_file="res://Scenes/Entities/Creature/Hunter.glb"
+dest_files=["res://.godot/imported/Hunter.glb-7c89f9c4fea1e87200668fe886d07e4e.scn"]
 
 [params]
 
@@ -31,9 +31,9 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"Material": {
+"Creature": {
 "use_external/enabled": true,
-"use_external/path": "res://Assets/Dither Mat.tres"
+"use_external/path": "res://Assets/Dither CREATURE.tres"
 }
 }
 }

@@ -1,0 +1,96 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgodsf4yrgju4"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/Human/Turret.gd" id="1_lgdml"]
+[ext_resource type="PackedScene" uid="uid://b2u2oydcn3nnn" path="res://Scenes/Entities/Human/Turret_1.glb" id="2_so4ek"]
+[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="3_ngt5r"]
+[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="4_6sod8"]
+[ext_resource type="PackedScene" uid="uid://cjvrvo30jemo2" path="res://Scenes/Projectiles/Laser_1/Enemy_Laser_1.tscn" id="5_e28in"]
+[ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="6_ehk1u"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cv8xm"]
+radius = 100.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b4ldh"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_541ft"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_krts8"]
+resource_name = "Damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret_1/TurretBase/TurretHead:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, SubResource("StandardMaterial3D_541ft"), null, SubResource("StandardMaterial3D_541ft"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jpafi"]
+_data = {
+"Damage": SubResource("Animation_krts8")
+}
+
+[node name="Turret_1" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_lgdml")
+aim_variance = 10.0
+
+[node name="Turret_1" parent="." instance=ExtResource("2_so4ek")]
+
+[node name="Hardpoint_1" parent="Turret_1/TurretBase/TurretHead" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.449999, 0.5, -3.39959)
+script = ExtResource("3_ngt5r")
+enabled = true
+
+[node name="Hardpoint_2" parent="Turret_1/TurretBase/TurretHead" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.450001, 0.5, -3.39959)
+script = ExtResource("3_ngt5r")
+enabled = true
+
+[node name="TargetingRange" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetingRange"]
+shape = SubResource("SphereShape3D_cv8xm")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720886, 0)
+shape = SubResource("BoxShape3D_b4ldh")
+
+[node name="Weapon" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
+script = ExtResource("4_6sod8")
+_projectile = ExtResource("5_e28in")
+rpm = 40.0
+hardpoint_list = [NodePath("../Turret_1/TurretBase/TurretHead/Hardpoint_1"), NodePath("../Turret_1/TurretBase/TurretHead/Hardpoint_2")]
+
+[node name="Timer" type="Timer" parent="Weapon"]
+
+[node name="InnacuracyTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jpafi")
+}
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("6_ehk1u")
+entity = NodePath("..")
+
+[connection signal="body_entered" from="TargetingRange" to="." method="_on_targeting_range_body_entered"]
+[connection signal="body_exited" from="TargetingRange" to="." method="_on_targeting_range_body_exited"]
+[connection signal="timeout" from="Weapon/Timer" to="Weapon" method="_on_timer_timeout"]
+[connection signal="timeout" from="InnacuracyTimer" to="." method="_on_innacuracy_timer_timeout"]
+
+[editable path="Turret_1"]

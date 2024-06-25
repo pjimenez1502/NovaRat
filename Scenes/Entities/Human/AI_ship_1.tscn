@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7fivsx1kd1lk"]
+
+[ext_resource type="PackedScene" uid="uid://cu8738c1wr1fq" path="res://Scenes/Entities/Human/Ship_1.glb" id="1_u76sk"]
+[ext_resource type="Script" path="res://Scenes/Entities/Human/AI_ship_1.gd" id="1_wflbu"]
+[ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="3_nx88s"]
+
+[node name="AI_Ship_1" type="CharacterBody3D"]
+script = ExtResource("1_wflbu")
+
+[node name="Ship_1" parent="." instance=ExtResource("1_u76sk")]
+
+[node name="Label" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+modulate = Color(0, 0.768627, 0, 1)
+pixel_size = 0.0075
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = ExtResource("3_nx88s")

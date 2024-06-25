@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=8 format=3 uid="uid://do3qg8xv2qeju"]
 
 [ext_resource type="PackedScene" uid="uid://c6l7po0jlw5nx" path="res://Scenes/World/World.tscn" id="1_xsorj"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Player Ship.tscn" id="2_7swg3"]
 [ext_resource type="Script" path="res://Src/Player/Player_Camera.gd" id="3_l4tny"]
-[ext_resource type="PackedScene" uid="uid://b42b1t1l3wbea" path="res://Scenes/Entities/Enemies/cruiser_1.tscn" id="3_ur2k2"]
+[ext_resource type="PackedScene" uid="uid://b42b1t1l3wbea" path="res://Scenes/Entities/Human/cruiser_1.tscn" id="3_ur2k2"]
+[ext_resource type="PackedScene" uid="uid://dk471ywuursg" path="res://Scenes/Entities/Creature/Hunter.tscn" id="5_cx4v0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ti2iq"]
 shading_mode = 0
@@ -46,3 +47,6 @@ _player_ship = NodePath("../PlayerShip")
 
 [node name="Cruiser_1" parent="." instance=ExtResource("3_ur2k2")]
 transform = Transform3D(-0.674431, 0, -0.738338, 0, 1, 0, 0.738338, 0, -0.674431, 27.4165, -6.71529, -220.957)
+
+[node name="Hunter" parent="." instance=ExtResource("5_cx4v0")]
+transform = Transform3D(-0.969898, 0, 0.243513, 0, 1, 0, -0.243513, 0, -0.969898, 0, 0, -60.25)

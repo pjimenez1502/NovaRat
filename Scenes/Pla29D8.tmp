@@ -1,0 +1,149 @@
+[gd_scene load_steps=16 format=3 uid="uid://bogc8w4gkun8x"]
+
+[ext_resource type="PackedScene" uid="uid://w5amtol0blid" path="res://Assets/Model/PlayerShip.glb" id="1_h0486"]
+[ext_resource type="Script" path="res://Src/Player/player_ship.gd" id="1_iatc7"]
+[ext_resource type="Script" path="res://Src/Player/PlayerControl.gd" id="3_qxxd3"]
+[ext_resource type="Texture2D" uid="uid://x2di4vfsrpet" path="res://Assets/Sprite/Sight.png" id="4_26r7y"]
+[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="5_33llm"]
+[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="5_41wfr"]
+[ext_resource type="PackedScene" uid="uid://c2djybousjxdy" path="res://Scenes/Projectiles/Laser_1/Player_Laser_1.tscn" id="6_fkmw5"]
+[ext_resource type="Script" path="res://Src/Ship/Ship_Stats.gd" id="7_xhxuk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y2ky3"]
+radius = 1.16547
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_647xx"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mvdj1"]
+resource_name = "Damage"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerShip/Wyvern:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, SubResource("StandardMaterial3D_647xx"), null, SubResource("StandardMaterial3D_647xx"), null, SubResource("StandardMaterial3D_647xx"), null]
+}
+
+[sub_resource type="Animation" id="Animation_qf7mn"]
+resource_name = "Dash L"
+length = 0.3
+step = 0.025
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerShip")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.025, 1, 0, 0, 0.707, 0.707, 0.05, 1, 0, 0, 1, 0, 0.075, 1, 0, 0, 0.707, -0.707, 0.1, 1, 0, 0, 0, 1, 0.125, 1, 0, 0, 0.707, 0.707, 0.15, 1, 0, 0, 1, 0, 0.175, 1, 0, 0, 0.707, -0.707, 0.2, 1, 0, 0, 0, 1, 0.225, 1, 0, 0, 0.707, 0.707, 0.25, 1, 0, 0, 1, 0, 0.275, 1, 0, 0, 0.707, -0.707, 0.3, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_opn0c"]
+resource_name = "Dash R"
+step = 0.025
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerShip")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.025, 1, 0, 0, 0.707, -0.707, 0.05, 1, 0, 0, -1, 0, 0.075, 1, 0, 0, 0.707, 0.707, 0.1, 1, 0, 0, 0, 1, 0.125, 1, 0, 0, 0.707, -0.707, 0.15, 1, 0, 0, -1, 0, 0.175, 1, 0, 0, 0.707, 0.707, 0.2, 1, 0, 0, 0, 1, 0.225, 1, 0, 0, 0.707, -0.707, 0.25, 1, 0, 0, -1, 0, 0.275, 1, 0, 0, 0.707, 0.707, 0.3, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gynr7"]
+_data = {
+"Damage": SubResource("Animation_mvdj1"),
+"Dash L": SubResource("Animation_qf7mn"),
+"Dash R": SubResource("Animation_opn0c")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr61g"]
+radius = 0.588808
+height = 3.00376
+
+[node name="PlayerShip" type="CharacterBody3D" node_paths=PackedStringArray("_player_control", "weapon", "stats") groups=["PLAYER"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_iatc7")
+_player_control = NodePath("PlayerControl")
+weapon = NodePath("Weapon")
+stats = NodePath("Stats")
+speed = 8.0
+
+[node name="PlayerShip" parent="." instance=ExtResource("1_h0486")]
+
+[node name="Sight" type="Node3D" parent="."]
+
+[node name="Sight_Near" type="Sprite3D" parent="Sight"]
+transform = Transform3D(0.999999, 0, -0.00122173, 0, 1, 0, 0.00122173, 0, 0.999999, -0.0018326, 0, -12)
+pixel_size = 0.1
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_26r7y")
+
+[node name="Sight_Far" type="Sprite3D" parent="Sight"]
+transform = Transform3D(0.999999, 0, -0.00122173, 0, 1, 0, 0.00122173, 0, 0.999999, 0.0018326, 0, -16)
+pixel_size = 0.08
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_26r7y")
+
+[node name="PlayerControl" type="Node" parent="."]
+script = ExtResource("3_qxxd3")
+
+[node name="Weapon" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
+script = ExtResource("5_33llm")
+_projectile = ExtResource("6_fkmw5")
+hardpoint_list = [NodePath("../Hardpoints/Hardpoint_1"), NodePath("../Hardpoints/Hardpoint_2"), NodePath("../Hardpoints/Hardpoint_3")]
+
+[node name="Timer" type="Timer" parent="Weapon"]
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("7_xhxuk")
+
+[node name="SpinShield" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_y2ky3")
+
+[node name="Hardpoints" type="Node3D" parent="."]
+
+[node name="Hardpoint_1" type="Node3D" parent="Hardpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000335492, -1.84036)
+script = ExtResource("5_41wfr")
+enabled = true
+
+[node name="Hardpoint_2" type="Node3D" parent="Hardpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.2, -1.2)
+script = ExtResource("5_41wfr")
+
+[node name="Hardpoint_3" type="Node3D" parent="Hardpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.2, -1.2)
+script = ExtResource("5_41wfr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gynr7")
+}
+
+[node name="COLLIDERS" type="StaticBody3D" parent="."]
+
+[node name="Body" type="CollisionShape3D" parent="COLLIDERS"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.3)
+shape = SubResource("CapsuleShape3D_jr61g")
+
+[node name="Hit Area" type="Area3D" parent="COLLIDERS" groups=["TERRAIN"]]
+collision_layer = 0
+collision_mask = 576
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="COLLIDERS/Hit Area"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.299968)
+shape = SubResource("CapsuleShape3D_jr61g")
+
+[connection signal="timeout" from="Weapon/Timer" to="Weapon" method="_on_timer_timeout"]
+[connection signal="body_entered" from="COLLIDERS/Hit Area" to="Stats" method="_on_hit_area_body_entered"]
+
+[editable path="PlayerShip"]

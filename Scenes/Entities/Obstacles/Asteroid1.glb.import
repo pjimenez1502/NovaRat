@@ -33,7 +33,7 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "res://Assets/mat_from_pallete.tres"
+"use_external/path": "res://Assets/Dither HUMAN.tres"
 }
 }
 }

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk471ywuursg"]
+
+[ext_resource type="PackedScene" uid="uid://qjh53vle7a8a" path="res://Scenes/Entities/Creature/Hunter.glb" id="1_m7wh7"]
+[ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="2_wdull"]
+
+[node name="Hunter" type="CharacterBody3D"]
+
+[node name="Hunter" parent="." instance=ExtResource("1_m7wh7")]
+
+[node name="Label" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+modulate = Color(0.768627, 0, 0, 1)
+pixel_size = 0.0075
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = ExtResource("2_wdull")
+
+[editable path="Hunter"]

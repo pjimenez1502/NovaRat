@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2u2oydcn3nnn"
-path="res://.godot/imported/Turret_1.glb-7036aa2c959be9ea36ca5707f5ec1199.scn"
+uid="uid://cu8738c1wr1fq"
+path="res://.godot/imported/Ship_1.glb-252c6d2a4c283c0b1e85c1169988e520.scn"
 
 [deps]
 
-source_file="res://Scenes/Entities/Enemies/Turret_1.glb"
-dest_files=["res://.godot/imported/Turret_1.glb-7036aa2c959be9ea36ca5707f5ec1199.scn"]
+source_file="res://Scenes/Entities/Human/Ship_1.glb"
+dest_files=["res://.godot/imported/Ship_1.glb-252c6d2a4c283c0b1e85c1169988e520.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "res://Assets/Dither Mat.tres"
+"use_external/path": "res://Assets/Dither HUMAN.tres"
 }
 }
 }

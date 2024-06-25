@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c8f7yrba8nyav"
-path="res://.godot/imported/Cruiser_1.glb-d1140a2619d6c90c4f1690300e0f2e93.scn"
+path="res://.godot/imported/Cruiser_1.glb-858f0e47b665d5080b01f41ee7beb2ae.scn"
 
 [deps]
 
-source_file="res://Scenes/Entities/Enemies/Cruiser_1.glb"
-dest_files=["res://.godot/imported/Cruiser_1.glb-d1140a2619d6c90c4f1690300e0f2e93.scn"]
+source_file="res://Scenes/Entities/Human/Cruiser_1.glb"
+dest_files=["res://.godot/imported/Cruiser_1.glb-858f0e47b665d5080b01f41ee7beb2ae.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "res://Assets/mat_from_pallete.tres"
+"use_external/path": "res://Assets/Dither HUMAN.tres"
 }
 }
 }
