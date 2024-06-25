@@ -4,7 +4,7 @@ var target : Node3D
 var target_look : Vector3
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var turret_head: MeshInstance3D = $Turret_1/TurretBase/TurretHead
+@onready var turret_head: MeshInstance3D = $Turret/TurretBase/TurretHead
 @onready var weapon: ship_weapon = $Weapon
 @onready var health: entity_health = $Health
 @onready var collision: CollisionShape3D = $Collision
