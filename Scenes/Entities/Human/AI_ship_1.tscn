@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7fivsx1kd1lk"]
 
 [ext_resource type="PackedScene" uid="uid://cu8738c1wr1fq" path="res://Scenes/Entities/Human/Ship_1.glb" id="1_u76sk"]
-[ext_resource type="Script" path="res://Scenes/Entities/Human/AI_ship_1.gd" id="1_wflbu"]
+[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_wflbu"]
 [ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="3_nx88s"]
 
 [node name="AI_Ship_1" type="CharacterBody3D"]
@@ -18,3 +18,16 @@ no_depth_test = true
 fixed_size = true
 texture_filter = 0
 texture = ExtResource("3_nx88s")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.27128)
+
+[node name="Target_Find" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Targetpoint_Find" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Target_Find" to="." method="find_target"]
+[connection signal="timeout" from="Targetpoint_Find" to="." method="decide_point_relative_to_target"]

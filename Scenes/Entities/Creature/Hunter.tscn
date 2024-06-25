@@ -1,9 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://dk471ywuursg"]
+[gd_scene load_steps=9 format=3 uid="uid://dk471ywuursg"]
 
 [ext_resource type="PackedScene" uid="uid://qjh53vle7a8a" path="res://Scenes/Entities/Creature/Hunter.glb" id="1_m7wh7"]
+[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_qjhug"]
 [ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="2_wdull"]
+[ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="4_dqa8w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pf5jf"]
+radius = 1.70507
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhj1o"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_0krpv"]
+resource_name = "Damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hunter/Hunter:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, null, SubResource("StandardMaterial3D_hhj1o"), null, SubResource("StandardMaterial3D_hhj1o"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xra6d"]
+_data = {
+"Damage": SubResource("Animation_0krpv")
+}
 
 [node name="Hunter" type="CharacterBody3D"]
+collision_layer = 33
+collision_mask = 33
+script = ExtResource("1_qjhug")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_pf5jf")
 
 [node name="Hunter" parent="." instance=ExtResource("1_m7wh7")]
 
@@ -16,5 +52,26 @@ no_depth_test = true
 fixed_size = true
 texture_filter = 0
 texture = ExtResource("2_wdull")
+
+[node name="Target_Find" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Targetpoint_Find" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("4_dqa8w")
+entity = NodePath("..")
+BASE_HP = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xra6d")
+}
+
+[connection signal="timeout" from="Target_Find" to="." method="find_target"]
+[connection signal="timeout" from="Targetpoint_Find" to="." method="decide_point_relative_to_target"]
 
 [editable path="Hunter"]
