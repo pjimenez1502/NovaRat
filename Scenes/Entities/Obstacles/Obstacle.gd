@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends RigidBody3D
 class_name obstacle
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

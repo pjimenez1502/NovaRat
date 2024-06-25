@@ -42,11 +42,18 @@ speed = 12.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayArea" node_paths=PackedStringArray("_player_ship")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)
+current = true
 script = ExtResource("3_l4tny")
 _player_ship = NodePath("../PlayerShip")
+
+[node name="TOP" type="Camera3D" parent="PlayArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
 
 [node name="Cruiser_1" parent="." instance=ExtResource("3_ur2k2")]
 transform = Transform3D(-0.674431, 0, -0.738338, 0, 1, 0, 0.738338, 0, -0.674431, 27.4165, -6.71529, -220.957)
 
-[node name="Hunter" parent="." instance=ExtResource("5_cx4v0")]
+[node name="Hunter" parent="." node_paths=PackedStringArray("dummy_target") instance=ExtResource("5_cx4v0")]
 transform = Transform3D(-0.969898, 0, 0.243513, 0, 1, 0, -0.243513, 0, -0.969898, 0, 0, -60.25)
+dummy_target = NodePath("../PlayArea")
+position_variance_distance = 20.0
+position_variance_width = 8.0
