@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dk471ywuursg"]
+[gd_scene load_steps=21 format=3 uid="uid://dk471ywuursg"]
 
 [ext_resource type="PackedScene" uid="uid://qjh53vle7a8a" path="res://Scenes/Entities/Creature/Hunter.glb" id="1_m7wh7"]
-[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_qjhug"]
+[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_n4gfv"]
 [ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="2_wdull"]
 [ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="4_dqa8w"]
+[ext_resource type="Texture2D" uid="uid://dqfkq8jjq0s8v" path="res://Assets/Sprite/Attack_charge/Attack_charge.png" id="5_6ud5x"]
+[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="6_8ufdc"]
+[ext_resource type="PackedScene" uid="uid://inroaknjdcxf" path="res://Scenes/Projectiles/guided_orb.tscn" id="7_a6ka0"]
+[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="8_hfej3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pf5jf"]
 radius = 1.70507
@@ -28,17 +32,117 @@ tracks/0/keys = {
 "values": [null, null, SubResource("StandardMaterial3D_hhj1o"), null, SubResource("StandardMaterial3D_hhj1o"), null]
 }
 
+[sub_resource type="Animation" id="Animation_fuc1x"]
+resource_name = "Charge_Shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Charge:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Charge:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:charging")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xra6d"]
 _data = {
+"Charge_Shoot": SubResource("Animation_fuc1x"),
 "Damage": SubResource("Animation_0krpv")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j6hao"]
+animation = &"Damage"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ohpmj"]
+states/Damage/node = SubResource("AnimationNodeAnimation_j6hao")
+states/Damage/position = Vector2(423, 50)
+states/Start/position = Vector2(206, 100)
+graph_offset = Vector2(-17, -16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od3jn"]
+atlas = ExtResource("5_6ud5x")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr7qs"]
+atlas = ExtResource("5_6ud5x")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prjhm"]
+atlas = ExtResource("5_6ud5x")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckgaw"]
+atlas = ExtResource("5_6ud5x")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5w6y2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od3jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr7qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prjhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckgaw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Hunter" type="CharacterBody3D"]
 collision_layer = 33
-collision_mask = 33
-script = ExtResource("1_qjhug")
+collision_mask = 0
+script = ExtResource("1_n4gfv")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.175198)
 shape = SubResource("SphereShape3D_pf5jf")
 
 [node name="Hunter" parent="." instance=ExtResource("1_m7wh7")]
@@ -71,7 +175,36 @@ libraries = {
 "": SubResource("AnimationLibrary_xra6d")
 }
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xra6d")
+}
+tree_root = SubResource("AnimationNodeStateMachine_ohpmj")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Charge" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.580179, 1.67946)
+visible = false
+pixel_size = 0.15
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_5w6y2")
+
+[node name="Hardpoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.623716, 1.72046)
+script = ExtResource("8_hfej3")
+
+[node name="WEAPON" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
+script = ExtResource("6_8ufdc")
+_projectile = ExtResource("7_a6ka0")
+rpm = 100.0
+hardpoint_list = [NodePath("../Hardpoint")]
+pool_size = 3
+
+[node name="Timer" type="Timer" parent="WEAPON"]
+
 [connection signal="timeout" from="Target_Find" to="." method="find_target"]
 [connection signal="timeout" from="Targetpoint_Find" to="." method="decide_point_relative_to_target"]
+[connection signal="timeout" from="WEAPON/Timer" to="WEAPON" method="_on_timer_timeout"]
 
 [editable path="Hunter"]

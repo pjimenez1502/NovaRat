@@ -3,6 +3,8 @@ extends CharacterBody3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health: entity_health = $Health
 @onready var collision: CollisionShape3D = $Collision
+@onready var weapon: ship_weapon = $WEAPON
+
 
 @export var speed : float = 4
 
@@ -20,6 +22,9 @@ var relative_target : Vector3
 
 func _ready() -> void:
 	health.init_hp()
+	
+	find_target()
+	decide_point_relative_to_target()
 
 func _physics_process(delta: float) -> void:
 	move(delta)
@@ -55,8 +60,30 @@ func decide_point_relative_to_target() -> void:
 		return
 	var target_basis = target_object.global_transform.basis
 	relative_target = target_basis.x * randf_range(-position_variance_width,position_variance_width) + target_basis.y * randf_range(-position_variance_width,position_variance_width) + target_basis.z * -position_variance_distance
+	if check_ready_to_fire():
+		charge_shoot()
 
 func follow_relative_point() -> void:
 	if !target_object:
 		return
 	target_point = target_object.global_position + relative_target
+
+@export var charging : bool
+func check_ready_to_fire() -> bool:
+	if charging:
+		return false
+	#print((target_object.global_position - global_position).length())
+	var distance = (target_object.global_position - global_position).length()
+	if distance > 15 and distance < 25:
+		return true
+	return false
+
+func charge_shoot() -> void:
+	print("charging")
+	animation_player.play("Charge_Shoot")
+
+func shoot():
+	var shoot_target = target_object
+	if shoot_target.is_in_group("PLAYER"):
+			shoot_target = target_object.get_child(0)
+	weapon.shoot_targeted(shoot_target)
