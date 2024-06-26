@@ -23,7 +23,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Turret_1/TurretBase/TurretHead:surface_material_override/0")
+tracks/0/path = NodePath("Turret/TurretBase/TurretHead:surface_material_override/0")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,11 +48,9 @@ aim_variance = 10.0
 
 [node name="Hardpoint_1" parent="Turret/TurretBase/TurretHead" index="0"]
 script = ExtResource("3_i2g2q")
-enabled = true
 
 [node name="Hardpoint_2" parent="Turret/TurretBase/TurretHead" index="1"]
 script = ExtResource("3_i2g2q")
-enabled = true
 
 [node name="TargetingRange" type="Area3D" parent="."]
 collision_layer = 2
@@ -70,6 +68,7 @@ script = ExtResource("4_p3nj5")
 _projectile = ExtResource("5_ta5bo")
 rpm = 40.0
 hardpoint_list = [NodePath("../Turret/TurretBase/TurretHead/Hardpoint_1"), NodePath("../Turret/TurretBase/TurretHead/Hardpoint_2")]
+pool_size = 20
 
 [node name="Timer" type="Timer" parent="Weapon"]
 

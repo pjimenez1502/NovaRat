@@ -7,6 +7,7 @@ class_name ship_weapon
 @export var rpm : float = 400
 @export var hardpoint_list : Array[hardpoint]
 
+@export var pool_size : int
 var timer_ready : bool = true
 
 func _ready() -> void:
@@ -21,26 +22,31 @@ func shoot() -> void:
 	timer.start()
 	iterate_hardpoints()
 
-func iterate_hardpoints() -> void:
+func shoot_targeted(target : Node3D) -> void:
+	iterate_hardpoints(target)
+
+func iterate_hardpoints(target : Node3D = null) -> void:
 	for _hardpoint : hardpoint in hardpoint_list:
 		if _hardpoint.enabled:
-			instantiate_projectile(_hardpoint)
+			if target:
+				_hardpoint.aim(target.global_position + -target.global_transform.basis.z * 4)
+			instantiate_projectile(_hardpoint, target)
 
-func instantiate_projectile(_hardpoint : hardpoint) -> void:
+func instantiate_projectile(_hardpoint : hardpoint, target : Node3D) -> void:
 	var projectile_instance = get_bullet()
 	if projectile_instance:
 		projectile_instance.global_transform = _hardpoint.global_transform
+		if target:
+			projectile_instance.set_guiding_target(target)
 
 func _on_timer_timeout() -> void:
 	timer_ready = true
 
 
-
-var available_bullet_pool_size : int = 200
 var available_bullet_pool : Array[projectile]
 var used_bullet_pool : Array[projectile]
 func init_available_bullet_pool():
-	for i in available_bullet_pool_size:
+	for i in pool_size:
 		var bullet: projectile = _projectile.instantiate() as projectile
 		add_child(bullet)
 		bullet.global_position = Vector3(0,0,100)
