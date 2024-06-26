@@ -22,8 +22,6 @@ func _input(_event: InputEvent) -> void:
 	#direction = Vector2(horizontal, vertical)
 	direction = Vector2(easeInSine(horizontal), easeInSine(vertical))
 	
-	
-	
 	var bank_axis = Input.get_axis("DODGE_LEFT", "DODGE_RIGHT")
 	_player_ship.set_bank(bank_axis)
 	

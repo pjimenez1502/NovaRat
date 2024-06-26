@@ -8,12 +8,22 @@ class_name entity_health
 var hp : int
 var shield: int
 
+@export var immunity_period : float = 0.2
+var immune : bool
+
 func init_hp() -> void:
 	hp = BASE_HP
 	shield = BASE_SHIELD
 
 func damage(damage : int) -> void:
+	if immune:
+		return
+	
 	entity.animation_player.play("Damage")
 	hp -= damage
 	if hp <= 0:
 		entity.death()
+	
+	immune = true
+	await get_tree().create_timer(immunity_period).timeout
+	immune = false

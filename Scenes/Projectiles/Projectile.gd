@@ -4,7 +4,7 @@ class_name projectile
 @onready var collision: CollisionShape3D = $CollisionShape3D
 
 @export var speed : float
-@export var damage : float = 1
+@export var _damage : float = 1
 @export var lifetime : float = 2
 
 @export var guided : bool
@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		#print(collision.get_collider())
 		if collision.get_collider().has_method("damage"):
-			collision.get_collider().damage(damage)
+			collision.get_collider().damage(_damage)
 		set_inactive()
 		print("hit")
 
