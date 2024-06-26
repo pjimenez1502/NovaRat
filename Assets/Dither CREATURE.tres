@@ -1,22 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://pon55v2k6677"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://pon55v2k6677"]
 
-[ext_resource type="Texture2D" uid="uid://c68xwy00d1gvs" path="res://Assets/emmision CREATURE.png" id="1_6n0d0"]
 [ext_resource type="Shader" path="res://Shader/Dither Lighting/shader_dither_lighting_standalone_tex.gdshader" id="1_fi7cb"]
 [ext_resource type="Texture2D" uid="uid://cm8x0fxacyhrl" path="res://Shader/Dither Lighting/bayer_8x8.png" id="2_rwvqt"]
 [ext_resource type="Texture2D" uid="uid://qloglirux8gf" path="res://Assets/Pallete CREATURE.png" id="3_h4u8x"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aal6c"]
-render_priority = 1
-transparency = 2
-alpha_scissor_threshold = 1.0
-alpha_antialiasing_mode = 0
-albedo_texture = ExtResource("1_6n0d0")
-emission_enabled = true
-emission_texture = ExtResource("1_6n0d0")
-
 [resource]
 render_priority = 0
-next_pass = SubResource("StandardMaterial3D_aal6c")
 shader = ExtResource("1_fi7cb")
 shader_parameter/tex_size = 16.0
 shader_parameter/dithering_matrix_size = 8.0
