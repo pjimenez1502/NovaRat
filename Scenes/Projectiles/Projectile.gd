@@ -1,17 +1,25 @@
 extends CharacterBody3D
 class_name projectile
 
+@onready var collision: CollisionShape3D = $CollisionShape3D
+
 @export var speed : float
 @export var damage : float = 1
 @export var lifetime : float = 2
-@onready var collision: CollisionShape3D = $CollisionShape3D
 
+@export var guided : bool
+@export var target : Node3D
+@export var guiding_power : float
 
 func _ready() -> void:
 	set_inactive()
 
 func _physics_process(delta: float) -> void:
-	var collision := move_and_collide(-transform.basis.z * speed * delta)
+	var guiding_velocity : Vector3
+	if guided and target:
+		guiding_velocity = guiding(delta)
+	
+	var collision := move_and_collide(guiding_velocity + -transform.basis.z * speed * delta)
 	if collision:
 		#print(collision.get_collider())
 		if collision.get_collider().has_method("damage"):
@@ -36,3 +44,10 @@ func set_inactive() -> void:
 
 func set_collision_disabled(value: bool) -> void:
 	collision.set_deferred("disabled", value)
+
+func guiding(delta) -> Vector3:
+	var direction = (target.global_position - global_position).normalized()
+	return direction * (guiding_power * 1)
+
+func set_guiding_target(_target : Node3D):
+	target = _target
