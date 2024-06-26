@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=8 format=3 uid="uid://do3qg8xv2qeju"]
 
+[ext_resource type="Script" path="res://Src/Scripting/TutorialScript.gd" id="1_etw1k"]
 [ext_resource type="PackedScene" uid="uid://c6l7po0jlw5nx" path="res://Scenes/World/World.tscn" id="1_xsorj"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Player Ship.tscn" id="2_7swg3"]
 [ext_resource type="Script" path="res://Src/Player/Player_Camera.gd" id="3_l4tny"]
@@ -14,7 +15,10 @@ material = SubResource("StandardMaterial3D_ti2iq")
 
 [node name="Tutorial" type="Node3D"]
 
-[node name="TUTORIAL SCRIPTING" type="Node" parent="."]
+[node name="TUTORIAL SCRIPT" type="Node" parent="."]
+script = ExtResource("1_etw1k")
+
+[node name="Timer" type="Timer" parent="TUTORIAL SCRIPT"]
 
 [node name="World" parent="." node_paths=PackedStringArray("play_area") instance=ExtResource("1_xsorj")]
 play_area = NodePath("../PlayArea")
@@ -37,7 +41,6 @@ mesh = SubResource("SphereMesh_egrti")
 skeleton = NodePath("../..")
 
 [node name="PlayerShip" parent="PlayArea" node_paths=PackedStringArray("play_area") instance=ExtResource("2_7swg3")]
-all_range = true
 play_area = NodePath("..")
 speed = 12.0
 

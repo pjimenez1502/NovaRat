@@ -5,7 +5,9 @@ extends Control
 @onready var text_label: Label = $HBoxContainer/TextLabel
 
 func _ready() -> void:
+	hide_dialog()
 	DialogDirector.DIALOG_SENT.connect(show_dialog)
+	DialogDirector.DIALOG_HIDE.connect(hide_dialog)
 
 func show_dialog(_character: DialogCharacter, _text: String) -> void:
 	portraitRect.texture = _character.portrait

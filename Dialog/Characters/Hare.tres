@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DialogCharacter" load_steps=3 format=3 uid="uid://dle8voemux8vj"]
 
 [ext_resource type="Texture2D" uid="uid://d35dbbjpc2qde" path="res://Dialog/Characters/Assets/hare.png" id="1_6f78t"]
-[ext_resource type="Script" path="res://Dialog/Characters/Dialog_Character.gd" id="2_uireq"]
+[ext_resource type="Script" path="res://Dialog/Dialog_Character.gd" id="2_uireq"]
 
 [resource]
 script = ExtResource("2_uireq")

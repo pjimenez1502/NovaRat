@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogCharacter" load_steps=3 format=3 uid="uid://bqgbpoh48e4by"]
+
+[ext_resource type="Texture2D" uid="uid://c80u2e70a2np7" path="res://Dialog/Characters/Assets/lizzard.png" id="1_c8lxc"]
+[ext_resource type="Script" path="res://Dialog/Dialog_Character.gd" id="2_aqf2h"]
+
+[resource]
+script = ExtResource("2_aqf2h")
+portrait = ExtResource("1_c8lxc")
+name = "Rizzard"
+color = Color(0.8, 0.8, 0.8, 1)
