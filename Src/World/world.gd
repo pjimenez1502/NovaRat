@@ -8,7 +8,7 @@ class_name world
 @export var scroll_speed : float = 5
 
 func _ready() -> void:
-	_spawn_director.start_obstacle_spawn()
+	_spawn_director.start_population()
 	
 func _physics_process(delta: float) -> void:
 	world_scroll(delta)

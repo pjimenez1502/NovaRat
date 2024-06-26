@@ -7,6 +7,7 @@ class_name obstacle
 
 @export var BASE_SPEED : float = 4
 var speed : float
+@export var despawn : bool
 @export var lifetime : float = 30
 var rotation_value : Vector3
 
@@ -26,8 +27,9 @@ func start() -> void:
 	set_active()
 	set_random_rotation()
 	speed = randf_range(BASE_SPEED - 1, BASE_SPEED + 1)
-	await get_tree().create_timer(lifetime).timeout
-	set_inactive()
+	if despawn:
+		await get_tree().create_timer(lifetime).timeout
+		set_inactive()
 
 func set_active() -> void:
 	set_physics_process(true)

@@ -11,6 +11,10 @@ script = ExtResource("1_fbcyp")
 [node name="SpawnDirector" type="Node" parent="."]
 script = ExtResource("2_il8o0")
 obstacle_list = Array[PackedScene]([ExtResource("3_slsxm")])
+field_enabled = true
+field_radius = 500.0
+field_spawn_count = 400.0
+distance_to_playarea = 60.0
 spawn_area = Vector3(60, 24, 6)
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="SpawnDirector"]
