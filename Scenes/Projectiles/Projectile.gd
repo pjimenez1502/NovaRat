@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		if collision.get_collider().has_method("damage"):
 			collision.get_collider().damage(_damage)
 		set_inactive()
-		print("hit")
+		#print("hit")
 
 func start() -> void:
 	set_active()

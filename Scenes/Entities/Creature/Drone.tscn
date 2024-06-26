@@ -1,36 +1,16 @@
-[gd_scene load_steps=21 format=3 uid="uid://dk471ywuursg"]
+[gd_scene load_steps=21 format=3 uid="uid://by1cw0203fi05"]
 
-[ext_resource type="PackedScene" uid="uid://qjh53vle7a8a" path="res://Scenes/Entities/Creature/Hunter.glb" id="1_m7wh7"]
-[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_n4gfv"]
-[ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="2_wdull"]
-[ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="4_dqa8w"]
-[ext_resource type="Texture2D" uid="uid://dqfkq8jjq0s8v" path="res://Assets/Sprite/Attack_charge/Attack_charge.png" id="5_6ud5x"]
-[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="6_8ufdc"]
-[ext_resource type="PackedScene" uid="uid://inroaknjdcxf" path="res://Scenes/Projectiles/guided_orb.tscn" id="7_a6ka0"]
-[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="8_hfej3"]
+[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_6kiax"]
+[ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="3_efmj8"]
+[ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="4_lxpec"]
+[ext_resource type="Texture2D" uid="uid://dqfkq8jjq0s8v" path="res://Assets/Sprite/Attack_charge/Attack_charge.png" id="5_vn8oj"]
+[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="6_r2fp6"]
+[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="7_g0cqk"]
+[ext_resource type="PackedScene" uid="uid://inroaknjdcxf" path="res://Scenes/Projectiles/guided_orb.tscn" id="8_2kggh"]
+[ext_resource type="PackedScene" uid="uid://b8fqmwwlobwlu" path="res://Scenes/Entities/Creature/Drone.glb" id="9_rdgqo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pf5jf"]
-radius = 1.70507
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhj1o"]
-shading_mode = 0
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_0krpv"]
-resource_name = "Damage"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hunter/Hunter:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, null, SubResource("StandardMaterial3D_hhj1o"), null, SubResource("StandardMaterial3D_hhj1o"), null]
-}
+radius = 0.962941
 
 [sub_resource type="Animation" id="Animation_fuc1x"]
 resource_name = "Charge_Shoot"
@@ -88,6 +68,26 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhj1o"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_0krpv"]
+resource_name = "Damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hunter/Hunter:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, null, SubResource("StandardMaterial3D_hhj1o"), null, SubResource("StandardMaterial3D_hhj1o"), null]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xra6d"]
 _data = {
 "Charge_Shoot": SubResource("Animation_fuc1x"),
@@ -104,19 +104,19 @@ states/Start/position = Vector2(206, 100)
 graph_offset = Vector2(-17, -16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_od3jn"]
-atlas = ExtResource("5_6ud5x")
+atlas = ExtResource("5_vn8oj")
 region = Rect2(0, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vr7qs"]
-atlas = ExtResource("5_6ud5x")
+atlas = ExtResource("5_vn8oj")
 region = Rect2(8, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prjhm"]
-atlas = ExtResource("5_6ud5x")
+atlas = ExtResource("5_vn8oj")
 region = Rect2(16, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ckgaw"]
-atlas = ExtResource("5_6ud5x")
+atlas = ExtResource("5_vn8oj")
 region = Rect2(24, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5w6y2"]
@@ -139,18 +139,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Hunter" type="CharacterBody3D" groups=["SWARM"]]
+[node name="Drone" type="CharacterBody3D" groups=["SWARM"]]
 collision_layer = 33
 collision_mask = 0
-script = ExtResource("1_n4gfv")
-position_variance_distance = 20.0
-position_variance_width = 8.0
+script = ExtResource("1_6kiax")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.175198)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.298336)
 shape = SubResource("SphereShape3D_pf5jf")
 
-[node name="Hunter" parent="." instance=ExtResource("1_m7wh7")]
+[node name="Hunter" parent="." instance=ExtResource("9_rdgqo")]
 
 [node name="Label" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -160,7 +158,7 @@ billboard = 1
 no_depth_test = true
 fixed_size = true
 texture_filter = 0
-texture = ExtResource("2_wdull")
+texture = ExtResource("3_efmj8")
 
 [node name="Target_Find" type="Timer" parent="."]
 wait_time = 10.0
@@ -171,7 +169,7 @@ wait_time = 6.0
 autostart = true
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
-script = ExtResource("4_dqa8w")
+script = ExtResource("4_lxpec")
 entity = NodePath("..")
 BASE_HP = 8
 
@@ -197,11 +195,11 @@ sprite_frames = SubResource("SpriteFrames_5w6y2")
 
 [node name="Hardpoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.623716, 1.72046)
-script = ExtResource("8_hfej3")
+script = ExtResource("6_r2fp6")
 
 [node name="WEAPON" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
-script = ExtResource("6_8ufdc")
-_projectile = ExtResource("7_a6ka0")
+script = ExtResource("7_g0cqk")
+_projectile = ExtResource("8_2kggh")
 rpm = 100.0
 hardpoint_list = [NodePath("../Hardpoint")]
 pool_size = 3

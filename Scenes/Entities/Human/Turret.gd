@@ -40,7 +40,7 @@ func change_inaccuracy() -> void:
 
 ## TARGETING AREAS
 func _on_targeting_range_body_entered(body: Node3D) -> void:
-	if body.is_in_group("PLAYER") and !target:
+	if body.is_in_group("SWARM") and !target:
 		target = body
 
 func _on_targeting_range_body_exited(body: Node3D) -> void:

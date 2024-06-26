@@ -79,7 +79,6 @@ func check_ready_to_fire() -> bool:
 	return false
 
 func charge_shoot() -> void:
-	print("charging")
 	animation_player.play("Charge_Shoot")
 
 func shoot():

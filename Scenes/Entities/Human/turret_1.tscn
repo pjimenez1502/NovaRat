@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b2u2oydcn3nnn" path="res://Scenes/Entities/Human/Turret_1.glb" id="2_gltsk"]
 [ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="3_i2g2q"]
 [ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="4_p3nj5"]
-[ext_resource type="PackedScene" uid="uid://cjvrvo30jemo2" path="res://Scenes/Projectiles/Laser_1/Enemy_Laser_1.tscn" id="5_ta5bo"]
+[ext_resource type="PackedScene" uid="uid://c2djybousjxdy" path="res://Scenes/Projectiles/Laser_1/Player_Laser_1.tscn" id="5_p4dsd"]
 [ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="6_2shlu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cv8xm"]
@@ -39,8 +39,8 @@ _data = {
 }
 
 [node name="Turret_1" type="StaticBody3D"]
-collision_layer = 32
-collision_mask = 0
+collision_layer = 0
+collision_mask = 768
 script = ExtResource("1_mwum8")
 aim_variance = 10.0
 
@@ -53,8 +53,8 @@ script = ExtResource("3_i2g2q")
 script = ExtResource("3_i2g2q")
 
 [node name="TargetingRange" type="Area3D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 32
+collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TargetingRange"]
 shape = SubResource("SphereShape3D_cv8xm")
@@ -65,7 +65,7 @@ shape = SubResource("BoxShape3D_b4ldh")
 
 [node name="Weapon" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
 script = ExtResource("4_p3nj5")
-_projectile = ExtResource("5_ta5bo")
+_projectile = ExtResource("5_p4dsd")
 rpm = 40.0
 hardpoint_list = [NodePath("../Turret/TurretBase/TurretHead/Hardpoint_1"), NodePath("../Turret/TurretBase/TurretHead/Hardpoint_2")]
 pool_size = 20
