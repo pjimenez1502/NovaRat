@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://uce22k0lid50"]
+[gd_scene load_steps=9 format=3 uid="uid://uce22k0lid50"]
 
-[ext_resource type="PackedScene" uid="uid://do3qg8xv2qeju" path="res://Scenes/World/Main.tscn" id="1_beg2u"]
+[ext_resource type="PackedScene" uid="uid://do3qg8xv2qeju" path="res://Scenes/World/Tutorial.tscn" id="1_beg2u"]
 [ext_resource type="Script" path="res://Src/UI/flight_overlay.gd" id="2_n832s"]
 [ext_resource type="Texture2D" uid="uid://ddbw8iha284u7" path="res://Assets/Sprite/UI/Hp.png" id="3_k32la"]
 [ext_resource type="Texture2D" uid="uid://j8qn4t14c8xh" path="res://Assets/Sprite/UI/underHP.png" id="4_0cres"]
 [ext_resource type="Texture2D" uid="uid://cat34tc22npxs" path="res://Assets/Sprite/UI/Shield.png" id="4_qsu1a"]
+[ext_resource type="PackedScene" uid="uid://defyp6gcrx7w7" path="res://Dialog/Dialog_Bubble.tscn" id="6_3fosp"]
 
 [sub_resource type="Animation" id="Animation_fw14b"]
 resource_name = "ScoreChange"
@@ -104,5 +105,10 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_v8wjv")
 }
+
+[node name="DialogBubbe" parent="Flight Overlay" instance=ExtResource("6_3fosp")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="Main" parent="." instance=ExtResource("1_beg2u")]

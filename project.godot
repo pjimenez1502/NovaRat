@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 UIDirector="*res://Src/Global/UIDirector.gd"
+DialogDirector="*res://Dialog/Dialog_Director.gd"
 
 [editor_plugins]
 
