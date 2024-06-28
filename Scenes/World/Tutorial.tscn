@@ -1,10 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=12 format=3 uid="uid://do3qg8xv2qeju"]
 
 [ext_resource type="Script" path="res://Src/Scripting/TutorialScript.gd" id="1_etw1k"]
 [ext_resource type="PackedScene" uid="uid://c6l7po0jlw5nx" path="res://Scenes/World/World.tscn" id="1_xsorj"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Player Ship.tscn" id="2_7swg3"]
+[ext_resource type="PackedScene" uid="uid://by1cw0203fi05" path="res://Scenes/Entities/Creature/Drone.tscn" id="2_sermy"]
 [ext_resource type="Script" path="res://Src/Player/Player_Camera.gd" id="3_l4tny"]
 [ext_resource type="PackedScene" uid="uid://b42b1t1l3wbea" path="res://Scenes/Entities/Human/cruiser_1.tscn" id="3_ur2k2"]
+[ext_resource type="PackedScene" uid="uid://bn251ybosfvy0" path="res://Scenes/UI/target_point.tscn" id="6_00vg8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yddda"]
+radius = 60.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8ihpn"]
+radius = 700.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ti2iq"]
 shading_mode = 0
@@ -15,13 +23,49 @@ material = SubResource("StandardMaterial3D_ti2iq")
 
 [node name="Tutorial" type="Node3D"]
 
-[node name="TUTORIAL SCRIPT" type="Node" parent="."]
+[node name="TUTORIAL SCRIPT" type="Node" parent="." node_paths=PackedStringArray("carrier")]
 script = ExtResource("1_etw1k")
+drone_prefab = ExtResource("2_sermy")
+carrier = NodePath("../Cruiser_1")
 
 [node name="Timer" type="Timer" parent="TUTORIAL SCRIPT"]
+wait_time = 5.0
+autostart = true
+
+[node name="TargetPoint" parent="TUTORIAL SCRIPT" instance=ExtResource("6_00vg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2000)
+visible = false
+
+[node name="TutorialDroneSpawnArea" type="Area3D" parent="TUTORIAL SCRIPT"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2000)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TUTORIAL SCRIPT/TutorialDroneSpawnArea"]
+shape = SubResource("SphereShape3D_yddda")
+
+[node name="AsteroidTrialFailArea" type="Area3D" parent="TUTORIAL SCRIPT"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1462.5)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TUTORIAL SCRIPT/AsteroidTrialFailArea"]
+shape = SubResource("SphereShape3D_yddda")
+
+[node name="EnemySpawnArea" type="Area3D" parent="TUTORIAL SCRIPT"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TUTORIAL SCRIPT/EnemySpawnArea"]
+shape = SubResource("SphereShape3D_8ihpn")
+disabled = true
 
 [node name="World" parent="." node_paths=PackedStringArray("play_area") instance=ExtResource("1_xsorj")]
 play_area = NodePath("../PlayArea")
+
+[node name="SpawnDirector" parent="World" index="0"]
+field_height = 20.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.901803, 0.278293, 0.330612, -0.354611, 0.0392959, 0.934188, 0.246986, -0.959692, 0.134123, 0.223911, 2.87974, 0.191294)
@@ -55,5 +99,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 43.
 
 [node name="Cruiser_1" parent="." instance=ExtResource("3_ur2k2")]
 transform = Transform3D(0.703941, 0, -0.710259, 0, 1, 0, 0.710259, 0, 0.703941, 6.33628, -6.71529, 156.65)
+
+[connection signal="timeout" from="TUTORIAL SCRIPT/Timer" to="TUTORIAL SCRIPT" method="_on_timer_timeout"]
+[connection signal="body_entered" from="TUTORIAL SCRIPT/TutorialDroneSpawnArea" to="TUTORIAL SCRIPT" method="_on_tutorial_drone_area_enter"]
+[connection signal="body_entered" from="TUTORIAL SCRIPT/AsteroidTrialFailArea" to="TUTORIAL SCRIPT" method="_on_asteroid_trial_fail_area_body_entered"]
+[connection signal="body_entered" from="TUTORIAL SCRIPT/EnemySpawnArea" to="TUTORIAL SCRIPT" method="_on_enemy_spawn_area_body_entered"]
 
 [editable path="World"]

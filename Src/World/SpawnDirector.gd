@@ -9,7 +9,9 @@ class_name spawn_director
 @export_group("Field Spawning")
 @export var field_enabled : bool
 @export var field_radius : float
+@export var field_height : float
 @export var field_spawn_count : float
+@export var field_position : Vector3
 
 @export_group("Continuous Spawning")
 @export var continuous_enabled : bool
@@ -30,11 +32,12 @@ func start_field_population() -> void:
 	for i in field_spawn_count:
 		var _obstacle = obstacle_list[randi_range(0, obstacle_list.size()-1)].instantiate()
 		add_child(_obstacle)
-		#_obstacle.start()
+		_obstacle.start()
 		_obstacle.position = get_random_position_in_field()
+		
 
 func get_random_position_in_field() -> Vector3:
-	return Vector3(randf_range(-1,1), 0, randf_range(-1,1)) * field_radius + Vector3(0,randf_range(-1,1) * 50,0)
+	return field_position + Vector3(randf_range(-1,1), 0, randf_range(-1,1)) * field_radius + Vector3(0,randf_range(-1,1) * field_height, 0)
 
 
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn251ybosfvy0"]
+
+[ext_resource type="Texture2D" uid="uid://5jo4carnjg6y" path="res://Assets/Sprite/UI/TargetLabel.png" id="1_vvovt"]
+
+[node name="TargetPoint" type="Node3D"]
+
+[node name="Label" type="Sprite3D" parent="."]
+pixel_size = 0.005
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+texture = ExtResource("1_vvovt")
