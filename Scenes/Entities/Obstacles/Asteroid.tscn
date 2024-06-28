@@ -33,7 +33,7 @@ _data = {
 }
 
 [node name="Asteroid" type="RigidBody3D" groups=["TERRAIN"]]
-collision_layer = 34
+collision_layer = 32
 collision_mask = 2
 mass = 5.0
 gravity_scale = 0.0
@@ -55,5 +55,6 @@ libraries = {
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("3_nkgob")
 entity = NodePath("..")
+immunity_period = 0.0
 
 [editable path="Asteroid"]

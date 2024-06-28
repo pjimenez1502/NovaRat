@@ -1,23 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjvrvo30jemo2"]
+[gd_scene load_steps=5 format=3 uid="uid://dmpb177p5neg0"]
 
-[ext_resource type="Script" path="res://Scenes/Projectiles/Projectile.gd" id="1_r645p"]
-[ext_resource type="PackedScene" uid="uid://crx6gwi111uvd" path="res://Scenes/Projectiles/Laser_1/Laser_1.glb" id="2_mjuds"]
+[ext_resource type="Script" path="res://Scenes/Projectiles/Projectile.gd" id="1_41t80"]
+[ext_resource type="PackedScene" uid="uid://crx6gwi111uvd" path="res://Scenes/Projectiles/Laser_1/Laser_1.glb" id="2_qox8t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkej3"]
 shading_mode = 0
+albedo_color = Color(0, 1, 1, 1)
 grow_amount = 0.288
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q7ybl"]
 radius = 0.108316
 height = 0.957679
 
-[node name="Laser_1" type="CharacterBody3D" groups=["SWARM"]]
-collision_layer = 512
-collision_mask = 102
-script = ExtResource("1_r645p")
-speed = 40.0
+[node name="Laser_1" type="CharacterBody3D" groups=["HUMAN"]]
+collision_layer = 256
+collision_mask = 104
+script = ExtResource("1_41t80")
+speed = 100.0
 
-[node name="Laser_1" parent="." instance=ExtResource("2_mjuds")]
+[node name="Laser_1" parent="." instance=ExtResource("2_qox8t")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
 
 [node name="Laser_1" parent="Laser_1" index="0"]

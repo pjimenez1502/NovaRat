@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dk471ywuursg"]
+[gd_scene load_steps=22 format=3 uid="uid://dk471ywuursg"]
 
 [ext_resource type="PackedScene" uid="uid://qjh53vle7a8a" path="res://Scenes/Entities/Creature/Hunter.glb" id="1_m7wh7"]
 [ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_n4gfv"]
@@ -11,26 +11,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pf5jf"]
 radius = 1.70507
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhj1o"]
-shading_mode = 0
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_0krpv"]
-resource_name = "Damage"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hunter/Hunter:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, null, SubResource("StandardMaterial3D_hhj1o"), null, SubResource("StandardMaterial3D_hhj1o"), null]
-}
 
 [sub_resource type="Animation" id="Animation_fuc1x"]
 resource_name = "Charge_Shoot"
@@ -88,6 +68,26 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhj1o"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_0krpv"]
+resource_name = "Damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hunter/Hunter:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, null, SubResource("StandardMaterial3D_hhj1o"), null, SubResource("StandardMaterial3D_hhj1o"), null]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xra6d"]
 _data = {
 "Charge_Shoot": SubResource("Animation_fuc1x"),
@@ -139,10 +139,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_gaxvm"]
+radius = 200.0
+
 [node name="Hunter" type="CharacterBody3D" groups=["SWARM"]]
-collision_layer = 33
-collision_mask = 0
+collision_layer = 8
+collision_mask = 366
 script = ExtResource("1_n4gfv")
+tag = 1
 position_variance_distance = 20.0
 position_variance_width = 8.0
 
@@ -154,6 +158,7 @@ shape = SubResource("SphereShape3D_pf5jf")
 
 [node name="Label" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 modulate = Color(0.768627, 0, 0, 1)
 pixel_size = 0.0075
 billboard = 1
@@ -173,7 +178,7 @@ autostart = true
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("4_dqa8w")
 entity = NodePath("..")
-BASE_HP = 8
+BASE_HP = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -208,8 +213,17 @@ pool_size = 3
 
 [node name="Timer" type="Timer" parent="WEAPON"]
 
+[node name="Detection Area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detection Area"]
+shape = SubResource("SphereShape3D_gaxvm")
+
 [connection signal="timeout" from="Target_Find" to="." method="find_target"]
 [connection signal="timeout" from="Targetpoint_Find" to="." method="decide_point_relative_to_target"]
 [connection signal="timeout" from="WEAPON/Timer" to="WEAPON" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection Area" to="." method="_on_detection_area_body_exited"]
 
 [editable path="Hunter"]

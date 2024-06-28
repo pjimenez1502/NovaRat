@@ -38,8 +38,8 @@ _data = {
 "Damage": SubResource("Animation_krts8")
 }
 
-[node name="Turret_1" type="StaticBody3D"]
-collision_layer = 0
+[node name="Turret_1" type="StaticBody3D" groups=["HUMAN"]]
+collision_layer = 4
 collision_mask = 768
 script = ExtResource("1_mwum8")
 aim_variance = 10.0
@@ -53,8 +53,8 @@ script = ExtResource("3_i2g2q")
 script = ExtResource("3_i2g2q")
 
 [node name="TargetingRange" type="Area3D" parent="."]
-collision_layer = 32
-collision_mask = 32
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TargetingRange"]
 shape = SubResource("SphereShape3D_cv8xm")
@@ -66,7 +66,7 @@ shape = SubResource("BoxShape3D_b4ldh")
 [node name="Weapon" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
 script = ExtResource("4_p3nj5")
 _projectile = ExtResource("5_p4dsd")
-rpm = 40.0
+rpm = 300.0
 hardpoint_list = [NodePath("../Turret/TurretBase/TurretHead/Hardpoint_1"), NodePath("../Turret/TurretBase/TurretHead/Hardpoint_2")]
 pool_size = 20
 

@@ -101,9 +101,9 @@ height = 3.00376
 [sub_resource type="SphereShape3D" id="SphereShape3D_y2ky3"]
 radius = 2.04228
 
-[node name="PlayerShip" type="CharacterBody3D" node_paths=PackedStringArray("_player_control", "weapon", "stats") groups=["PLAYER"]]
+[node name="PlayerShip" type="CharacterBody3D" node_paths=PackedStringArray("_player_control", "weapon", "stats") groups=["HUMAN", "PLAYER"]]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 608
 script = ExtResource("1_iatc7")
 _player_control = NodePath("PlayerControl")
 weapon = NodePath("Weapon")
@@ -178,7 +178,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0214635, -0.268869)
 shape = SubResource("SphereShape3D_y2ky3")
 disabled = true
 
-[node name="Hit Area" type="Area3D" parent="." groups=["TERRAIN"]]
+[node name="Hit Area" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 608
 
