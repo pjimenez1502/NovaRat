@@ -1,6 +1,9 @@
 extends RigidBody3D
 class_name obstacle
 
+enum TAGS {ASTEROID}
+@export var tag : TAGS
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var asteroid: Node3D = $Asteroid
 @onready var health: entity_health = $Health
@@ -18,18 +21,23 @@ func _physics_process(delta: float) -> void:
 	asteroid.rotate(rotation_value, 0.005)
 	var collision := move_and_collide(transform.basis.z * speed * delta)
 	
-func damage(_damage:int) -> void:
-	health.damage(_damage)
-func death() -> void:
+func damage(_damage: int, damager_group: String) -> void:
+	health.damage(_damage, damager_group)
+	
+func death(damager_group: String) -> void:
 	set_inactive()
+	if damager_group == "PLAYER":
+		UIDirector.add_to_killcount(TAGS.keys()[tag])
 
 func start() -> void:
 	set_active()
 	set_random_rotation()
 	speed = randf_range(BASE_SPEED - 1, BASE_SPEED + 1)
+	global_scale(Vector3.ONE * randf_range(5,20))
 	if despawn:
 		await get_tree().create_timer(lifetime).timeout
 		set_inactive()
+	
 
 func set_active() -> void:
 	set_physics_process(true)

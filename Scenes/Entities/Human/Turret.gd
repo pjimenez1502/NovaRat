@@ -1,5 +1,8 @@
 extends Node3D
 
+enum TAGS {DRONE, HUNTER}
+@export var tag : TAGS
+
 var target : Node3D
 var target_look : Vector3
 
@@ -22,13 +25,15 @@ func _physics_process(delta: float) -> void:
 		turret_head.look_at(target_look)
 		weapon.shoot()
 
-func damage(_damage:int) -> void:
-	health.damage(_damage)
-func death() -> void:
+func damage(_damage: int, damager_group: String) -> void:
+	health.damage(_damage, damager_group)
+	
+func death(damager_group: String) -> void:
 	turret_head.visible = false
 	collision.disabled = true
 	set_physics_process(false)
-	UIDirector.add_score(score_value)
+	if damager_group == "PLAYER":
+		UIDirector.add_to_killcount(TAGS.keys()[tag])
 	
 ## ACCURACY
 func _on_innacuracy_timer_timeout() -> void:

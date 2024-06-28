@@ -16,7 +16,7 @@ func show_status() -> void:
 	UIDirector.HP_CHANGED.emit(hull)
 	UIDirector.SHIELD_CHANGED.emit(shield)
 
-func damage(damage : float) -> void:
+func damage(damage: float, damager_group: String) -> void:
 	if immune:
 		return
 	
@@ -40,12 +40,13 @@ func death() -> void:
 
 var terrain_damage : float = 2
 func _on_hit_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("PLAYER"):
-		return
-	
-	if body.is_in_group("TERRAIN"):
-		damage(terrain_damage)
-		return
-	
-	if body._damage:
-		damage(body._damage)
+	pass
+	#if body.is_in_group("PLAYER"):
+		#return
+	#
+	#if body.is_in_group("TERRAIN"):
+		#damage(terrain_damage)
+		#return
+	#
+	#if body._damage:
+		#damage(body._damage)

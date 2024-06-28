@@ -38,6 +38,7 @@ var dash : Vector3
 
 
 func _physics_process(delta: float) -> void:
+	scale = Vector3.ONE
 	steer(delta)
 	bank(delta)
 	
@@ -98,3 +99,6 @@ func set_bank(angle : float) -> void:
 
 func roll(direction : float) -> void:
 	pass
+
+func damage(_damage: int, damager_group: String) -> void:
+	stats.damage(_damage, damager_group)
