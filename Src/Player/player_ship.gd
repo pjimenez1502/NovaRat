@@ -7,7 +7,7 @@ class_name player_ship
 
 @export_group("Movement type")
 @export var invert_y : bool
-@export var all_range : bool
+#@export var all_range : bool
 
 @export_group("Components")
 @export var play_area : Node3D
@@ -17,88 +17,57 @@ class_name player_ship
 
 @export_group("Stats")
 @export var speed : float = 6
-@export var boost_power : float = 1.4
-@export var brake_power : float = 0.8
-
-@export var dodge_distance : float = 1.5
-@export var dodge_cooldown : float = 1
-
-var curr_dodge_cooldown : float
 
 var target_position : Vector3
 var target_bank : float
 var _bank : float
-var bank_boost : float
+#var bank_boost : float
 
 var velocity : Vector3
 var look_target: Vector3
 
-var dash : Vector3
-
-
 
 func _physics_process(delta: float) -> void:
 	scale = Vector3.ONE
-	steer(delta)
+	aim(delta)
 	bank(delta)
 	
 	forward(delta)
-	if all_range:
-		check_turning(delta)
-	curr_dodge_cooldown -= delta
 
 func calculate_speed() -> float:
-	return speed * (brake_power if _player_control.braking else 1) * (boost_power if _player_control.boosting else 1)
-
+	return speed
 func forward(delta : float) -> void:
 	var calculated_speed = calculate_speed()
 	play_area.global_translate(-play_area.transform.basis.z * delta * calculated_speed)
 
-func steer(delta : float) -> void:
-	target_position = position + Vector3(_player_control.direction.x + bank_boost, _player_control.direction.y, 0)
-	if invert_y:
-		target_position = position + Vector3(_player_control.direction.x + bank_boost, -_player_control.direction.y, 0)
-	
-	target_position.x = clampf(target_position.x, -6.5, 6.5)
-	target_position.y = clampf(target_position.y, -2, 4)
-	
-	target_position.z = 0 + -2 if _player_control.boosting else 0 + 2 if _player_control.braking else 0
-	
-	position = lerp(position, target_position , delta * 6)
-	
-	aim_center.position = Vector3(_player_control.direction.x * 30, _player_control.direction.y * 12, -20)
+
+func aim(delta : float) -> void:
+	aim_center.position = position + Vector3(_player_control.direction.x * 20, _player_control.direction.y * 8, -20)
 	look_target = lerp(look_target, aim_center.global_position , delta * 8)
 	look_at(look_target)
-
-func check_turning(delta: float) -> void:
-	var turning_offset : float = position.x
-	if turning_offset > 5 and _player_control.direction.x > 0:
-		play_area.rotate_y(-_player_control.direction.x * delta * .8)
-		
-	if turning_offset < -5 and _player_control.direction.x < 0:
-		play_area.rotate_y(-_player_control.direction.x * delta * .8)
-	
-	#play_area.rotate_y(-bank_boost * delta * 1)
-
-func dodge(direction : int) -> void:
-	if curr_dodge_cooldown > 0:
-		return
-	curr_dodge_cooldown = dodge_cooldown
-	if direction == 1:
-		animation_player.play("Dash R")
-	elif direction == -1:
-		animation_player.play("Dash L")
 
 func bank(delta : float) -> void:
 	_bank = lerp(_bank, target_bank, delta * 6)
 	rotate_object_local(Vector3.FORWARD, _bank)
-
 func set_bank(angle : float) -> void:
-	bank_boost = angle * 0.5
+	#bank_boost = angle * 0.5
 	target_bank = deg_to_rad(clampf( angle * 90 + _player_control.direction.x * 40, -90, 90))
 
-func roll(direction : float) -> void:
-	pass
+var current_lane = 0
+func dodge(direction: float) -> void:
+	if current_lane + direction > 1 or current_lane + direction < -1:
+		#print("dodging out of rails")
+		##play missed dodge
+		return
+	
+	current_lane += direction
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(self, "position", Vector3(current_lane * 6, 0, 0), 0.3)
+	tween.parallel().tween_property(self, "rotation", Vector3(0, 0, -direction * PI*2), 0.3)
+	
+	#print("dodge: ", direction)
+
+
 
 func damage(_damage: int, damager_group: String) -> void:
 	stats.damage(_damage, damager_group)

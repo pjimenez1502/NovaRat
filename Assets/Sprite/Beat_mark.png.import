@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x2di4vfsrpet"
-path="res://.godot/imported/Sight.png-1e85ec3c621bb769f6d1256a30c3788c.ctex"
+uid="uid://cehvmvcd2oteu"
+path="res://.godot/imported/Beat_mark.png-f25136b3a2417460f0f50fef6efbbf44.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprite/Sight.png"
-dest_files=["res://.godot/imported/Sight.png-1e85ec3c621bb769f6d1256a30c3788c.ctex"]
+source_file="res://Assets/Sprite/Beat_mark.png"
+dest_files=["res://.godot/imported/Beat_mark.png-f25136b3a2417460f0f50fef6efbbf44.ctex"]
 
 [params]
 

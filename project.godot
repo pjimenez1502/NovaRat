@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 UIDirector="*res://Src/Global/UIDirector.gd"
 DialogDirector="*res://Dialog/Dialog_Director.gd"
 BeatDirector="*res://Src/Global/BeatDirector.gd"
+FloatingTextDirector="*res://Src/Global/FloatingTextDirector.gd"
 
 [editor_plugins]
 

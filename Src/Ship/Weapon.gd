@@ -17,7 +17,6 @@ func _ready() -> void:
 func shoot() -> void:
 	if !timer_ready:
 		return
-	
 	timer_ready = false
 	timer.start()
 	iterate_hardpoints()
