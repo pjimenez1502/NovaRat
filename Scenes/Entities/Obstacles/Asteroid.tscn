@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="3_nkgob"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_j806r"]
-radius = 0.728876
+radius = 1.66593
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1urq5"]
 shading_mode = 0
@@ -32,16 +32,14 @@ _data = {
 "Damage": SubResource("Animation_b0hhq")
 }
 
-[node name="Asteroid" type="RigidBody3D" groups=["TERRAIN"]]
+[node name="Asteroid" type="StaticBody3D" groups=["TERRAIN"]]
 collision_layer = 32
 collision_mask = 2
-mass = 5.0
-gravity_scale = 0.0
 script = ExtResource("1_mdiil")
 BASE_SPEED = 0.0
 
 [node name="Asteroid" parent="." instance=ExtResource("2_f2yoh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0981742, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -55,6 +53,7 @@ libraries = {
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("3_nkgob")
 entity = NodePath("..")
+BASE_HP = 8
 immunity_period = 0.0
 
 [editable path="Asteroid"]

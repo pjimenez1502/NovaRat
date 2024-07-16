@@ -4,28 +4,32 @@ const BEAT_MARK = preload("res://Assets/Sprite/Beat_mark.png")
 
 func _ready() -> void:
 	BeatDirector.BEAT.connect(on_beat)
+	BeatDirector.MEASURE.connect(on_measure)
 
 func on_beat(beat: int) -> void:
 	build_marker(false)
 	build_marker(true)
 
+func on_measure(beat: int) -> void:
+	build_marker(false, 1.4)
+	build_marker(true, 1.4)
+	
 
-func build_marker(is_right: bool) -> void:
+func build_marker(is_right: bool, size: float = 1) -> void:
 	var beat_marker: Sprite3D = setup_sprite()
 	beat_marker.flip_h = is_right
 	add_child(beat_marker)
 	
 	beat_marker.modulate = Color(1, 1, 1, .1)
 	beat_marker.position = Vector3(8,0,0) if is_right else Vector3(-8,0,0)
-	beat_marker.pixel_size = 0.002
+	beat_marker.pixel_size = 0.002 * size
 	
 	var tween := get_tree().create_tween()
 	tween.tween_property(beat_marker, "position", Vector3.ZERO, BeatDirector.sec_per_beat*2)
 	tween.parallel().tween_property(beat_marker, "modulate", Color(1, 1, 1, 1), BeatDirector.sec_per_beat*2)
-	tween.parallel().tween_property(beat_marker, "pixel_size", 0.008, BeatDirector.sec_per_beat*2)
+	tween.parallel().tween_property(beat_marker, "pixel_size", 0.008 * size, BeatDirector.sec_per_beat*2)
 	
 	tween.tween_property(beat_marker, "modulate", Color(1, 1, 1, 0), 0.25)
-	
 	
 	await tween.finished
 	beat_marker.queue_free()

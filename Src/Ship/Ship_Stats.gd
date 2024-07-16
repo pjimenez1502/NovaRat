@@ -38,15 +38,16 @@ func death() -> void:
 
 
 
-var terrain_damage : float = 2
+var terrain_damage : float = 1
 func _on_hit_area_body_entered(body: Node3D) -> void:
 	pass
 	#if body.is_in_group("PLAYER"):
 		#return
 	#
-	#if body.is_in_group("TERRAIN"):
-		#damage(terrain_damage)
-		#return
+	if body.is_in_group("TERRAIN"):
+		damage(terrain_damage, "TERRAIN")
+		body.death("TERRAIN")
+		return
 	#
 	#if body._damage:
 		#damage(body._damage)

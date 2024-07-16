@@ -16,7 +16,7 @@ class_name spawn_director
 @export_group("Continuous Spawning")
 @export var continuous_enabled : bool
 @export var distance_to_playarea : float
-@export var spawn_area : Vector3
+@export var spawn_time : float = 4
 
 var obstacle_pool_size : int = 60
 var available_obstacle_pool : Array[obstacle]
@@ -45,13 +45,13 @@ func get_random_position_in_field() -> Vector3:
 ## Continous spawning
 func start_continuous_population() -> void:
 	init_obstacle_pool()
+	obstacle_spawn_timer.wait_time = spawn_time
 	obstacle_spawn_timer.start()
 
 func spawn_obstacle() -> void:
-	var _obstacle: obstacle = get_obstacle()
-	if _obstacle:
-		var position: Vector3 = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3(randf_range(-spawn_area.x, spawn_area.x), randf_range(-spawn_area.y, spawn_area.y), randf_range(-spawn_area.z, spawn_area.z))
-		_obstacle.position = position
+	var lane: int = randi_range(-1, 1)
+	var position: Vector3 = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3.RIGHT * lane * 6
+	var _obstacle: obstacle = get_obstacle(position)
 
 func _on_obstacle_spawn_timer_timeout() -> void:
 	spawn_obstacle()
@@ -65,10 +65,11 @@ func init_obstacle_pool() -> void: ## !!!!!! Right now, all asteroids start visi
 		
 	print("sdssd ",available_obstacle_pool.size())
 
-func get_obstacle() -> obstacle:
+func get_obstacle(position: Vector3) -> obstacle:
 	if available_obstacle_pool.size() > 0:
 		var _obstacle : obstacle = available_obstacle_pool.pop_front()
 		used_obstacle_pool.append(_obstacle)
+		_obstacle.position = position
 		_obstacle.start()
 		return _obstacle
 	else:

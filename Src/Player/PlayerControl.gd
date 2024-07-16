@@ -45,6 +45,7 @@ func check_dodge(dodge_axis: float) -> void:
 			pass
 	dodge_cooldown = 0.6
 	
+	FloatingTextDirector.display_text(BeatDirector.ACCURACY.keys()[beat_accuracy], get_parent().global_position + Vector3(0, 0, 0), Color.WHITE, 20)
 
 func easeInSine(x: float) -> float:
 	return (1 - cos((x * PI) / 2)) * sign(x)

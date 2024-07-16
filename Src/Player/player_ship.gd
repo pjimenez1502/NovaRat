@@ -42,7 +42,7 @@ func forward(delta : float) -> void:
 
 
 func aim(delta : float) -> void:
-	aim_center.position = position + Vector3(_player_control.direction.x * 20, _player_control.direction.y * 8, -20)
+	aim_center.position = position + Vector3(_player_control.direction.x * 4, _player_control.direction.y * 2, -20)
 	look_target = lerp(look_target, aim_center.global_position , delta * 8)
 	look_at(look_target)
 

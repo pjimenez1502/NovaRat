@@ -16,7 +16,6 @@ field_radius = 500.0
 field_spawn_count = 400.0
 field_position = Vector3(0, 0, -1500)
 distance_to_playarea = 60.0
-spawn_area = Vector3(60, 24, 6)
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="SpawnDirector"]
 wait_time = 0.5
