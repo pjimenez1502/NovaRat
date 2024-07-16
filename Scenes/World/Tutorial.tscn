@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=13 format=3 uid="uid://do3qg8xv2qeju"]
 
+[ext_resource type="Script" path="res://Scenes/World/Scene.gd" id="1_71e4o"]
 [ext_resource type="Script" path="res://Src/Scripting/TutorialScript.gd" id="1_etw1k"]
 [ext_resource type="PackedScene" uid="uid://c6l7po0jlw5nx" path="res://Scenes/World/World.tscn" id="1_xsorj"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Player Ship.tscn" id="2_7swg3"]
+[ext_resource type="AudioStream" uid="uid://b5c7dc58c7i27" path="res://Assets/Music/Metronome - 100.mp3" id="2_sar1k"]
 [ext_resource type="PackedScene" uid="uid://by1cw0203fi05" path="res://Scenes/Entities/Creature/Drone.tscn" id="2_sermy"]
 [ext_resource type="Script" path="res://Src/Player/Player_Camera.gd" id="3_l4tny"]
 [ext_resource type="PackedScene" uid="uid://bn251ybosfvy0" path="res://Scenes/UI/target_point.tscn" id="6_00vg8"]
@@ -21,6 +23,8 @@ albedo_color = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_ti2iq")
 
 [node name="Tutorial" type="Node3D"]
+script = ExtResource("1_71e4o")
+scene_song = ExtResource("2_sar1k")
 
 [node name="Asteroids" type="Node3D" parent="."]
 

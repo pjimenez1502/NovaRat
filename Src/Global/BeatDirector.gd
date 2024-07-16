@@ -1,9 +1,5 @@
 extends Node
 
-const POLY_SNARE_LONG = preload("res://Assets/Music/poly snare long.wav") ## 45 bpm
-const POLY_HIHAT_LONG = preload("res://Assets/Music/poly hihat long.wav") ## 60 bpm
-const METRONOME_100 = preload("res://Assets/Music/Metronome - 100.wav")
-
 signal BEAT
 signal MEASURE
 
@@ -28,6 +24,10 @@ func _ready() -> void:
 	output_latency = AudioServer.get_output_latency()
 
 func _physics_process(delta: float) -> void:
+	if audio_player.playing:
+		playing()
+
+func playing() -> void:
 	time = audio_player.get_playback_position() + AudioServer.get_time_since_last_mix() - delay_tuning
 	# Compensate for output latency.
 	time -= output_latency
@@ -35,10 +35,10 @@ func _physics_process(delta: float) -> void:
 	div_position = int((floor(time / sec_per_division)))
 	_report_beat()
 
-
-func start_play() -> void:
-	audio_player.stream = METRONOME_100 #### TRACK TO PLAY
+func start_play(stream: AudioStream) -> void:
+	audio_player.stream = stream  #### TRACK TO PLAY
 	audio_player.play()
+	print(audio_player.playing)
 	sec_per_beat = 60 / bpm
 	sec_per_division = sec_per_beat / subdivisions
 

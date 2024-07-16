@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccxlk7rwhxdix"]
+
+[ext_resource type="Script" path="res://Scenes/Menu/Title.gd" id="1_7436c"]
+
+[node name="Title_Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7436c")
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
