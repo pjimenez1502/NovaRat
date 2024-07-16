@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://chuq4fj8d3ec0"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/Creature/creature_destroyer.gd" id="1_ay0jg"]
+[ext_resource type="PackedScene" uid="uid://c7lot6yq25ijx" path="res://Scenes/Entities/Creature/Destroyer.glb" id="1_cgetu"]
+[ext_resource type="PackedScene" uid="uid://bn251ybosfvy0" path="res://Scenes/UI/target_point.tscn" id="3_3xg7n"]
+
+[node name="Creature Destroyer" type="Node3D" node_paths=PackedStringArray("targetpoints")]
+script = ExtResource("1_ay0jg")
+targetpoints = [NodePath("TargetPoint"), NodePath("TargetPoint2"), NodePath("TargetPoint3"), NodePath("TargetPoint4")]
+
+[node name="Destroyer" parent="." instance=ExtResource("1_cgetu")]
+
+[node name="TargetPoint" parent="." instance=ExtResource("3_3xg7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9122, 28.5697, -43.2019)
+
+[node name="TargetPoint2" parent="." instance=ExtResource("3_3xg7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.912, 28.57, -43.202)
+
+[node name="TargetPoint3" parent="." instance=ExtResource("3_3xg7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -42.7591, -68.514)
+
+[node name="TargetPoint4" parent="." instance=ExtResource("3_3xg7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -42.0172, 28.521)

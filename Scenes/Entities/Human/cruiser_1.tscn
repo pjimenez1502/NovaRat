@@ -43,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 5.962, -46)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 5.572, -64)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["TERRAIN"]]
-collision_layer = 64
+collision_layer = 66
 collision_mask = 834
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]

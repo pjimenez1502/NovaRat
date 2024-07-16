@@ -118,5 +118,6 @@ func find_closest() -> Node3D:
 		var distance = global_position.distance_squared_to(target.global_position)
 		if distance < closest_distance:
 			closest = target
+			closest_distance = distance
 	print("closest: ",closest)
 	return closest

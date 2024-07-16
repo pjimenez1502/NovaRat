@@ -12,6 +12,7 @@ extends Node
 
 
 @export var drone_prefab : PackedScene
+@export var cruiser_prefab : PackedScene
 @export var carrier : Node3D
 
 
@@ -144,6 +145,12 @@ func return_to_carrier() -> void:
 	carrier.global_position = Vector3(0,-16 ,-1000)
 	target_point.global_position = Vector3(0,0,-1000)
 	
+	## Spawn Swarm cruiser
+	var creature = cruiser_prefab.instantiate()
+	add_child(creature)
+	creature.global_position = Vector3(360, 0, -1034)
+	creature.global_rotation_degrees = Vector3(0,111,0)
+	
 	await get_tree().create_timer(4).timeout
 	DialogDirector.new_dialog("lizzard","Cadet! The carrier is under attack!.")
 	await get_tree().create_timer(2).timeout
@@ -162,20 +169,29 @@ func enable_all_range_mode() -> void:
 func _on_enemy_spawn_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("PLAYER"):
 		spawn_swarm()
-var field_spawn_count = 20
+
 func spawn_swarm() -> void:
-	print("spawnswarm")
-	for i in field_spawn_count:
+	print("Spawning Swarm")
+	## Spawn drones between player and carrier
+	spawn_drone_wave(Vector3(0,0,-1200), 4)
+	
+	
+	## Spawn another drone wave
+	await get_tree().create_timer(10).timeout
+	spawn_drone_wave(Vector3(0,0,-1200), 5)
+	
+	## Fire swarm cruiser
+	await get_tree().create_timer(15).timeout
+	spawn_drone_wave(Vector3(0,0,-1200), 5)
+
+
+
+
+func spawn_drone_wave(position: Vector3, count: int) -> void:
+	for i in count:
 		var _drone = drone_prefab.instantiate()
 		add_child(_drone)
-		_drone.global_position = get_random_position_in_field(carrier.global_position, 100, 40)
-		
-
-func get_random_position_in_field(field_position: Vector3, field_radius: float, field_height: float) -> Vector3:
-	return field_position + Vector3(randf_range(-1,1), 0, randf_range(-1,1)) * field_radius + Vector3(0,randf_range(-1,1) * field_height, 0)
-	
-
-
+		_drone.global_position = get_random_position_in_field(position, 100, 40)
 
 
 #################
@@ -185,6 +201,10 @@ func _on_timer_timeout() -> void:
 func no_check() -> bool:
 	return false
 
+func get_random_position_in_field(field_position: Vector3, field_radius: float, field_height: float) -> Vector3:
+	return field_position + Vector3(randf_range(-1,1), 0, randf_range(-1,1)) * field_radius + Vector3(0,randf_range(-1,1) * field_height, 0)
+
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -192,9 +212,5 @@ func _unhandled_input(event: InputEvent) -> void:
 			Engine.time_scale = 15
 		if event.is_pressed() and event.keycode == KEY_O:
 			Engine.time_scale = 1
-
-
-
-
 
 
