@@ -32,7 +32,7 @@ func iterate_hardpoints(target : Node3D = null) -> void:
 			instantiate_projectile(_hardpoint, target)
 
 func instantiate_projectile(_hardpoint : hardpoint, target : Node3D) -> void:
-	var projectile_instance = get_bullet()
+	var projectile_instance := get_bullet()
 	if projectile_instance:
 		projectile_instance.global_transform = _hardpoint.global_transform
 		if target:
@@ -44,7 +44,7 @@ func _on_timer_timeout() -> void:
 
 var available_bullet_pool : Array[projectile]
 var used_bullet_pool : Array[projectile]
-func init_available_bullet_pool():
+func init_available_bullet_pool() -> void:
 	for i in pool_size:
 		var bullet: projectile = _projectile.instantiate() as projectile
 		add_child(bullet)

@@ -30,7 +30,7 @@ func start_population() -> void:
 
 func start_field_population() -> void:
 	for i in field_spawn_count:
-		var _obstacle = obstacle_list[randi_range(0, obstacle_list.size()-1)].instantiate()
+		var _obstacle: obstacle = obstacle_list[randi_range(0, obstacle_list.size()-1)].instantiate()
 		add_child(_obstacle)
 		_obstacle.start()
 		_obstacle.position = get_random_position_in_field()
@@ -48,9 +48,9 @@ func start_continuous_population() -> void:
 	obstacle_spawn_timer.start()
 
 func spawn_obstacle() -> void:
-	var _obstacle = get_obstacle()
+	var _obstacle: obstacle = get_obstacle()
 	if _obstacle:
-		var position = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3(randf_range(-spawn_area.x, spawn_area.x), randf_range(-spawn_area.y, spawn_area.y), randf_range(-spawn_area.z, spawn_area.z))
+		var position: Vector3 = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3(randf_range(-spawn_area.x, spawn_area.x), randf_range(-spawn_area.y, spawn_area.y), randf_range(-spawn_area.z, spawn_area.z))
 		_obstacle.position = position
 
 func _on_obstacle_spawn_timer_timeout() -> void:
@@ -60,7 +60,7 @@ func _on_obstacle_spawn_timer_timeout() -> void:
 ## Pooling for continuous population
 func init_obstacle_pool() -> void: ## !!!!!! Right now, all asteroids start visible in the center of the map.
 	for i in obstacle_pool_size:
-		var _obstacle = obstacle_list[randi_range(0, obstacle_list.size()-1)].instantiate()
+		var _obstacle: obstacle = obstacle_list[randi_range(0, obstacle_list.size()-1)].instantiate()
 		add_child(_obstacle)
 		
 	print("sdssd ",available_obstacle_pool.size())

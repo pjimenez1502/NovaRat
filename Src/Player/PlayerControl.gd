@@ -18,22 +18,22 @@ func _input(_event: InputEvent) -> void:
 	#direction = Vector2(horizontal, vertical)
 	direction = Vector2(easeInSine(horizontal), easeInSine(vertical))
 	
-	var bank_axis = 0
+	var bank_axis: float = 0
 	_player_ship.set_bank(bank_axis)
 		
-	var dodge_axis = Input.get_axis("DODGE_LEFT", "DODGE_RIGHT")
+	var dodge_axis: float = Input.get_axis("DODGE_LEFT", "DODGE_RIGHT")
 	check_dodge(dodge_axis)
 	
 
 
-func check_dodge(dodge_axis):
+func check_dodge(dodge_axis: float) -> void:
 	dodge_axis = int(dodge_axis)
 	if dodge_axis == 0:
 		return
 	if dodge_cooldown > 0:
 		return
 	
-	var beat_accuracy = BeatDirector.check_beat_accuracy()
+	var beat_accuracy := BeatDirector.check_beat_accuracy()
 	match beat_accuracy:
 		BeatDirector.ACCURACY.PERFECT:
 			_player_ship.dodge(dodge_axis)

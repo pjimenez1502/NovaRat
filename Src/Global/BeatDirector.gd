@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	_report_beat()
 
 
-func start_play():
+func start_play() -> void:
 	audio_player.stream = POLY_SNARE_LONG
 	audio_player.play()
 	sec_per_beat = 60 / bpm
@@ -43,8 +43,8 @@ func start_play():
 
 enum ACCURACY { PERFECT, GOOD, OKAY, MISS}
 func check_beat_accuracy() -> int:
-	var hit_time = time / sec_per_division - last_reported_div
-	var distance_to_beat = hit_time if hit_time <= 0.5 else 1 - hit_time
+	var hit_time: float = time / sec_per_division - last_reported_div
+	var distance_to_beat: float = hit_time if hit_time <= 0.5 else 1 - hit_time
 	#print("hit_time: ", hit_time, " - distance: ",distance_to_beat)
 	print(distance_to_beat)
 	var accuracy: int
@@ -70,7 +70,7 @@ var beat: int = 1
 var measure: int = 1
 
 var last_measure: int = -1
-func _report_beat():  ##DELAY ALL BY TWO BEATS (Time between new beat spawn and them arriving to the center)
+func _report_beat() -> void:  ##DELAY ALL BY TWO BEATS (Time between new beat spawn and them arriving to the center)
 	if last_reported_div >= div_position:
 		return
 	last_reported_div = div_position

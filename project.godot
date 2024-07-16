@@ -22,6 +22,10 @@ DialogDirector="*res://Dialog/Dialog_Director.gd"
 BeatDirector="*res://Src/Global/BeatDirector.gd"
 FloatingTextDirector="*res://Src/Global/FloatingTextDirector.gd"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")

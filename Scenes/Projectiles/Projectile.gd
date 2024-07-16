@@ -45,9 +45,9 @@ func set_inactive() -> void:
 func set_collision_disabled(value: bool) -> void:
 	collision.set_deferred("disabled", value)
 
-func guiding(delta) -> Vector3:
-	var direction = (target.global_position - global_position).normalized()
+func guiding(delta: float) -> Vector3:
+	var direction : Vector3 = (target.global_position - global_position).normalized()
 	return direction * (guiding_power * 1)
 
-func set_guiding_target(_target : Node3D):
+func set_guiding_target(_target : Node3D) -> void:
 	target = _target

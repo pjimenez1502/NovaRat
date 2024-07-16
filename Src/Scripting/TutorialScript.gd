@@ -123,7 +123,7 @@ func _on_tutorial_drone_area_enter(body: Node3D) -> void:
 func spawn_tutorial_drone() -> void:
 	tutorial_drone_spawn_area.get_child(0).set_deferred("disabled", true)
 	target_point.visible = false
-	var drone = drone_prefab.instantiate()
+	var drone := drone_prefab.instantiate()
 	add_child(drone)
 	drone.global_position = _player_ship.global_position + Vector3(0, 20, -30)
 	drone.dummy_target = _player_ship.get_parent()
@@ -146,7 +146,7 @@ func return_to_carrier() -> void:
 	target_point.global_position = Vector3(0,0,-1000)
 	
 	## Spawn Swarm cruiser
-	var creature = cruiser_prefab.instantiate()
+	var creature := cruiser_prefab.instantiate()
 	add_child(creature)
 	creature.global_position = Vector3(360, 0, -1034)
 	creature.global_rotation_degrees = Vector3(0,111,0)
@@ -189,7 +189,7 @@ func spawn_swarm() -> void:
 
 func spawn_drone_wave(position: Vector3, count: int) -> void:
 	for i in count:
-		var _drone = drone_prefab.instantiate()
+		var _drone := drone_prefab.instantiate()
 		add_child(_drone)
 		_drone.global_position = get_random_position_in_field(position, 100, 40)
 

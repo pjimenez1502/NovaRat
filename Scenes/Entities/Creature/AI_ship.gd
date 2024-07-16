@@ -49,7 +49,7 @@ func death(damager_group: String) -> void:
 		UIDirector.add_to_killcount(TAGS.keys()[tag])
 	
 func move(delta: float) -> void:
-	var distance = (target_point - global_position).length()
+	var distance: float = (target_point - global_position).length()
 	target_direction = global_position.direction_to(target_point).clamp(-Vector3.ONE, Vector3.ONE) * clampf(distance/10, 0, 0.1)
 	direction = lerp(direction, target_direction, delta)
 	velocity = direction * speed
@@ -68,7 +68,7 @@ func find_target() -> void:
 func decide_point_relative_to_target() -> void:
 	if !target_object:
 		return
-	var target_basis = target_object.global_transform.basis
+	var target_basis: Basis = target_object.global_transform.basis
 	relative_target = target_basis.x * randf_range(-position_variance_width,position_variance_width) + target_basis.y * randf_range(-position_variance_width,position_variance_width) + target_basis.z * -position_variance_distance
 	if check_ready_to_fire():
 		charge_shoot()
@@ -83,7 +83,7 @@ func check_ready_to_fire() -> bool:
 	if charging:
 		return false
 	#print((target_object.global_position - global_position).length())
-	var distance = (target_object.global_position - global_position).length()
+	var distance: float = (target_object.global_position - global_position).length()
 	if distance > 15 and distance < 25:
 		return true
 	return false
@@ -91,8 +91,8 @@ func check_ready_to_fire() -> bool:
 func charge_shoot() -> void:
 	animation_player.play("Charge_Shoot")
 
-func shoot():
-	var shoot_target = target_object
+func shoot() -> void:
+	var shoot_target: Node3D = target_object
 	if shoot_target.is_in_group("PLAYER"):
 			shoot_target = target_object.get_child(0)
 	weapon.shoot_targeted(shoot_target)
@@ -115,7 +115,7 @@ func find_closest() -> Node3D:
 	var closest : Node3D
 	var closest_distance : float = INF
 	for target in detected_target_list:
-		var distance = global_position.distance_squared_to(target.global_position)
+		var distance: float = global_position.distance_squared_to(target.global_position)
 		if distance < closest_distance:
 			closest = target
 			closest_distance = distance

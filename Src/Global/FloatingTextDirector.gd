@@ -1,7 +1,7 @@
 extends Node
 
-func display_text(value: String, position: Vector3, color: Color = "FFF", text_size: float = 12):
-	var combat_text = Label.new()
+func display_text(value: String, position: Vector3, color: Color = "FFF", text_size: float = 12) -> void:
+	var combat_text := Label.new()
 	combat_text.global_position = get_viewport().get_camera_3d().unproject_position(position)
 	combat_text.text = str(value)
 	combat_text.z_index = 10
@@ -17,7 +17,7 @@ func display_text(value: String, position: Vector3, color: Color = "FFF", text_s
 	await combat_text.resized
 	combat_text.pivot_offset = Vector2(combat_text.size / 2)
 	
-	var tween = get_tree().create_tween()
+	var tween := get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(
 		combat_text, "position:y", combat_text.position.y - 24, 0.25
