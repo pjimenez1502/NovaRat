@@ -1,11 +1,11 @@
 [gd_scene load_steps=22 format=3 uid="uid://by1cw0203fi05"]
 
-[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship.gd" id="1_6kiax"]
+[ext_resource type="Script" path="res://Scenes/Entities/Creature/AI_ship_old.gd" id="1_6kiax"]
 [ext_resource type="Texture2D" uid="uid://dd1sdmdu55q6e" path="res://Assets/Sprite/UI/label.png" id="3_efmj8"]
 [ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="4_lxpec"]
 [ext_resource type="Texture2D" uid="uid://dqfkq8jjq0s8v" path="res://Assets/Sprite/Attack_charge/Attack_charge.png" id="5_vn8oj"]
-[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="6_r2fp6"]
-[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="7_g0cqk"]
+[ext_resource type="Script" path="res://Scenes/Entities/Hardpoint.gd" id="6_h6yl5"]
+[ext_resource type="Script" path="res://Scenes/Entities/Weapon.gd" id="7_dyg8s"]
 [ext_resource type="PackedScene" uid="uid://inroaknjdcxf" path="res://Scenes/Projectiles/guided_orb.tscn" id="8_2kggh"]
 [ext_resource type="PackedScene" uid="uid://b8fqmwwlobwlu" path="res://Scenes/Entities/Creature/Drone.glb" id="9_rdgqo"]
 
@@ -199,10 +199,10 @@ sprite_frames = SubResource("SpriteFrames_5w6y2")
 
 [node name="Hardpoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.623716, 1.72046)
-script = ExtResource("6_r2fp6")
+script = ExtResource("6_h6yl5")
 
 [node name="WEAPON" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
-script = ExtResource("7_g0cqk")
+script = ExtResource("7_dyg8s")
 _projectile = ExtResource("8_2kggh")
 rpm = 100.0
 hardpoint_list = [NodePath("../Hardpoint")]

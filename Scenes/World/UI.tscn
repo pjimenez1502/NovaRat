@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://uce22k0lid50"]
 
 [ext_resource type="PackedScene" uid="uid://do3qg8xv2qeju" path="res://Scenes/World/Tutorial.tscn" id="1_beg2u"]
-[ext_resource type="Script" path="res://Src/UI/flight_overlay.gd" id="2_n832s"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player/UI/flight_overlay.gd" id="2_n832s"]
 [ext_resource type="Texture2D" uid="uid://ddbw8iha284u7" path="res://Assets/Sprite/UI/Hp.png" id="3_k32la"]
 [ext_resource type="Texture2D" uid="uid://j8qn4t14c8xh" path="res://Assets/Sprite/UI/underHP.png" id="4_0cres"]
 [ext_resource type="Texture2D" uid="uid://cat34tc22npxs" path="res://Assets/Sprite/UI/Shield.png" id="4_qsu1a"]

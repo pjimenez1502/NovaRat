@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scenes/Entities/Human/Turret.gd" id="1_mwum8"]
 [ext_resource type="PackedScene" uid="uid://b2u2oydcn3nnn" path="res://Scenes/Entities/Human/Turret_1.glb" id="2_gltsk"]
-[ext_resource type="Script" path="res://Src/Ship/Hardpoint.gd" id="3_i2g2q"]
-[ext_resource type="Script" path="res://Src/Ship/Weapon.gd" id="4_p3nj5"]
+[ext_resource type="Script" path="res://Scenes/Entities/Hardpoint.gd" id="3_i2g2q"]
+[ext_resource type="Script" path="res://Scenes/Entities/Weapon.gd" id="4_p3nj5"]
 [ext_resource type="PackedScene" uid="uid://c2djybousjxdy" path="res://Scenes/Projectiles/Laser_1/Player_Laser_1.tscn" id="5_p4dsd"]
 [ext_resource type="Script" path="res://Scenes/Entities/Entity_Health.gd" id="6_2shlu"]
 

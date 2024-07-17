@@ -7,117 +7,44 @@ enum TAGS {DRONE, HUNTER}
 @onready var health: entity_health = $Health
 @onready var collision: CollisionShape3D = $Collision
 @onready var weapon: ship_weapon = $WEAPON
-@onready var targetpoint_find: Timer = $Targetpoint_Find
-
 
 @export var speed : float = 4
+@export var score_value : float = 100
 
-@export var dummy_target : Node3D
-@export var position_variance_distance : float
-@export var position_variance_width : float
 
-@export var score_value : float = 200
-
-var detected_target_list : Array[Node3D]
-
-var target_object : Node3D
-var target_point: Vector3
-var direction : Vector3
-var target_direction : Vector3
-var relative_target : Vector3
+var current_lane: int = 0
+var time_on_screen: float ## track how much time the enemy has been on screen. if too much, leave. (less score for the player if not fast enough)
 
 func _ready() -> void:
 	health.init_hp()
-	
-	targetpoint_find.wait_time = randf_range(5.5, 6.5)
-	find_target()
-	decide_point_relative_to_target()
-	
 
 func _physics_process(delta: float) -> void:
-	move(delta)
-	point_nose(delta)
+	pass
+
+func start(lane: int, z_pos: int, time: float = 40) -> void:
+	current_lane = lane
+	global_position = Vector3(lane * 6, 0, z_pos)
+	time_on_screen = time
+
+#func on_forward_raycast_collision() -> void:
+	#swap_lane()
+
+func swap_lane() -> void: ## randomly on behaviour or if going to hit an asteroid?
+	var direction: int
+	match current_lane:
+		0:
+			direction = randi_range(-1,1)
+		1:
+			direction = randi_range(-1,0)
+		-1:
+			direction = randi_range(0,1)
 	
-	follow_relative_point()
-
-func damage(_damage: int, damager_group: String) -> void:
-	health.damage(_damage, damager_group)
-
-func death(damager_group: String) -> void:
-	queue_free()
-	if damager_group == "PLAYER":
-		UIDirector.add_to_killcount(TAGS.keys()[tag])
+	current_lane += direction
 	
-func move(delta: float) -> void:
-	var distance: float = (target_point - global_position).length()
-	target_direction = global_position.direction_to(target_point).clamp(-Vector3.ONE, Vector3.ONE) * clampf(distance/10, 0, 0.1)
-	direction = lerp(direction, target_direction, delta)
-	velocity = direction * speed
-	
-	move_and_collide(velocity)
-
-func point_nose(delta : float) -> void:
-	look_at(global_position + velocity.normalized())
-
-func find_target() -> void:
-	if dummy_target:
-		target_object = dummy_target
-		return
-	target_object = find_closest()
-
-func decide_point_relative_to_target() -> void:
-	if !target_object:
-		return
-	var target_basis: Basis = target_object.global_transform.basis
-	relative_target = target_basis.x * randf_range(-position_variance_width,position_variance_width) + target_basis.y * randf_range(-position_variance_width,position_variance_width) + target_basis.z * -position_variance_distance
-	if check_ready_to_fire():
-		charge_shoot()
-
-func follow_relative_point() -> void:
-	if !target_object:
-		return
-	target_point = target_object.global_position + relative_target
-
-@export var charging : bool
-func check_ready_to_fire() -> bool:
-	if charging:
-		return false
-	#print((target_object.global_position - global_position).length())
-	var distance: float = (target_object.global_position - global_position).length()
-	if distance > 15 and distance < 25:
-		return true
-	return false
-
-func charge_shoot() -> void:
-	animation_player.play("Charge_Shoot")
-
-func shoot() -> void:
-	var shoot_target: Node3D = target_object
-	if shoot_target.is_in_group("PLAYER"):
-			shoot_target = target_object.get_child(0)
-	weapon.shoot_targeted(shoot_target)
+	var tween := get_tree().create_tween()
+	tween.parallel().tween_property(self, "position", Vector3(current_lane * 6, 0, 0), 0.3)
+	tween.parallel().tween_property(self, "rotation", Vector3(0, 0, -direction * PI*2), 0.3)
 
 
-
-func _on_detection_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("PLAYER"):
-		detected_target_list.append(body.get_parent())
-	if body.is_in_group("HUMAN"):
-		detected_target_list.append(body)
-
-func _on_detection_area_body_exited(body: Node3D) -> void:
-	if detected_target_list.has(body):
-		detected_target_list.erase(body)
-
-func find_closest() -> Node3D:
-	print("targets: ",detected_target_list)
-	
-	var closest : Node3D
-	var closest_distance : float = INF
-	for target in detected_target_list:
-		var distance: float = global_position.distance_squared_to(target.global_position)
-		if distance < closest_distance:
-			closest = target
-			closest_distance = distance
-	print("closest: ",closest)
-	return closest
+func exit_screen() -> void: ## move forward or upwards outisde of the screen 
+	pass

@@ -43,7 +43,7 @@ func check_dodge(dodge_axis: float) -> void:
 			_player_ship.dodge(dodge_axis)
 		BeatDirector.ACCURACY.MISS:
 			pass
-	dodge_cooldown = 0.6
+	dodge_cooldown = 0.4
 	
 	FloatingTextDirector.display_text(BeatDirector.ACCURACY.keys()[beat_accuracy], get_parent().global_position + Vector3(0, 0, 0), Color.WHITE, 20)
 

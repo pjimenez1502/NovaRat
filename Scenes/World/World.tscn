@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6l7po0jlw5nx"]
 
-[ext_resource type="Script" path="res://Src/World/world.gd" id="1_fbcyp"]
-[ext_resource type="Script" path="res://Src/World/SpawnDirector.gd" id="2_il8o0"]
+[ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_fbcyp"]
+[ext_resource type="Script" path="res://Scenes/World/SpawnDirector.gd" id="2_il8o0"]
 [ext_resource type="PackedScene" uid="uid://f6rkutfavjyl" path="res://Scenes/Entities/Obstacles/Asteroid.tscn" id="3_slsxm"]
 [ext_resource type="Environment" uid="uid://cofx1wlt5va41" path="res://Scenes/World/World.tres" id="4_i6g8i"]
 
