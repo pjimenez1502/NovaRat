@@ -26,6 +26,12 @@ FloatingTextDirector="*res://Src/Global/FloatingTextDirector.gd"
 
 gdscript/warnings/untyped_declaration=2
 
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=800
+window/stretch/mode="viewport"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
