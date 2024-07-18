@@ -1,6 +1,8 @@
 extends Node
 class_name entity_health
 
+@onready var damage_animation_player: AnimationPlayer = $"../Damage AnimationPlayer"
+
 @export var entity : Node3D
 
 @export var BASE_HP : int = 4
@@ -19,7 +21,7 @@ func damage(damage: int, damager_group: String) -> void:
 	if immune:
 		return
 	
-	entity.animation_player.play("Damage")
+	damage_animation_player.play("Damage")
 	hp -= damage
 	if hp <= 0:
 		entity.death(damager_group)

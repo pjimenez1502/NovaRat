@@ -4,7 +4,6 @@ class_name obstacle
 enum TAGS {ASTEROID}
 @export var tag : TAGS
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var asteroid: Node3D = $Asteroid
 @onready var health: entity_health = $Health
 

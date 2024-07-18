@@ -3,7 +3,6 @@ extends CharacterBody3D
 enum TAGS {DRONE, HUNTER}
 @export var tag : TAGS
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var health: entity_health = $Health
 @onready var collision: CollisionShape3D = $Collision
 @onready var weapon: ship_weapon = $WEAPON

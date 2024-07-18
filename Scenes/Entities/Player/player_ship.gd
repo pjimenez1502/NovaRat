@@ -1,7 +1,6 @@
 extends Node3D
 class_name player_ship
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var aim_center: Node3D = $"../AimCenter"
 @onready var collision: CollisionShape3D = $Collision
 

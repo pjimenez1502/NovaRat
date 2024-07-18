@@ -1,6 +1,7 @@
 extends Node
 class_name ship_stats
 
+@onready var damage_animation_player: AnimationPlayer = $"../Damage AnimationPlayer"
 @onready var player_ship: player_ship = $".."
 
 @export var hull : float = 4
@@ -25,7 +26,7 @@ func damage(damage: float, damager_group: String) -> void:
 		hull += shield
 		shield = 0
 	
-	player_ship.animation_player.play("Damage")
+	damage_animation_player.play("Damage")
 	show_status()
 	if hull <= 0:
 		death()
