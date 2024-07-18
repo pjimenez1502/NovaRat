@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6l7po0jlw5nx"]
 
-[ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_fbcyp"]
-[ext_resource type="Script" path="res://Scenes/World/SpawnDirector.gd" id="2_il8o0"]
+[ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_sxr30"]
+[ext_resource type="Script" path="res://Scenes/World/SpawnDirector.gd" id="2_56as0"]
 [ext_resource type="PackedScene" uid="uid://f6rkutfavjyl" path="res://Scenes/Entities/Obstacles/Asteroid.tscn" id="3_slsxm"]
 [ext_resource type="Environment" uid="uid://cofx1wlt5va41" path="res://Scenes/World/World.tres" id="4_i6g8i"]
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_fbcyp")
+script = ExtResource("1_sxr30")
 
 [node name="SpawnDirector" type="Node" parent="."]
-script = ExtResource("2_il8o0")
+script = ExtResource("2_56as0")
 obstacle_list = Array[PackedScene]([ExtResource("3_slsxm")])
 field_enabled = true
 field_radius = 500.0

@@ -49,7 +49,8 @@ func start_continuous_population() -> void:
 	obstacle_spawn_timer.start()
 
 func spawn_obstacle() -> void:
-	var lane: int = randi_range(-1, 1)
+	var lane: int = randi_range(-4, 4)
+	print("asteroid lane: ",lane)
 	var position: Vector3 = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3.RIGHT * lane * 6
 	var _obstacle: obstacle = get_obstacle(position)
 

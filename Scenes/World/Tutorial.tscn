@@ -72,7 +72,7 @@ play_area = NodePath("../PlayArea")
 field_enabled = false
 field_height = 20.0
 continuous_enabled = true
-distance_to_playarea = 100.0
+distance_to_playarea = 160.0
 spawn_time = 2.0
 
 [node name="ObstacleSpawnTimer" parent="World/SpawnDirector" index="0"]
@@ -91,6 +91,7 @@ transform = Transform3D(-0.926544, 0.278293, -0.253118, 0.274291, 0.0392957, -0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayArea/AimCenter"]
+visible = false
 mesh = SubResource("SphereMesh_egrti")
 skeleton = NodePath("../..")
 
@@ -105,7 +106,7 @@ _player_ship = NodePath("../PlayerShip")
 camera_follow = false
 
 [node name="Camera3D2" type="Camera3D" parent="PlayArea" node_paths=PackedStringArray("_player_ship")]
-transform = Transform3D(1, 0, 0, 0, 0.771758, 0.635917, 0, -0.635917, 0.771758, 0, 5.31201, 2.78416)
+transform = Transform3D(1, 0, 0, 0, 0.777146, 0.629321, 0, -0.629321, 0.777146, 0, 8, 6.15)
 current = true
 script = ExtResource("3_l4tny")
 _player_ship = NodePath("../PlayerShip")

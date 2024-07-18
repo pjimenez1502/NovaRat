@@ -1,0 +1,180 @@
+[gd_scene load_steps=5 format=3 uid="uid://bewyoq88jfusr"]
+
+[ext_resource type="Texture2D" uid="uid://cvos477g1304e" path="res://Scenes/UI/Funk_Machine_BG.png" id="1_0f46t"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player/UI/FunkMachine.gd" id="1_7vfxx"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player/UI/Beat_Button.gd" id="3_hpu60"]
+[ext_resource type="Texture2D" uid="uid://conlcdrp7sco" path="res://Scenes/UI/Beatmark_1.png" id="3_q0n0g"]
+
+[node name="TheFunkMachine" type="Control"]
+custom_minimum_size = Vector2(748, 216)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -208.0
+offset_right = 382.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_7vfxx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0f46t")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Track" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Engine" type="Label" parent="MarginContainer/VBoxContainer/Track"]
+custom_minimum_size = Vector2(108, 32)
+layout_mode = 2
+text = "Engine
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="Control" parent="MarginContainer/VBoxContainer/Track"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Snaps" type="Control" parent="MarginContainer/VBoxContainer/Track"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Snap BEAT" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Track/Snaps"]
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 150
+
+[node name="Beat 1" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT" node_paths=PackedStringArray("_funk_machine")]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+script = ExtResource("3_hpu60")
+_funk_machine = NodePath("../../../../../..")
+
+[node name="Guide" type="TextureRect" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT/Beat 1"]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+texture = ExtResource("3_q0n0g")
+
+[node name="ON" type="TextureRect" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT/Beat 1"]
+visible = false
+modulate = Color(0.54902, 1, 0.92549, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+texture = ExtResource("3_q0n0g")
+
+[node name="Button" type="TextureButton" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT/Beat 1"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+
+[node name="Beat 2" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT"]
+layout_mode = 2
+
+[node name="Beat 3" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT"]
+layout_mode = 2
+
+[node name="Beat 4" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT"]
+layout_mode = 2
+
+[node name="Snap Quarters" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Track/Snaps"]
+visible = false
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 37
+
+[node name="B1 Q1" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="B1 Q2" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="B1 Q3" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="B1 Q4" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="B2 Q1" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="B2 Q2" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="B2 Q3" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="B2 Q4" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Quarters"]
+layout_mode = 2
+
+[node name="Snap Tri" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Track/Snaps"]
+visible = false
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 50
+
+[node name="B1 T1" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B1 T2" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B1 T3" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B2 T1" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B2 T2" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B2 T3" type="Control" parent="MarginContainer/VBoxContainer/Track/Snaps/Snap Tri"]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT/Beat 1/Button" to="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT/Beat 1" method="_on_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT/Beat 1/Button" to="MarginContainer/VBoxContainer/Track/Snaps/Snap BEAT/Beat 1" method="_on_on_mouse_exited"]
