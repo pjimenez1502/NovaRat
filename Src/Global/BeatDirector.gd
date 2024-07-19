@@ -120,5 +120,8 @@ func _report_stream_beat() -> void:
 		stream_measurebeat = stream_beat_pos % beat_per_measure
 		
 		STREAMBEAT.emit(stream_measurebeat+1)
+		
+		if stream_measurebeat == 0:
+			STREAMMEASURE.emit()
 	
 	STREAMDIV.emit(stream_measurebeat+1, stream_div_pos % subdivisions +1)

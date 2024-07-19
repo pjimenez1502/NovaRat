@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bewyoq88jfusr"]
+[gd_scene load_steps=5 format=3 uid="uid://bewyoq88jfusr"]
 
 [ext_resource type="Script" path="res://Scenes/UI/FunkMachine/FunkMachine.gd" id="1_q0b54"]
 [ext_resource type="Texture2D" uid="uid://cvos477g1304e" path="res://Scenes/UI/FunkMachine/Funk_Machine_BG.png" id="2_twfqi"]
 [ext_resource type="PackedScene" uid="uid://bmjihkwsrujw4" path="res://Scenes/UI/FunkMachine/Beat_Button.tscn" id="3_0la3m"]
+[ext_resource type="Texture2D" uid="uid://bp0jasdwjebj3" path="res://Scenes/UI/FunkMachine/TimeBar.png" id="4_cjeib"]
 
 [node name="TheFunkMachine" type="Control"]
 custom_minimum_size = Vector2(748, 216)
@@ -486,3 +487,14 @@ track = 2
 beat = 4
 div = 4
 directional = true
+
+[node name="TimeBar" type="TextureRect" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(8, 216)
+layout_mode = 0
+offset_left = 691.0
+offset_right = 699.0
+offset_bottom = 216.0
+mouse_filter = 2
+texture = ExtResource("4_cjeib")

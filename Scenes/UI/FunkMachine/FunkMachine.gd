@@ -1,12 +1,12 @@
 extends Control
 class_name funk_machine
 
+@onready var time_bar: TextureRect = %TimeBar
+
 const METRONOME_100 = preload("res://Assets/Music/Metronome - 100.mp3")
 const KICK_SFX = preload("res://Assets/SFX/Kick.ogg")
 const GUN_SFX = preload("res://Assets/SFX/Gun.mp3")
 const DASH_SFX = preload("res://Assets/SFX/Dash.mp3")
-
-var bpm: int = 60
 
 var beat_dictionary: Dictionary = {
 	"ENGINE": [],	##KICK
@@ -17,6 +17,7 @@ var beat_dictionary: Dictionary = {
 
 func _ready() -> void:
 	BeatDirector.STREAMDIV.connect(on_div)
+	BeatDirector.STREAMMEASURE.connect(on_measure)
 	audiostreams_setup()
 	
 	await get_tree().process_frame
@@ -43,6 +44,18 @@ func audiostreams_setup() -> void:
 	dash_stream = AudioStreamPlayer.new()
 	dash_stream.stream = DASH_SFX
 	get_tree().get_root().add_child.call_deferred(dash_stream)
+
+
+var timebar_tween: Tween
+func on_measure() -> void:
+	if timebar_tween:
+		timebar_tween.kill()
+	
+	time_bar.position = Vector2(136,0)
+	print(time_bar.position.x)
+	
+	timebar_tween = get_tree().create_tween()
+	timebar_tween.tween_property(time_bar, "position:x", 691, BeatDirector.sec_per_beat*4)
 
 func on_div(beat: int, div: int) -> void:
 	engine_beat(beat, div)

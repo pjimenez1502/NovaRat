@@ -18,6 +18,8 @@ class_name spawn_director
 @export var distance_to_playarea : float
 @export var spawn_time : float = 4
 
+var distance_mult: int = 16
+
 var obstacle_pool_size : int = 60
 var available_obstacle_pool : Array[obstacle]
 var used_obstacle_pool : Array[obstacle]
@@ -49,9 +51,13 @@ func start_continuous_population() -> void:
 	obstacle_spawn_timer.start()
 
 func spawn_obstacle() -> void:
-	var lane: int = randi_range(-4, 4)
-	#print("asteroid lane: ",lane)
-	var position: Vector3 = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3.RIGHT * lane * 6
+	#var lane: int = randi_range(-4, 4)
+	var lane: int = randi_range(-1, 1)
+	
+	var beat: int = ceili(_world.play_area.position.z / 16)
+	var position: Vector3 = (Vector3.FORWARD * 96 + Vector3.BACK * beat * 16) + (Vector3.RIGHT * lane * 6)
+	print(position)
+	#var position: Vector3 = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3.RIGHT * lane * 6
 	var _obstacle: obstacle = get_obstacle(position)
 
 func _on_obstacle_spawn_timer_timeout() -> void:

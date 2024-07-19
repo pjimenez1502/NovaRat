@@ -66,7 +66,7 @@ func dodge(direction: float) -> void:
 	
 	current_lane += direction
 	var tween := get_tree().create_tween()
-	tween.parallel().tween_property(self, "position", Vector3(current_lane * 6, 0, 0), 0.3)
+	tween.parallel().tween_property(self, "position", Vector3(current_lane * 6, 0, position.z), 0.3)
 	tween.parallel().tween_property(self, "rotation", Vector3(0, 0, -current_lane * PI*2), 0.3)
 
 
