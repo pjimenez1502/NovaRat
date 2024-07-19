@@ -5,25 +5,25 @@ class_name player_control
 
 var direction : Vector2
 var dodge_cooldown: float
-
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("SHOOT"):
-		_player_ship.weapon.shoot()
-	
-	dodge_cooldown -= delta
-
-func _input(_event: InputEvent) -> void:
-	var vertical : float = Input.get_axis("DOWN", "UP")
-	var horizontal : float = Input.get_axis("LEFT", "RIGHT")
-	#direction = Vector2(horizontal, vertical)
-	direction = Vector2(easeInSine(horizontal), easeInSine(vertical))
-	
-	var bank_axis: float = 0
-	_player_ship.set_bank(bank_axis)
-		
-	var dodge_axis: float = Input.get_axis("DODGE_LEFT", "DODGE_RIGHT")
-	check_dodge(dodge_axis)
-	
+#
+#func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("SHOOT"):
+		#_player_ship.weapon.shoot()
+	#
+	#dodge_cooldown -= delta
+#
+#func _input(_event: InputEvent) -> void:
+	#var vertical : float = Input.get_axis("DOWN", "UP")
+	#var horizontal : float = Input.get_axis("LEFT", "RIGHT")
+	##direction = Vector2(horizontal, vertical)
+	#direction = Vector2(easeInSine(horizontal), easeInSine(vertical))
+	#
+	#var bank_axis: float = 0
+	#_player_ship.set_bank(bank_axis)
+		#
+	#var dodge_axis: float = Input.get_axis("DODGE_LEFT", "DODGE_RIGHT")
+	#check_dodge(dodge_axis)
+	#
 
 
 func check_dodge(dodge_axis: float) -> void:

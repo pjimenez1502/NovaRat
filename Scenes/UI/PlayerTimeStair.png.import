@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://conlcdrp7sco"
-path="res://.godot/imported/Beatmark_1.png-524e9741f4a0a3d32daa994dcaaec8da.ctex"
+uid="uid://bk73f3uanfnnf"
+path="res://.godot/imported/PlayerTimeStair.png-5328caa481fa4462fad15b5378ea2c57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/UI/Beatmark_1.png"
-dest_files=["res://.godot/imported/Beatmark_1.png-524e9741f4a0a3d32daa994dcaaec8da.ctex"]
+source_file="res://Scenes/UI/PlayerTimeStair.png"
+dest_files=["res://.godot/imported/PlayerTimeStair.png-5328caa481fa4462fad15b5378ea2c57.ctex"]
 
 [params]
 

@@ -50,7 +50,7 @@ func start_continuous_population() -> void:
 
 func spawn_obstacle() -> void:
 	var lane: int = randi_range(-4, 4)
-	print("asteroid lane: ",lane)
+	#print("asteroid lane: ",lane)
 	var position: Vector3 = _world.play_area.position + _world.play_area.transform.basis.z * -distance_to_playarea + Vector3.RIGHT * lane * 6
 	var _obstacle: obstacle = get_obstacle(position)
 
@@ -63,8 +63,6 @@ func init_obstacle_pool() -> void: ## !!!!!! Right now, all asteroids start visi
 	for i in obstacle_pool_size:
 		var _obstacle: obstacle = obstacle_list[randi_range(0, obstacle_list.size()-1)].instantiate()
 		add_child(_obstacle)
-		
-	print("sdssd ",available_obstacle_pool.size())
 
 func get_obstacle(position: Vector3) -> obstacle:
 	if available_obstacle_pool.size() > 0:

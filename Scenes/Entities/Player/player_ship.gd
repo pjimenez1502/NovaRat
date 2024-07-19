@@ -3,14 +3,12 @@ class_name player_ship
 
 @onready var aim_center: Node3D = $"../AimCenter"
 @onready var collision: CollisionShape3D = $Collision
+@onready var the_funk_machine: funk_machine = $TheFunkMachine
 
-@export_group("Movement type")
-@export var invert_y : bool
-#@export var all_range : bool
+@onready var engine_push_sprite: AnimatedSprite3D = $Engine_push
 
 @export_group("Components")
 @export var play_area : Node3D
-@export var _player_control : player_control
 @export var weapon : ship_weapon
 @export var stats : ship_stats
 
@@ -25,46 +23,52 @@ var _bank : float
 var velocity : Vector3
 var look_target: Vector3
 
+func _ready() -> void:
+	the_funk_machine.ENGINE.connect(engine_push)
+	the_funk_machine.GUN.connect(shoot)
+	the_funk_machine.DASH.connect(dodge)
 
 func _physics_process(delta: float) -> void:
 	scale = Vector3.ONE
-	aim(delta)
-	bank(delta)
-	
 	forward(delta)
+	ship_drag(delta)
+
+func ship_drag(delta: float) -> void:
+	position.z += delta
+	if position.z >= 6:
+		print("ship too back")
 
 func calculate_speed() -> float:
-	return speed
+	return speed * 0.41875
 func forward(delta : float) -> void:
 	var calculated_speed: float = calculate_speed()
 	play_area.global_translate(-play_area.transform.basis.z * delta * calculated_speed)
 
+var engine_tween: Tween
+var last_pos: float
+func engine_push() -> void:
+	#print("pos: ", global_position.z - last_pos)
+	last_pos = global_position.z
+	engine_tween = get_tree().create_tween()
+	engine_tween.tween_property(self, "position:z", position.z - 1, 0.2)
+	#engine_tween.tween_property(self, "position:z", 2, 4)
+	engine_push_sprite.play("default")
+	
 
-func aim(delta : float) -> void:
-	aim_center.position = position + Vector3(_player_control.direction.x * 4, _player_control.direction.y * 2, -20)
-	look_target = lerp(look_target, aim_center.global_position , delta * 8)
-	look_at(look_target)
-
-func bank(delta : float) -> void:
-	_bank = lerp(_bank, target_bank, delta * 6)
-	rotate_object_local(Vector3.FORWARD, _bank)
-func set_bank(angle : float) -> void:
-	#bank_boost = angle * 0.5
-	target_bank = deg_to_rad(clampf( angle * 90 + _player_control.direction.x * 40, -90, 90))
+func shoot() -> void:
+	weapon.shoot()
 
 var current_lane: int = 0
 func dodge(direction: float) -> void:
 	if current_lane + direction > 1 or current_lane + direction < -1:
-		#print("dodging out of rails")
-		##play missed dodge
+		print("dodging out of rails")
 		return
 	
 	current_lane += direction
 	var tween := get_tree().create_tween()
 	tween.parallel().tween_property(self, "position", Vector3(current_lane * 6, 0, 0), 0.3)
-	tween.parallel().tween_property(self, "rotation", Vector3(0, 0, -direction * PI*2), 0.3)
-	
-	#print("dodge: ", direction)
+	tween.parallel().tween_property(self, "rotation", Vector3(0, 0, -current_lane * PI*2), 0.3)
+
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://uce22k0lid50"]
+[gd_scene load_steps=9 format=3 uid="uid://uce22k0lid50"]
 
 [ext_resource type="PackedScene" uid="uid://do3qg8xv2qeju" path="res://Scenes/World/Tutorial.tscn" id="1_beg2u"]
 [ext_resource type="Script" path="res://Scenes/Entities/Player/UI/flight_overlay.gd" id="1_v2gs7"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://j8qn4t14c8xh" path="res://Assets/Sprite/UI/underHP.png" id="4_0cres"]
 [ext_resource type="Texture2D" uid="uid://cat34tc22npxs" path="res://Assets/Sprite/UI/Shield.png" id="4_qsu1a"]
 [ext_resource type="PackedScene" uid="uid://defyp6gcrx7w7" path="res://Dialog/Dialog_Bubble.tscn" id="6_3fosp"]
-[ext_resource type="PackedScene" uid="uid://bewyoq88jfusr" path="res://Scenes/Entities/Player/UI/The_funk_machine.tscn" id="7_ac160"]
 
 [sub_resource type="Animation" id="Animation_fw14b"]
 resource_name = "ScoreChange"
@@ -114,9 +113,3 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="Main" parent="." instance=ExtResource("1_beg2u")]
-
-[node name="TheFunkMachine" parent="." instance=ExtResource("7_ac160")]
-offset_left = -374.0
-offset_top = -216.0
-offset_right = 374.0
-offset_bottom = 0.0

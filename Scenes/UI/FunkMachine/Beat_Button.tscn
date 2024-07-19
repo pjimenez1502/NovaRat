@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmjihkwsrujw4"]
+
+[ext_resource type="Script" path="res://Scenes/UI/FunkMachine/Beat_Button.gd" id="1_w85km"]
+[ext_resource type="Texture2D" uid="uid://conlcdrp7sco" path="res://Scenes/UI/FunkMachine/Beatmark_1.png" id="2_gea0t"]
+[ext_resource type="Texture2D" uid="uid://bm6ey6kbnb6cd" path="res://Scenes/UI/FunkMachine/Beatmark_left.png" id="3_m3b1m"]
+
+[node name="Beat 1" type="Control"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_w85km")
+
+[node name="Guide" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+texture = ExtResource("2_gea0t")
+
+[node name="ON" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.54902, 1, 0.92549, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+texture = ExtResource("2_gea0t")
+
+[node name="Left" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.54902, 1, 0.92549, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+texture = ExtResource("3_m3b1m")
+
+[node name="Right" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.54902, 1, 0.92549, 1)
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+texture = ExtResource("3_m3b1m")
+flip_h = true
+
+[node name="Button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 28.0
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_on_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_on_mouse_exited"]

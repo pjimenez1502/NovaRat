@@ -10,12 +10,13 @@ var time: float
 var beat_position: int
 var div_position: int
 
-var subdivisions: int = 1
-var bpm: float = 100
+var subdivisions: int = 4
 var sec_per_beat: float
 var sec_per_division: float
 
 var delay_tuning: float = 0.1
+
+@export var bpm: float = 60
 
 
 func _ready() -> void:
@@ -38,10 +39,12 @@ func playing() -> void:
 	_report_beat()
 	
 	stream_time = audio_player.get_playback_position() + AudioServer.get_time_since_last_mix()
+	stream_div_pos = int((floor(stream_time / sec_per_division)))
 	stream_beat_pos = int(floor(stream_time / sec_per_beat))
 	_report_stream_beat()
 
 func start_play(stream: AudioStream) -> void:
+	bpm = stream.bpm
 	audio_player.stream = stream  #### TRACK TO PLAY
 	audio_player.play()
 	sec_per_beat = 60 / bpm
@@ -96,18 +99,26 @@ func _report_beat() -> void:  ##DELAY ALL BY TWO BEATS (Time between new beat sp
 
 
 signal STREAMBEAT
+signal STREAMDIV
+signal STREAMMEASURE
 var stream_time: float
+var stream_div_pos: int
 var stream_beat_pos: int
+
+var last_stream_div: int
 var last_stream_beat: int = 2
 
 var stream_measurebeat: int = 3
 func _report_stream_beat() -> void:
-	stream_beat_pos = stream_beat_pos +2 ##Starting song offset
-	if stream_beat_pos == last_stream_beat:
+	if last_stream_div >= stream_div_pos:
 		return
-	last_stream_beat = stream_beat_pos
-	stream_measurebeat = stream_beat_pos % beat_per_measure
+	last_stream_div = stream_div_pos
 	
-	print("currbeat: ",stream_measurebeat)
-	print("Stream_beat: ", stream_beat_pos)
-	STREAMBEAT.emit(stream_measurebeat+1)
+	stream_beat_pos = stream_beat_pos +2 ##Starting song offset
+	if stream_beat_pos != last_stream_beat:
+		last_stream_beat = stream_beat_pos
+		stream_measurebeat = stream_beat_pos % beat_per_measure
+		
+		STREAMBEAT.emit(stream_measurebeat+1)
+	
+	STREAMDIV.emit(stream_measurebeat+1, stream_div_pos % subdivisions +1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://do3qg8xv2qeju"]
+[gd_scene load_steps=15 format=3 uid="uid://do3qg8xv2qeju"]
 
 [ext_resource type="Script" path="res://Scenes/World/Scene.gd" id="1_71e4o"]
 [ext_resource type="Script" path="res://Src/Scripting/TutorialScript.gd" id="1_etw1k"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Scenes/Entities/Player/Player_Camera.gd" id="3_l4tny"]
 [ext_resource type="PackedScene" uid="uid://bn251ybosfvy0" path="res://Scenes/UI/target_point.tscn" id="6_00vg8"]
 [ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Entities/Player/Player Ship.tscn" id="7_e1ok5"]
+[ext_resource type="Texture2D" uid="uid://bk73f3uanfnnf" path="res://Scenes/UI/PlayerTimeStair.png" id="9_mdle5"]
+[ext_resource type="PackedScene" uid="uid://bmoe0mwiep5u0" path="res://Scenes/Entities/Obstacles/Asteroid1.glb" id="10_j34gd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yddda"]
 radius = 60.0
@@ -97,7 +99,7 @@ skeleton = NodePath("../..")
 
 [node name="PlayerShip" parent="PlayArea" node_paths=PackedStringArray("play_area") instance=ExtResource("7_e1ok5")]
 play_area = NodePath("..")
-speed = 12.0
+speed = 16.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayArea" node_paths=PackedStringArray("_player_ship")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)
@@ -108,12 +110,25 @@ camera_follow = false
 [node name="Camera3D2" type="Camera3D" parent="PlayArea" node_paths=PackedStringArray("_player_ship")]
 transform = Transform3D(1, 0, 0, 0, 0.777146, 0.629321, 0, -0.629321, 0.777146, 0, 8, 6.15)
 current = true
+fov = 80.0
 script = ExtResource("3_l4tny")
 _player_ship = NodePath("../PlayerShip")
 camera_follow = false
 
 [node name="TOP" type="Camera3D" parent="PlayArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 43.82, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="PlayArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2.62268e-07, -16)
+pixel_size = 0.16
+texture_filter = 0
+texture = ExtResource("9_mdle5")
+
+[node name="Asteroid12" parent="." instance=ExtResource("10_j34gd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="Asteroid13" parent="." instance=ExtResource("10_j34gd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
 
 [connection signal="timeout" from="TUTORIAL SCRIPT/Timer" to="TUTORIAL SCRIPT" method="_on_timer_timeout"]
 [connection signal="body_entered" from="TUTORIAL SCRIPT/TutorialDroneSpawnArea" to="TUTORIAL SCRIPT" method="_on_tutorial_drone_area_enter"]

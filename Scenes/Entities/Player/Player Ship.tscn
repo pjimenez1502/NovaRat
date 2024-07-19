@@ -1,18 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://bogc8w4gkun8x"]
+[gd_scene load_steps=24 format=3 uid="uid://bogc8w4gkun8x"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player/player_ship.gd" id="1_cphdg"]
 [ext_resource type="PackedScene" uid="uid://w5amtol0blid" path="res://Scenes/Entities/Player/PlayerShip.glb" id="2_khudi"]
 [ext_resource type="Texture2D" uid="uid://x2di4vfsrpet" path="res://Assets/Sprite/Sight.png" id="3_qy5ed"]
 [ext_resource type="Script" path="res://Scenes/Entities/Player/UI/Beat_Sight.gd" id="4_w145y"]
-[ext_resource type="Script" path="res://Scenes/Entities/Player/PlayerControl.gd" id="5_7j1xs"]
-[ext_resource type="Script" path="res://Scenes/Entities/Player/player_weapon.gd" id="6_sty3q"]
+[ext_resource type="Script" path="res://Scenes/Entities/Weapon.gd" id="5_8hiyp"]
 [ext_resource type="PackedScene" uid="uid://c2djybousjxdy" path="res://Scenes/Projectiles/Laser_1/Player_Laser_1.tscn" id="7_34etp"]
 [ext_resource type="Script" path="res://Scenes/Entities/Ship_Stats.gd" id="8_m5nyr"]
 [ext_resource type="Script" path="res://Scenes/Entities/Hardpoint.gd" id="9_so4ud"]
 [ext_resource type="Script" path="res://Scenes/Entities/Player/SpinShield.gd" id="10_u5skh"]
+[ext_resource type="PackedScene" uid="uid://bewyoq88jfusr" path="res://Scenes/UI/FunkMachine/The_funk_machine.tscn" id="11_72m5y"]
 [ext_resource type="Texture2D" uid="uid://d2og8ttgifust" path="res://Assets/Sprite/speaker_particle_sheet.png" id="11_ahxc5"]
-[ext_resource type="Script" path="res://Scenes/Entities/Player/BeatSynced.gd" id="11_qt5qj"]
-[ext_resource type="AudioStream" uid="uid://bnqugjwypaagf" path="res://Assets/SFX/Kick.mp3" id="12_dwx4y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_647xx"]
 shading_mode = 0
@@ -46,54 +44,60 @@ height = 3.00376
 [sub_resource type="SphereShape3D" id="SphereShape3D_y2ky3"]
 radius = 2.04228
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7qru8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4ciy"]
 atlas = ExtResource("11_ahxc5")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tx4c8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8oae"]
 atlas = ExtResource("11_ahxc5")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2083"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7beh"]
 atlas = ExtResource("11_ahxc5")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d858y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykvb5"]
 atlas = ExtResource("11_ahxc5")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bmmqq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lusqc"]
 atlas = ExtResource("11_ahxc5")
 region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_egydi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5dmq"]
+atlas = ExtResource("11_ahxc5")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bsf13"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7qru8")
+"texture": SubResource("AtlasTexture_y4ciy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tx4c8")
+"texture": SubResource("AtlasTexture_a8oae")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y2083")
+"texture": SubResource("AtlasTexture_v7beh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d858y")
+"texture": SubResource("AtlasTexture_ykvb5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bmmqq")
+"texture": SubResource("AtlasTexture_lusqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5dmq")
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 15.0
 }]
 
-[node name="PlayerShip" type="CharacterBody3D" node_paths=PackedStringArray("_player_control", "weapon", "stats") groups=["HUMAN", "PLAYER"]]
+[node name="PlayerShip" type="CharacterBody3D" node_paths=PackedStringArray("weapon", "stats") groups=["HUMAN", "PLAYER"]]
 collision_layer = 2
 collision_mask = 608
 script = ExtResource("1_cphdg")
-_player_control = NodePath("PlayerControl")
 weapon = NodePath("Weapon")
 stats = NodePath("Stats")
 speed = 10.0
@@ -121,13 +125,10 @@ fixed_size = true
 texture_filter = 0
 texture = ExtResource("3_qy5ed")
 
-[node name="PlayerControl" type="Node" parent="."]
-script = ExtResource("5_7j1xs")
-
 [node name="Weapon" type="Node" parent="." node_paths=PackedStringArray("hardpoint_list")]
-script = ExtResource("6_sty3q")
+script = ExtResource("5_8hiyp")
 _projectile = ExtResource("7_34etp")
-rpm = 200.0
+rpm = 600.0
 hardpoint_list = [NodePath("../Hardpoints/Hardpoint_1"), NodePath("../Hardpoints/Hardpoint_2"), NodePath("../Hardpoints/Hardpoint_3")]
 pool_size = 100
 
@@ -181,20 +182,15 @@ shape = SubResource("CapsuleShape3D_jr61g")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327119, -0.207999)
 
-[node name="BeatSynced" type="Node3D" parent="."]
-script = ExtResource("11_qt5qj")
+[node name="TheFunkMachine" parent="." instance=ExtResource("11_72m5y")]
 
-[node name="EngineParticle" type="AnimatedSprite3D" parent="BeatSynced"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0022037, -0.0607739, 0.881124)
-pixel_size = 0.02
-billboard = 2
+[node name="Engine_push" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0191)
+pixel_size = 0.05
 texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_egydi")
-frame_progress = 0.925598
-
-[node name="EngineKick" type="AudioStreamPlayer" parent="BeatSynced"]
-stream = ExtResource("12_dwx4y")
-volume_db = -6.0
+sprite_frames = SubResource("SpriteFrames_bsf13")
+frame = 5
+frame_progress = 1.0
 
 [connection signal="timeout" from="Weapon/Timer" to="Weapon" method="_on_timer_timeout"]
 [connection signal="body_entered" from="SpinShield" to="SpinShield" method="_on_body_entered"]

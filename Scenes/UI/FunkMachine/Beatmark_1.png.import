@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvos477g1304e"
-path="res://.godot/imported/Funk_Machine_BG.png-5c378b7bff91264f3df9340b020e469e.ctex"
+uid="uid://conlcdrp7sco"
+path="res://.godot/imported/Beatmark_1.png-a16920f929ff924bbbf0bc3fce2ba443.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/UI/Funk_Machine_BG.png"
-dest_files=["res://.godot/imported/Funk_Machine_BG.png-5c378b7bff91264f3df9340b020e469e.ctex"]
+source_file="res://Scenes/UI/FunkMachine/Beatmark_1.png"
+dest_files=["res://.godot/imported/Beatmark_1.png-a16920f929ff924bbbf0bc3fce2ba443.ctex"]
 
 [params]
 

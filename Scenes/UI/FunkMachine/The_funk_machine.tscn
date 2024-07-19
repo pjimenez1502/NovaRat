@@ -1,0 +1,488 @@
+[gd_scene load_steps=4 format=3 uid="uid://bewyoq88jfusr"]
+
+[ext_resource type="Script" path="res://Scenes/UI/FunkMachine/FunkMachine.gd" id="1_q0b54"]
+[ext_resource type="Texture2D" uid="uid://cvos477g1304e" path="res://Scenes/UI/FunkMachine/Funk_Machine_BG.png" id="2_twfqi"]
+[ext_resource type="PackedScene" uid="uid://bmjihkwsrujw4" path="res://Scenes/UI/FunkMachine/Beat_Button.tscn" id="3_0la3m"]
+
+[node name="TheFunkMachine" type="Control"]
+custom_minimum_size = Vector2(748, 216)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -208.0
+offset_right = 382.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_q0b54")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_twfqi")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EngineTrack" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TrackName" type="Label" parent="MarginContainer/VBoxContainer/EngineTrack"]
+custom_minimum_size = Vector2(108, 32)
+layout_mode = 2
+text = "Engine
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Snaps" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Snap BEAT" type="HBoxContainer" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps"]
+visible = false
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 150
+
+[node name="Beat 1" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap BEAT" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+
+[node name="Beat 2" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap BEAT" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 2
+
+[node name="Beat 3" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap BEAT" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 3
+
+[node name="Beat 4" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap BEAT" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 4
+
+[node name="Snap Quarters" type="HBoxContainer" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps"]
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 37
+
+[node name="Beat 1" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+
+[node name="B1 Q2" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+div = 2
+
+[node name="B1 Q3" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+div = 3
+
+[node name="B1 Q4" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+div = 4
+
+[node name="Beat 2" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 2
+
+[node name="B2 Q2" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 2
+div = 2
+
+[node name="B2 Q3" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 2
+div = 3
+
+[node name="B2 Q4" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 2
+div = 4
+
+[node name="Beat 3" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 3
+
+[node name="B3 Q2" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 3
+div = 2
+
+[node name="B3 Q3" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 3
+div = 3
+
+[node name="B3 Q4" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 3
+div = 4
+
+[node name="Beat 4" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 4
+
+[node name="B4 Q2" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 4
+div = 2
+
+[node name="B4 Q3" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 4
+div = 3
+
+[node name="B4 Q4" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+beat = 4
+div = 4
+
+[node name="Snap Tri" type="HBoxContainer" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps"]
+visible = false
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 50
+
+[node name="B1 T1" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B1 T2" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B1 T3" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B2 T1" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B2 T2" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="B2 T3" type="Control" parent="MarginContainer/VBoxContainer/EngineTrack/Snaps/Snap Tri"]
+layout_mode = 2
+
+[node name="Gun" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TrackName" type="Label" parent="MarginContainer/VBoxContainer/Gun"]
+custom_minimum_size = Vector2(108, 32)
+layout_mode = 2
+text = "Gun"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Control" parent="MarginContainer/VBoxContainer/Gun"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Snaps" type="Control" parent="MarginContainer/VBoxContainer/Gun"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Snap Quarters" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Gun/Snaps"]
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 37
+
+[node name="Beat 1" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+
+[node name="B1 Q2" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+div = 2
+
+[node name="B1 Q3" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+div = 3
+
+[node name="B1 Q4" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+div = 4
+
+[node name="Beat 2" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 2
+
+[node name="B2 Q2" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 2
+div = 2
+
+[node name="B2 Q3" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 2
+div = 3
+
+[node name="B2 Q4" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 2
+div = 4
+
+[node name="Beat 3" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 3
+
+[node name="B3 Q2" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 3
+div = 2
+
+[node name="B3 Q3" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 3
+div = 3
+
+[node name="B3 Q4" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 3
+div = 4
+
+[node name="Beat 4" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 4
+
+[node name="B4 Q2" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 4
+div = 2
+
+[node name="B4 Q3" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 4
+div = 3
+
+[node name="B4 Q4" parent="MarginContainer/VBoxContainer/Gun/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 1
+beat = 4
+div = 4
+
+[node name="Dash" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TrackName" type="Label" parent="MarginContainer/VBoxContainer/Dash"]
+custom_minimum_size = Vector2(108, 32)
+layout_mode = 2
+text = "Dash"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="Control" parent="MarginContainer/VBoxContainer/Dash"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Snaps" type="Control" parent="MarginContainer/VBoxContainer/Dash"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Snap Quarters" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Dash/Snaps"]
+layout_mode = 2
+offset_right = 600.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 37
+
+[node name="Beat 1" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+directional = true
+
+[node name="B1 Q2" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+div = 2
+directional = true
+
+[node name="B1 Q3" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+div = 3
+directional = true
+
+[node name="B1 Q4" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+div = 4
+directional = true
+
+[node name="Beat 2" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 2
+directional = true
+
+[node name="B2 Q2" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 2
+div = 2
+directional = true
+
+[node name="B2 Q3" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 2
+div = 3
+directional = true
+
+[node name="B2 Q4" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 2
+div = 4
+directional = true
+
+[node name="Beat 3" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 3
+directional = true
+
+[node name="B3 Q2" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 3
+div = 2
+directional = true
+
+[node name="B3 Q3" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 3
+div = 3
+directional = true
+
+[node name="B3 Q4" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 3
+div = 4
+directional = true
+
+[node name="Beat 4" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 4
+directional = true
+
+[node name="B4 Q2" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 4
+div = 2
+directional = true
+
+[node name="B4 Q3" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 4
+div = 3
+directional = true
+
+[node name="B4 Q4" parent="MarginContainer/VBoxContainer/Dash/Snaps/Snap Quarters" node_paths=PackedStringArray("_funk_machine") instance=ExtResource("3_0la3m")]
+layout_mode = 2
+_funk_machine = NodePath("../../../../../..")
+track = 2
+beat = 4
+div = 4
+directional = true
