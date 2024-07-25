@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://brhmuuw3m7qot"]
+
+[ext_resource type="PackedScene" uid="uid://est8v8denkog" path="res://Scenes/Entities/Obstacles/jump_barrier.glb" id="1_ajrkn"]
+[ext_resource type="PackedScene" uid="uid://b0bvypco6c8t1" path="res://Scenes/Entities/Obstacles/duck_barrier.glb" id="2_tefhj"]
+[ext_resource type="PackedScene" uid="uid://bjskbsw1f41yp" path="res://Scenes/Entities/Obstacles/Side_barrier.glb" id="3_7fwkn"]
+
+[node name="Tileset_1" type="Node3D"]
+
+[node name="jump_barrier" parent="." instance=ExtResource("1_ajrkn")]
+
+[node name="duck_barrier" parent="." instance=ExtResource("2_tefhj")]
+
+[node name="Side_barrier" parent="." instance=ExtResource("3_7fwkn")]
+
+[editable path="jump_barrier"]
+[editable path="duck_barrier"]

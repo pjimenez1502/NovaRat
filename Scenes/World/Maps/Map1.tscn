@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6hb6tp6i74ue"]
+
+[ext_resource type="Environment" uid="uid://cofx1wlt5va41" path="res://Scenes/World/World.tres" id="1_qvvfo"]
+[ext_resource type="MeshLibrary" uid="uid://56abg4dhbpx6" path="res://Scenes/Entities/Obstacles/Obstacle_Library_1.tres" id="2_ancbc"]
+[ext_resource type="PackedScene" uid="uid://cg2yj8evys6a1" path="res://Scenes/Entities/Player/play_area.tscn" id="2_s2psv"]
+[ext_resource type="Shader" path="res://Shader/Water.gdshader" id="4_fh7w2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3tbow"]
+render_priority = 0
+shader = ExtResource("4_fh7w2")
+shader_parameter/WATER_COL = Color(0, 0, 0, 1)
+shader_parameter/WATER2_COL = Color(0.0980392, 0.0980392, 0.0980392, 1)
+shader_parameter/FOAM_COL = Color(0.32549, 0.32549, 0.32549, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(200, 2000)
+shader_parameter/height = 2.0
+shader_parameter/wave_size = Vector2(0, 0)
+shader_parameter/wave_speed = 1.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7a1cg"]
+material = SubResource("ShaderMaterial_3tbow")
+size = Vector2(2000, 20000)
+
+[node name="MAP1" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="." groups=["TERRAIN"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 2)
+mesh_library = ExtResource("2_ancbc")
+cell_size = Vector3(1000, 6, 32)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+data = {
+"cells": PackedInt32Array(0, 65533, 0, 0, 65529, 0, 0, 65525, 0, 0, 65521, 0, 0, 65517, 0, 0, 65513, 0, 0, 65509, 0, 0, 65505, 0, 0, 65501, 0, 0, 65530, 2, 0, 65527, 655362)
+}
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.901803, 0.278293, 0.330612, -0.354611, 0.039296, 0.934188, 0.246986, -0.959692, 0.134123, 0.223911, 2.87974, 0.191294)
+light_energy = 6.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.926544, 0.278293, -0.253118, 0.274291, 0.0392956, -0.960844, -0.25745, -0.959692, -0.112742, 0.223911, 2.87974, 0.191294)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_qvvfo")
+
+[node name="PlayArea" parent="." instance=ExtResource("2_s2psv")]
+
+[node name="PlayerShip" parent="PlayArea" index="1"]
+speed = 128.0
+
+[node name="Camera3D" parent="PlayArea" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 8)
+fov = 80.0
+
+[node name="TOP" parent="PlayArea" index="4"]
+fov = 100.0
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, -10000)
+mesh = SubResource("PlaneMesh_7a1cg")
+
+[editable path="PlayArea"]

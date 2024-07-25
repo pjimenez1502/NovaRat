@@ -5,12 +5,12 @@ class_name funk_machine
 
 const METRONOME_100 = preload("res://Assets/Music/Metronome - 100.mp3")
 const KICK_SFX = preload("res://Assets/SFX/Kick.ogg")
-const GUN_SFX = preload("res://Assets/SFX/Gun.mp3")
+const DUCK_SFX = preload("res://Assets/SFX/Gun.mp3")
 const DASH_SFX = preload("res://Assets/SFX/Dash.mp3")
 
 var beat_dictionary: Dictionary = {
-	"ENGINE": [],	##KICK
-	"GUN": [],		##HIHAT
+	"JUMP": [],	##KICK
+	"DUCK": [],		##HIHAT
 	"DASH": [],		##SNARE
 	"SHIELD": [],	##BASS
 }
@@ -28,18 +28,18 @@ func start_director(track: AudioStream) -> void:
 	BeatDirector.start_play(track)
 
 ## Audiostreams
-var engine_stream: AudioStreamPlayer
+var jump_stream: AudioStreamPlayer
 var dash_stream: AudioStreamPlayer
-var gun_stream: AudioStreamPlayer
+var duck_stream: AudioStreamPlayer
 var shield_stream: AudioStreamPlayer
 func audiostreams_setup() -> void:
-	engine_stream = AudioStreamPlayer.new()
-	engine_stream.stream = KICK_SFX
-	get_tree().get_root().add_child.call_deferred(engine_stream)
+	jump_stream = AudioStreamPlayer.new()
+	jump_stream.stream = KICK_SFX
+	get_tree().get_root().add_child.call_deferred(jump_stream)
 	
-	gun_stream = AudioStreamPlayer.new()
-	gun_stream.stream = GUN_SFX
-	get_tree().get_root().add_child.call_deferred(gun_stream)
+	duck_stream = AudioStreamPlayer.new()
+	duck_stream.stream = DUCK_SFX
+	get_tree().get_root().add_child.call_deferred(duck_stream)
 	
 	dash_stream = AudioStreamPlayer.new()
 	dash_stream.stream = DASH_SFX
@@ -58,33 +58,37 @@ func on_measure() -> void:
 	timebar_tween.tween_property(time_bar, "position:x", 691, BeatDirector.sec_per_beat*4)
 
 func on_div(beat: int, div: int) -> void:
-	engine_beat(beat, div)
+	jump_beat(beat, div)
 
-func engine_beat(beat: int, div: int) -> void:
+func jump_beat(beat: int, div: int) -> void:
 	for track: String in beat_dictionary.keys():
 		var filtered_beat := filter_beat(beat_dictionary[track], [beat,div])
 		if filtered_beat:
 			play_track(track, filtered_beat[2])
 
 
-signal ENGINE
-signal GUN
+signal JUMP
+signal DUCK
 signal DASH
 signal SHIELD
 
 func play_track(track: String, dir: int=0) -> void:
 	match track:
-		"ENGINE":
-			engine_stream.play()
-			ENGINE.emit()
-		"GUN":
-			gun_stream.play()
-			GUN.emit()
+		"JUMP":
+			jump_stream.play()
+			JUMP.emit()
+		"DUCK":
+			duck_stream.play()
+			DUCK.emit()
 		"DASH":
 			dash_stream.play()
 			DASH.emit(dir)
 
 func enable_beat(track: String, beat: int, div: int, directional: bool = false) -> int:
+	for _track : String in beat_button.TRACKS:
+		if _track != track:
+			disable_beat(_track, beat, div)
+	
 	var dir: int = 0
 	var filtered_beat := filter_beat(beat_dictionary[track], [beat, div])
 	if !filtered_beat:

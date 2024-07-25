@@ -29,12 +29,16 @@ gdscript/warnings/untyped_declaration=2
 [display]
 
 window/size/viewport_width=800
-window/size/viewport_height=800
+window/size/viewport_height=1200
 window/stretch/mode="viewport"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/pjime/Videos/Captures/NovaRat.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
+enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/proton_trail-master/plugin.cfg")
 
 [importer_defaults]
 

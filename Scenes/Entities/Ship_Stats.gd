@@ -1,8 +1,9 @@
 extends Node
 class_name ship_stats
 
-@onready var damage_animation_player: AnimationPlayer = $"../Damage AnimationPlayer"
 @onready var player_ship: player_ship = $".."
+@onready var damage_animation_player: AnimationPlayer = $"../Damage AnimationPlayer"
+@onready var hit_player: AudioStreamPlayer = $"Hit Player"
 
 @export var hull : float = 4
 @export var shield : float = 1
@@ -21,6 +22,8 @@ func damage(damage: float, damager_group: String) -> void:
 	if immune:
 		return
 	
+	play_hit()
+	
 	shield -= damage
 	if shield < 0:
 		hull += shield
@@ -28,6 +31,7 @@ func damage(damage: float, damager_group: String) -> void:
 	
 	damage_animation_player.play("Damage")
 	show_status()
+	
 	if hull <= 0:
 		death()
 	immune = true
@@ -38,17 +42,20 @@ func death() -> void:
 	print("player dead")
 
 
+func play_hit() -> void:
+	hit_player.pitch_scale = randf_range(0.9, 1.1)
+	hit_player.play()
 
 var terrain_damage : float = 1
 func _on_hit_area_body_entered(body: Node3D) -> void:
 	pass
 	#if body.is_in_group("PLAYER"):
 		#return
-	#
+	
 	if body.is_in_group("TERRAIN"):
 		damage(terrain_damage, "TERRAIN")
-		body.death("TERRAIN")
+		#body.death("TERRAIN")
 		return
-	#
+	
 	#if body._damage:
 		#damage(body._damage)

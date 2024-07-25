@@ -10,7 +10,7 @@ class_name beat_button
 
 @export var _funk_machine: funk_machine
 
-enum TRACKS { ENGINE, GUN, DASH, SHIELD}
+enum TRACKS { JUMP, DUCK, DASH, SHIELD}
 @export var track: TRACKS
 @export var beat: int = 1
 @export var div: int = 1
@@ -41,6 +41,8 @@ func disable() -> void:
 	left.visible = false
 	right.visible = false
 	_funk_machine.disable_beat(TRACKS.keys()[track], beat, div)
+
+## LISTEN TO A SIGNAL FROM FUNK MACHINE TELLING EACH BUTTON WHEN THEY ARE ENABLED OR DISABLED
 
 func _on_on_mouse_entered() -> void:
 	guide.visible = true

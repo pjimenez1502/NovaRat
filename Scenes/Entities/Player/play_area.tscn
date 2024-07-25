@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg2yj8evys6a1"]
+
+[ext_resource type="PackedScene" uid="uid://bogc8w4gkun8x" path="res://Scenes/Entities/Player/Player Ship.tscn" id="1_j4n51"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player/Player_Camera.gd" id="2_ogjjv"]
+[ext_resource type="Texture2D" uid="uid://bk73f3uanfnnf" path="res://Scenes/UI/PlayerTimeStair.png" id="3_chgbk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ti2iq"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_egrti"]
+material = SubResource("StandardMaterial3D_ti2iq")
+
+[node name="PlayArea" type="Node3D"]
+
+[node name="AimCenter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AimCenter"]
+visible = false
+mesh = SubResource("SphereMesh_egrti")
+skeleton = NodePath("../..")
+
+[node name="PlayerShip" parent="." node_paths=PackedStringArray("play_area") instance=ExtResource("1_j4n51")]
+play_area = NodePath("..")
+speed = 16.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)
+script = ExtResource("2_ogjjv")
+camera_follow = false
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642788, 0, -0.642788, 0.766045, 0, 10, 7)
+current = true
+fov = 80.0
+script = ExtResource("2_ogjjv")
+camera_follow = false
+
+[node name="TOP" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 43.82, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -2.62268e-07, -16)
+pixel_size = 0.16
+texture_filter = 0
+texture = ExtResource("3_chgbk")

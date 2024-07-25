@@ -24,14 +24,14 @@ var velocity : Vector3
 var look_target: Vector3
 
 func _ready() -> void:
-	the_funk_machine.ENGINE.connect(engine_push)
-	the_funk_machine.GUN.connect(shoot)
+	the_funk_machine.JUMP.connect(jump)
+	the_funk_machine.DUCK.connect(duck)
 	the_funk_machine.DASH.connect(dodge)
 
 func _physics_process(delta: float) -> void:
 	scale = Vector3.ONE
 	forward(delta)
-	ship_drag(delta)
+	#ship_drag(delta)
 
 func ship_drag(delta: float) -> void:
 	position.z += delta
@@ -44,19 +44,22 @@ func forward(delta : float) -> void:
 	var calculated_speed: float = calculate_speed()
 	play_area.global_translate(-play_area.transform.basis.z * delta * calculated_speed)
 
-var engine_tween: Tween
-var last_pos: float
-func engine_push() -> void:
-	#print("pos: ", global_position.z - last_pos)
-	last_pos = global_position.z
-	engine_tween = get_tree().create_tween()
-	engine_tween.tween_property(self, "position:z", position.z - 1, 0.2)
-	#engine_tween.tween_property(self, "position:z", 2, 4)
+var jump_tween: Tween
+func jump() -> void:
 	engine_push_sprite.play("default")
+	jump_tween = get_tree().create_tween()
+	jump_tween.tween_property(self, "position:y", 3.5, 0.3).set_ease(Tween.EASE_OUT)
+	jump_tween.parallel().tween_property(self, "rotation", Vector3(.2, 0, rotation.z), 0.3)
 	
+	jump_tween.tween_property(self, "position:y", 0, 0.3).set_ease(Tween.EASE_OUT)
+	jump_tween.parallel().tween_property(self, "rotation", Vector3(-.1, 0, rotation.z), 0.1)
+	jump_tween.tween_property(self, "rotation", Vector3(0, 0, rotation.z), 0.2)
 
-func shoot() -> void:
-	weapon.shoot()
+var duck_tween: Tween
+func duck() -> void:
+	duck_tween = get_tree().create_tween()
+	duck_tween.tween_property(self, "position:y", -3.5, 0.3)
+	duck_tween.tween_property(self, "position:y", 0, 0.3)
 
 var current_lane: int = 0
 func dodge(direction: float) -> void:

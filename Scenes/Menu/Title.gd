@@ -1,6 +1,6 @@
 extends Control
 
-const TutorialScript = preload("res://Scenes/World/UI.tscn")
+const TutorialScript = preload("res://Scenes/World/Maps/Map1.tscn")
 
 
 func _on_play_button_pressed() -> void:
